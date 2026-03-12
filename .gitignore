@@ -1,0 +1,21 @@
+# Binarios y compilación (C#, Java, etc)
+bin/
+obj/
+*.exe
+*.dll
+
+# Frontend (Node/React)
+node_modules/
+dist/
+.env
+
+# Base de Datos (SQL Server local)
+*.mdf
+*.ldf
+*.bak
+
+# IDEs (VS Code, Visual Studio)
+.vscode/
+.idea/
+*.suo
+*.user
