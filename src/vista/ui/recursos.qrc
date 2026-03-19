@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="imagenes">
+    <file>descarga.jpeg</file>
+  </qresource>
+</RCC>
