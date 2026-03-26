@@ -1,9 +1,0 @@
-Hay que hacer un dao para cada tabla de nuestra base de datos
-
-Los nombres de la clase UserDAOJBC(Conexion) tiene que tener los nombres TAL CUALES a nuestras tablas de la base de datos
-
-en la función select dentro de la clase, cambiar este nombre selecto por otro (lo ha puesto ella para que lo entendamos)
-
-La llamada a la base de datos siempre la vamos a hacer con un try except Exception as e.
-
-
