@@ -1,6 +1,6 @@
-# Archivo: src/modelo/vo/LoginVo.py
-
 class LoginVo:
-    def __init__(self, texto_nombre, texto_contrasena):
-        self.texto_nombre = texto_nombre
-        self.texto_contrasena = texto_contrasena
+    def __init__(self,nombre,contrasena):
+        self.__nombre=nombre
+        self.__contrasena=contrasena
+        
+        

@@ -1,7 +1,7 @@
 import jaydebeapi
 
 class Conexion:
-    def __init__(self, host='localhost', database='G10.LFP.CryptoTracker.SQLSentencesTransactSQL', user='sa', password='221322S@muel'):
+    def __init__(self, host='localhost', database='floristeria', user='root', password='pruebaISD2024'):
         self._host = host
         self._database = database
         self._user = user
