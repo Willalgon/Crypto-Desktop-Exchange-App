@@ -85,6 +85,13 @@ border-bottom: 2px solid rgb(105, 118, 132);</string>
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="btn_ir_registro">
+       <property name="text">
+        <string>Crear cuenta</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>

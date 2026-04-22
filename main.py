@@ -1,15 +1,24 @@
-from PyQt5.QtWidgets import QApplication, QMainWind
-from PyQt5 import uic
-from src.modelo.BussinessObject import BussinessObj
+import qdarktheme
+from PyQt5.QtWidgets import QApplication
+
 from src.vista.Login import MiVentana
-from src.controlador.ControladorPrincipal import ControladorPrinicipal
-import os.path
-os.path.dirname(os.path.abspath(__file__))
-if __name__=="__main__":
-    app=QApplication([])
-    ventana=MiVentana()
-    modelo=Logica()
-    controlador=ControladorPrinicpal(ventana,modelo)
-    ventana.controlador=controlador
+from src.vista.Registro import VentanaRegistro
+from src.modelo.Logica import Logica 
+from src.controlador.ControladorPrincipal import ControladorPrincipal
+
+if __name__ == "__main__":
+    app = QApplication([])
+    qdarktheme.setup_theme()
+    
+    ventana_login = MiVentana()
+    ventana_registro=VentanaRegistro()
+
+    modelo = Logica()
+    
+    controlador = ControladorPrincipal(ventana_login, ventana_registro, modelo)
+    
+    ventana_login.controlador = controlador
+    ventana_registro.controlador=controlador
     controlador.abrirIniciarSesion()
+    
     app.exec_()

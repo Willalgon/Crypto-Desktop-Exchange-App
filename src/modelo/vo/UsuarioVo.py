@@ -9,3 +9,19 @@ class UsuarioVo:
     @property
     def dni(self):
         return self.__dni
+
+    @property
+    def nombre(self):
+        return self.__nombre
+
+    @property
+    def email(self):
+        return self.__email
+
+    @property
+    def primerapellido(self):
+        return self.__primerapellido
+
+    @property
+    def segundoapellido(self):
+        return self.__segundoapellido
