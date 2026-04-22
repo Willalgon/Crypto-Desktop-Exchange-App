@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from src.modelo.vo.LoginVO import LoginVO
 from src.modelo.Logica import Logica
 class ControladorPrincipal:
@@ -18,7 +17,6 @@ class ControladorPrincipal:
             self.__vista.lanzaviso()
         else:
             self.__vista.close()
-=======
 import hashlib
 from src.modelo.vo.LoginVO import LoginVO
 from src.modelo.Logica import Logica
@@ -66,4 +64,3 @@ class ControladorPrincipal:
         sha256=hashlib.sha256()
         sha256.update(contrasena.encode('utf-8'))
         return sha256.hexdigest()
->>>>>>> 77ee610af2f1cae1c2b645341f2832edcf5a0f26
