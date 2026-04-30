@@ -10,65 +10,56 @@
     <height>750</height>
    </rect>
   </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
-  </property>
   <property name="windowTitle">
    <string>CryptoLearning - Registro de Trader</string>
   </property>
   <property name="styleSheet">
    <string notr="true">
-/* FONDO NEGRO PURO */
+/* FONDO NEGRO PURO IDENTICO AL LOGIN */
 QMainWindow { background-color: #000000; }
 QFrame { background: transparent; border: none; }
 
-/* TITULO EN NARANJA PURO */
+/* TITULO */
 QLabel#lbl_titulo { 
     color: #FFFFFF; 
     font-size: 32px; 
     font-weight: bold; 
     font-family: 'Inter', 'Roboto', 'sans-serif';
-    letter-spacing: 1px;
 }
 
 QLabel#lbl_subtitulo { 
     color: #8B94A5; 
-    font-size: 16px; 
-    font-family: 'Inter', 'Roboto', 'sans-serif';
-}
-
-/* BORDES DE RECUADROS NARANJAS */
-QLineEdit {
-    background-color: #0D1117;
-    border: 2px solid #FF6A00; /* Borde naranja permanente */
-    border-radius: 8px;
-    color: #FFFFFF;
-    padding: 18px 20px;
     font-size: 16px;
 }
+
+/* INPUTS CON BORDE NARANJA */
+QLineEdit {
+    background-color: #0D1117;
+    border: 2px solid #FF6A00;
+    border-radius: 8px;
+    color: #FFFFFF;
+    padding: 12px 20px; 
+    font-size: 14px;
+}
 QLineEdit:focus {
-    border: 2px solid #FF4500; /* Naranja más intenso al escribir */
+    border: 2px solid #FF4500;
     background-color: #161B22;
 }
 
-/* BOTÓN INICIAR SESIÓN NARANJA PURO */
+/* BOTÓN NARANJA */
 QPushButton#btn_registrar {
-    background-color: #FF6A00; /* Naranja puro sólido */
-    color: #000000; /* Texto negro para contraste máximo */
+    background-color: #FF6A00;
+    color: #000000;
     font-weight: bold;
     font-size: 18px;
     border-radius: 8px;
-    padding: 18px;
-    letter-spacing: 2px;
+    padding: 16px;
 }
 QPushButton#btn_registrar:hover { 
-    background-color: #FF4500; /* Naranja más oscuro al pasar el ratón */
+    background-color: #FF4500;
 }
 
-/* ENLACE INFERIOR */
+/* ENLACE VOLVER */
 QPushButton#btn_volver { 
     color: #8B94A5; 
     background: transparent; 
@@ -79,12 +70,6 @@ QPushButton#btn_volver:hover { color: #FF6A00; text-decoration: underline; }
    </string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
    <layout class="QHBoxLayout" name="main_layout" stretch="1,2">
     <property name="spacing">
      <number>0</number>
@@ -120,18 +105,15 @@ QPushButton#btn_volver:hover { color: #FF6A00; text-decoration: underline; }
         <number>9</number>
        </property>
        <item>
-        <widget class="QLabel" name="label_fondo">
+        <widget class="QLabel" name="label_imagen_lateral">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
-          <string/>
-         </property>
          <property name="pixmap">
-          <pixmap>../../../../../../../IMG_5131.WEBP</pixmap>
+          <pixmap>../../../30c0b309-47ba-4936-b7ab-3a82a5bd0739.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -144,12 +126,6 @@ QPushButton#btn_volver:hover { color: #FF6A00; text-decoration: underline; }
     <item>
      <widget class="QFrame" name="frame_right">
       <layout class="QVBoxLayout" name="layout_right_main">
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
        <item>
         <spacer name="verticalSpacer_top">
          <property name="orientation">
@@ -158,7 +134,7 @@ QPushButton#btn_volver:hover { color: #FF6A00; text-decoration: underline; }
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>40</height>
+           <height>10</height>
           </size>
          </property>
         </spacer>
@@ -187,25 +163,22 @@ QPushButton#btn_volver:hover { color: #FF6A00; text-decoration: underline; }
          <item>
           <layout class="QVBoxLayout" name="master_vertical_block">
            <property name="spacing">
-            <number>20</number>
-           </property>
+            <number>5</number> </property>
            <item>
             <layout class="QVBoxLayout" name="layout_logo">
              <property name="leftMargin">
-              <number>125</number>
-             </property>
+              <number>70</number> </property>
              <item>
               <widget class="QLabel" name="lbl_logo">
                <property name="minimumSize">
                 <size>
-                 <width>200</width>
-                 <height>200</height>
+                 <width>450</width> <height>450</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>200</width>
-                 <height>200</height>
+                 <width>450</width>
+                 <height>450</height>
                 </size>
                </property>
                <property name="pixmap">
@@ -224,7 +197,7 @@ QPushButton#btn_volver:hover { color: #FF6A00; text-decoration: underline; }
            <item>
             <layout class="QVBoxLayout" name="layout_formulario">
              <property name="spacing">
-              <number>15</number>
+              <number>8</number>
              </property>
              <property name="leftMargin">
               <number>40</number>
@@ -348,7 +321,7 @@ QPushButton#btn_volver:hover { color: #FF6A00; text-decoration: underline; }
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>40</height>
+           <height>10</height>
           </size>
          </property>
         </spacer>
