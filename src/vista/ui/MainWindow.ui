@@ -22,42 +22,42 @@
   <property name="styleSheet">
    <string notr="true">
     /* FONDO CONTINUO */
-    QMainWindow { background-color: #080B10; }
+    QMainWindow { background-color: #FFFFFF; }
     QFrame { background: transparent; border: none; }
     
     /* TEXTOS DEL LOGIN - Escalados (Título 32px, Subtítulo 16px) */
 QLabel#lbl_titulo { 
-    color: #FFFFFF; 
+    color: #1A1A1A; 
     font-size: 32px; 
     font-weight: bold; 
     font-family: 'Inter', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
     letter-spacing: 1px;
 }
 QLabel#lbl_subtitulo { 
-    color: #8B94A5; 
+    color: #4A4A4A; 
     font-size: 16px; 
     font-family: 'Inter', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
 }
 
 /* CAMPOS DE TEXTO - Más altos y letra más grande (16px) */
 QLineEdit {
-    background-color: #121824;
-    border: 1px solid #1F2A3D;
+    background-color: #F5F7FA;
+    border: 1px solid #E1E4E8;
     border-radius: 8px;
-    color: #FFFFFF;
+    color: #1A1A1A;
     padding: 18px 20px;
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
 }
 QLineEdit:focus {
     border: 1px solid #C48B54;
-    background-color: #161D2B;
+    background-color: #FFFFFF;
 }
 
 /* BOTÓN PRINCIPAL - Botón robusto (18px) */
 QPushButton#Aceptar {
     background-color: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #A66C3D, stop:1 #C48B54);
-    color: #080B10;
+    color: #FFFFFF;
     font-weight: bold;
     font-size: 18px;
     font-family: 'Inter', 'Roboto', sans-serif;
@@ -69,7 +69,7 @@ QPushButton#Aceptar:hover { background-color: #DDA76A; }
 
 /* ENLACE INFERIOR (14px) */
 QPushButton#btn_ir_registro { 
-    color: #8B94A5; 
+    color: #4A4A4A; 
     background: transparent; 
     border: none; 
     font-size: 14px; 
@@ -85,7 +85,7 @@ QPushButton#btn_ir_registro:hover { color: #C48B54; text-decoration: underline; 
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QHBoxLayout" name="main_layout" stretch="1,2">
+   <layout class="QHBoxLayout" name="main_layout" stretch="1,1">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -116,7 +116,7 @@ QPushButton#btn_ir_registro:hover { color: #C48B54; text-decoration: underline; 
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>../../../4abb715f3507235351edaf8f1a5d4f0b.webp</pixmap>
+          <pixmap>../../../PHOTO-2026-04-30-20-19-45.jpg</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>

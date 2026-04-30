@@ -10,7 +10,7 @@ from src.controlador.ControladorPrincipal import ControladorPrincipal
 if __name__ == "__main__":
     app = QApplication([])
     
-    qdarktheme.setup_theme()
+    qdarktheme.setup_theme("light")
     ventana_login = MiVentana()
     ventana_registro=VentanaRegistro()
     ventana_principal=VentanaPrincipal()
