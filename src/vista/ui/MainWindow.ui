@@ -131,7 +131,7 @@ QPushButton#btn_ir_registro:hover { color: #C48B54; text-decoration: underline; 
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>../../../bb2d9119bbccf333916f6b9d7a5d0519.webp</pixmap>
+          <pixmap>../../../f95c424c2b751981f761f8cf6f691c3c.webp</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
