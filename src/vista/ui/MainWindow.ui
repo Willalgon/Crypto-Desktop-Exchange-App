@@ -116,7 +116,7 @@ QPushButton#btn_ir_registro:hover { color: #C48B54; text-decoration: underline; 
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>../../../../../../../../unnamed.png</pixmap>
+          <pixmap>../../../ChatGPT Image Apr 30, 2026, 08_08_44 PM.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
