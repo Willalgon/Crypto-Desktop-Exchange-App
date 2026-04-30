@@ -21,61 +21,61 @@
   </property>
   <property name="styleSheet">
    <string notr="true">
-    /* FONDO CONTINUO */
-    QMainWindow { background-color: #000000; }
-    QFrame { background: transparent; border: none; }
-    
-    /* TEXTOS DEL LOGIN - Escalados (Título 32px, Subtítulo 16px) */
+ /* FONDO NEGRO PURO */
+QMainWindow { background-color: #000000; }
+QFrame { background: transparent; border: none; }
+
+/* 3- TITULO EN NARANJA PURO */
 QLabel#lbl_titulo { 
-    color: #FFFFFF; 
+    color: #FF6A00; 
     font-size: 32px; 
     font-weight: bold; 
-    font-family: 'Inter', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+    font-family: 'Inter', 'Roboto', 'sans-serif';
     letter-spacing: 1px;
 }
+
 QLabel#lbl_subtitulo { 
     color: #8B94A5; 
     font-size: 16px; 
-    font-family: 'Inter', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+    font-family: 'Inter', 'Roboto', 'sans-serif';
 }
 
-/* CAMPOS DE TEXTO - Más altos y letra más grande (16px) */
+/* 2- BORDES DE RECUADROS NARANJAS */
 QLineEdit {
     background-color: #0D1117;
-    border: 1px solid #30363D;
+    border: 2px solid #FF6A00; /* Borde naranja permanente */
     border-radius: 8px;
     color: #FFFFFF;
     padding: 18px 20px;
     font-size: 16px;
-    font-family: 'Roboto', sans-serif;
 }
 QLineEdit:focus {
-    border: 1px solid #C48B54;
+    border: 2px solid #FF4500; /* Naranja más intenso al escribir */
     background-color: #161B22;
 }
 
-/* BOTÓN PRINCIPAL - Botón robusto (18px) */
+/* 1- BOTÓN INICIAR SESIÓN NARANJA PURO */
 QPushButton#Aceptar {
-    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #A66C3D, stop:1 #C48B54);
-    color: #000000;
+    background-color: #FF6A00; /* Naranja puro sólido */
+    color: #000000; /* Texto negro para contraste máximo */
     font-weight: bold;
     font-size: 18px;
-    font-family: 'Inter', 'Roboto', sans-serif;
     border-radius: 8px;
     padding: 18px;
     letter-spacing: 2px;
 }
-QPushButton#Aceptar:hover { background-color: #DDA76A; }
+QPushButton#Aceptar:hover { 
+    background-color: #FF4500; /* Naranja más oscuro al pasar el ratón */
+}
 
-/* ENLACE INFERIOR (14px) */
+/* ENLACE INFERIOR */
 QPushButton#btn_ir_registro { 
     color: #8B94A5; 
     background: transparent; 
     border: none; 
-    font-size: 14px; 
-    font-family: 'Inter', 'Roboto', sans-serif;
+    font-size: 14px;
 }
-QPushButton#btn_ir_registro:hover { color: #C48B54; text-decoration: underline; }
+QPushButton#btn_ir_registro:hover { color: #FF6A00; text-decoration: underline; }
    </string>
   </property>
   <widget class="QWidget" name="centralwidget">
