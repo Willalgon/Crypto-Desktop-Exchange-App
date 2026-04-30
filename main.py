@@ -1,5 +1,6 @@
-from PyQt5.QtWidgets import QApplication
 
+from PyQt5.QtWidgets import QApplication
+import qdarktheme
 from src.vista.Login import MiVentana
 from src.vista.Registro import VentanaRegistro
 from src.vista.Principal import VentanaPrincipal
@@ -9,7 +10,7 @@ from src.controlador.ControladorPrincipal import ControladorPrincipal
 if __name__ == "__main__":
     app = QApplication([])
     
-    
+    qdarktheme.setup_theme()
     ventana_login = MiVentana()
     ventana_registro=VentanaRegistro()
     ventana_principal=VentanaPrincipal()
