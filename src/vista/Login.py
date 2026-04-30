@@ -1,28 +1,23 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
+from PyQt5.QtCore import Qt
 from PyQt5 import uic
 
-# 1. CARGAR LA INTERFAZ: 
-# uic.loadUiType lee el archivo XML que genera QtDesigner y lo traduce a clases de Python.
-# OJO: Asegúrate de que la ruta coincida con donde tienes guardado el archivo .ui
 Form, Window = uic.loadUiType("./src/vista/ui/MainWindow.ui")
 
 class MiVentana(QMainWindow, Form):
     def __init__(self):
         super().__init__()
-        # 2. INICIALIZAR LA INTERFAZ: 
-        # Esto "dibuja" los botones y campos en la pantalla basándose en el .ui
         self.setupUi(self)  
-        
-        # Referencia al controlador (el cerebro que decidirá qué hacer con los datos)
+        self.setWindowState(Qt.WindowMaximized)
         self.controlador = None
         
-        # 3. EVENTOS (SIGNALS & SLOTS):
-        # Aquí conectamos el clic del botón (Signal) con una función (Slot).
-        # Fíjate que uso 'self.Aceptar' porque así se llama el botón en tu MainWindow.ui
+        # Conexiones de botones
         self.Aceptar.clicked.connect(self.on_button_click)
         self.btn_ir_registro.clicked.connect(self.on_registro_click)
 
+    # ... Tus funciones como on_button_click siguen igual aquí debajo ...
 
+    # ... Siguen tus funciones (on_button_click, etc.) ...
     def on_button_click(self):
         """Esta función se ejecuta SOLO cuando el usuario hace clic en el botón."""
         

@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5 import uic
+from PyQt5.QtCore import Qt
 
 # 1. Cargamos el archivo XML que acabas de dibujar en QtDesigner
 Form, Window = uic.loadUiType("./src/vista/ui/RegistroWindow.ui")
@@ -9,7 +10,7 @@ class VentanaRegistro(QMainWindow, Form):
         super().__init__()
         # 2. Pintamos la ventana en la pantalla
         self.setupUi(self)  
-        
+        self.setWindowState(Qt.WindowMaximized)
         # 3. Preparamos el bolsillo secreto para guardar la tarjeta del jefe (Controlador)
         self._controlador = None
         
