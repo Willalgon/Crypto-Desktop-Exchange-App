@@ -85,7 +85,7 @@ QPushButton#btn_ir_registro:hover { color: #C48B54; text-decoration: underline; 
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QHBoxLayout" name="main_layout" stretch="1,1">
+   <layout class="QHBoxLayout" name="main_layout" stretch="1,2">
     <property name="spacing">
      <number>0</number>
     </property>
