@@ -85,7 +85,7 @@ QPushButton#btn_ir_registro:hover { color: #C48B54; text-decoration: underline; 
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QHBoxLayout" name="main_layout" stretch="1,2">
+   <layout class="QHBoxLayout" name="main_layout" stretch="1,1">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -131,7 +131,7 @@ QPushButton#btn_ir_registro:hover { color: #C48B54; text-decoration: underline; 
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>../../../f63d889beeb8e16648c361397555009f.webp</pixmap>
+          <pixmap>../../../bb2d9119bbccf333916f6b9d7a5d0519.webp</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
