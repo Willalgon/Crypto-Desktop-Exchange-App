@@ -21,61 +21,61 @@
   </property>
   <property name="styleSheet">
    <string notr="true">
-    /* FONDO CONTINUO */
-    QMainWindow { background-color: #080B10; }
-    QFrame { background: transparent; border: none; }
-    
-    /* TEXTOS DEL LOGIN - Escalados */
+/* FONDO NEGRO PURO */
+QMainWindow { background-color: #000000; }
+QFrame { background: transparent; border: none; }
+
+/* TITULO EN NARANJA PURO */
 QLabel#lbl_titulo { 
     color: #FFFFFF; 
     font-size: 32px; 
     font-weight: bold; 
-    font-family: 'Inter', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+    font-family: 'Inter', 'Roboto', 'sans-serif';
     letter-spacing: 1px;
 }
+
 QLabel#lbl_subtitulo { 
     color: #8B94A5; 
     font-size: 16px; 
-    font-family: 'Inter', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+    font-family: 'Inter', 'Roboto', 'sans-serif';
 }
 
-/* CAMPOS DE TEXTO - Altura y legibilidad */
+/* BORDES DE RECUADROS NARANJAS */
 QLineEdit {
-    background-color: #121824;
-    border: 1px solid #1F2A3D;
+    background-color: #0D1117;
+    border: 2px solid #FF6A00; /* Borde naranja permanente */
     border-radius: 8px;
     color: #FFFFFF;
-    padding: 16px 20px;
+    padding: 18px 20px;
     font-size: 16px;
-    font-family: 'Roboto', sans-serif;
 }
 QLineEdit:focus {
-    border: 1px solid #C48B54;
-    background-color: #161D2B;
+    border: 2px solid #FF4500; /* Naranja más intenso al escribir */
+    background-color: #161B22;
 }
 
-/* BOTÓN PRINCIPAL - Botón robusto */
+/* BOTÓN INICIAR SESIÓN NARANJA PURO */
 QPushButton#btn_registrar {
-    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #A66C3D, stop:1 #C48B54);
-    color: #080B10;
+    background-color: #FF6A00; /* Naranja puro sólido */
+    color: #000000; /* Texto negro para contraste máximo */
     font-weight: bold;
     font-size: 18px;
-    font-family: 'Inter', 'Roboto', sans-serif;
     border-radius: 8px;
     padding: 18px;
     letter-spacing: 2px;
 }
-QPushButton#btn_registrar:hover { background-color: #DDA76A; }
+QPushButton#btn_registrar:hover { 
+    background-color: #FF4500; /* Naranja más oscuro al pasar el ratón */
+}
 
 /* ENLACE INFERIOR */
 QPushButton#btn_volver { 
     color: #8B94A5; 
     background: transparent; 
     border: none; 
-    font-size: 14px; 
-    font-family: 'Inter', 'Roboto', sans-serif;
+    font-size: 14px;
 }
-QPushButton#btn_volver:hover { color: #C48B54; text-decoration: underline; }
+QPushButton#btn_volver:hover { color: #FF6A00; text-decoration: underline; }
    </string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -85,7 +85,7 @@ QPushButton#btn_volver:hover { color: #C48B54; text-decoration: underline; }
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QHBoxLayout" name="main_layout" stretch="1,1">
+   <layout class="QHBoxLayout" name="main_layout" stretch="1,2">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -104,6 +104,21 @@ QPushButton#btn_volver:hover { color: #C48B54; text-decoration: underline; }
     <item>
      <widget class="QFrame" name="frame_left">
       <layout class="QVBoxLayout" name="verticalLayout_left">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>9</number>
+       </property>
+       <property name="topMargin">
+        <number>9</number>
+       </property>
+       <property name="rightMargin">
+        <number>9</number>
+       </property>
+       <property name="bottomMargin">
+        <number>9</number>
+       </property>
        <item>
         <widget class="QLabel" name="label_fondo">
          <property name="sizePolicy">
@@ -130,7 +145,10 @@ QPushButton#btn_volver:hover { color: #C48B54; text-decoration: underline; }
      <widget class="QFrame" name="frame_right">
       <layout class="QVBoxLayout" name="layout_right_main">
        <property name="leftMargin">
-        <number>10</number>
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
        </property>
        <item>
         <spacer name="verticalSpacer_top">
@@ -169,7 +187,7 @@ QPushButton#btn_volver:hover { color: #C48B54; text-decoration: underline; }
          <item>
           <layout class="QVBoxLayout" name="master_vertical_block">
            <property name="spacing">
-            <number>15</number>
+            <number>20</number>
            </property>
            <item>
             <layout class="QVBoxLayout" name="layout_logo">
@@ -206,7 +224,7 @@ QPushButton#btn_volver:hover { color: #C48B54; text-decoration: underline; }
            <item>
             <layout class="QVBoxLayout" name="layout_formulario">
              <property name="spacing">
-              <number>12</number>
+              <number>15</number>
              </property>
              <property name="leftMargin">
               <number>40</number>
