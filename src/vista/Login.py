@@ -13,7 +13,6 @@ Form, Window = uic.loadUiType("./src/vista/ui/MainWindow.ui")
 class MiVentana(QMainWindow, Form):
     def __init__(self):
         super().__init__()
-<
         self.setupUi(self)  
         self.setWindowState(Qt.WindowMaximized)
         self.controlador = None
