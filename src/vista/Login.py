@@ -4,7 +4,6 @@ from src.modelo.vo.LoginVo import LoginVo
 
 # Cargar la interfaz generada desde el archivo .ui
 Form, Window = uic.loadUiType("./src/vista/Ui/Login.ui")
-=======
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5 import uic
 
@@ -12,7 +11,6 @@ from PyQt5 import uic
 # uic.loadUiType lee el archivo XML que genera QtDesigner y lo traduce a clases de Python.
 # OJO: Asegúrate de que la ruta coincida con donde tienes guardado el archivo .ui
 Form, Window = uic.loadUiType("./src/vista/ui/MainWindow.ui")
->>>>>>> 77ee610af2f1cae1c2b645341f2832edcf5a0f26
 
 class MiVentana(QMainWindow, Form):
     def __init__(self):
