@@ -85,7 +85,7 @@ QPushButton#btn_ir_registro:hover { color: #C48B54; text-decoration: underline; 
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QHBoxLayout" name="main_layout" stretch="1,1">
+   <layout class="QHBoxLayout" name="main_layout" stretch="1,2">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -108,16 +108,16 @@ QPushButton#btn_ir_registro:hover { color: #C48B54; text-decoration: underline; 
         <number>0</number>
        </property>
        <property name="leftMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <property name="topMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <property name="rightMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <property name="bottomMargin">
-        <number>0</number>
+        <number>9</number>
        </property>
        <item>
         <widget class="QLabel" name="label">
@@ -131,7 +131,7 @@ QPushButton#btn_ir_registro:hover { color: #C48B54; text-decoration: underline; 
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>../../../PHOTO-2026-04-30-20-19-45.jpg</pixmap>
+          <pixmap>../../../878f3972be6d034dd2ef4505f08678ba.webp</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
