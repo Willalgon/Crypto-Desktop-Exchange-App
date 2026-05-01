@@ -3,317 +3,516 @@
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>1200</width>
-    <height>750</height>
-   </rect>
+   <rect><x>0</x><y>0</y><width>1200</width><height>750</height></rect>
   </property>
   <property name="sizePolicy">
    <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
+    <horstretch>0</horstretch><verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>CryptoLearning - Iniciar Sesión</string>
+   <string>CryptoLearning — Iniciar Sesión</string>
   </property>
+
   <property name="styleSheet">
    <string notr="true">
- /* FONDO NEGRO PURO */
-QMainWindow { background-color: #000000; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CRYPTOLEARNING  ·  ACCESO
+   Pure Black Spatial  ·  Deep Dark Edition
+   ═══════════════════════════════════════════════════════════════════════ */
+
+
+/* ── VENTANA BASE ───────────────────────────────────────────────────── */
+QMainWindow, QWidget#centralwidget {
+    background-color: #000000;
+}
 QFrame { background: transparent; border: none; }
 
-/* 3- TITULO EN NARANJA PURO */
-QLabel#lbl_titulo { 
-    color: #FFFFFF; 
-    font-size: 32px; 
-    font-weight: bold; 
-    font-family: 'Inter', 'Roboto', 'sans-serif';
-    letter-spacing: 1px;
+
+/* ── PANELES ────────────────────────────────────────────────────────── */
+QFrame#frame_left  { background-color: #000000; }
+QFrame#frame_right { background-color: #000000; }
+
+
+/* ── CARD PRINCIPAL — profundidad radial ────────────────────────────── */
+QFrame#form_card {
+    background: qradialgradient(
+        cx: 0.50, cy: 0.38, radius: 0.85,
+        stop: 0.00  rgba(26, 26, 36, 255),
+        stop: 0.55  rgba(15, 15, 22, 255),
+        stop: 1.00  rgba( 7,  7, 11, 255)
+    );
+    border-top:    1px solid rgba(255, 255, 255, 55);
+    border-left:   1px solid rgba(255, 255, 255, 30);
+    border-right:  1px solid rgba(255, 255, 255, 18);
+    border-bottom: 1px solid rgba(255, 255, 255, 12);
+    border-radius: 26px;
 }
 
-QLabel#lbl_subtitulo { 
-    color: #8B94A5; 
-    font-size: 16px; 
-    font-family: 'Inter', 'Roboto', 'sans-serif';
+
+/* ── LÍNEA NARANJA SUPERIOR DE LA CARD ──────────────────────────────── */
+QFrame#card_glow_top {
+    background: qlineargradient(
+        x1:0, y1:0, x2:1, y2:0,
+        stop:0.00 rgba(255, 106,  0,   0),
+        stop:0.25 rgba(255, 106,  0, 120),
+        stop:0.50 rgba(255, 160,  0, 255),
+        stop:0.75 rgba(255, 106,  0, 120),
+        stop:1.00 rgba(255, 106,  0,   0)
+    );
+    min-height: 1px;
+    max-height: 1px;
+    border: none;
 }
 
-/* 2- BORDES DE RECUADROS NARANJAS */
-QLineEdit {
-    background-color: #0D1117;
-    border: 2px solid #FF6A00; /* Borde naranja permanente */
-    border-radius: 8px;
+
+/* ── SEPARADOR INTERIOR ─────────────────────────────────────────────── */
+QFrame#separator {
+    background: qlineargradient(
+        x1:0, y1:0, x2:1, y2:0,
+        stop:0.00 rgba(255, 255, 255,  0),
+        stop:0.50 rgba(255, 255, 255, 28),
+        stop:1.00 rgba(255, 255, 255,  0)
+    );
+    min-height: 1px;
+    max-height: 1px;
+    border: none;
+}
+
+
+/* ── TÍTULO ─────────────────────────────────────────────────────────── */
+QLabel#lbl_titulo {
     color: #FFFFFF;
-    padding: 18px 20px;
-    font-size: 16px;
+    font-size: 17px;
+    font-weight: 700;
+    font-family: "Helvetica Neue", "Segoe UI Semibold", Arial, sans-serif;
+    letter-spacing: 3px;
+    padding-bottom: 9px;
+    border-bottom: 2px solid qlineargradient(
+        x1:0, y1:0, x2:1, y2:0,
+        stop:0.00 rgba(255, 106,  0,   0),
+        stop:0.30 rgba(255, 106,  0, 160),
+        stop:0.50 rgba(255, 180,  0, 255),
+        stop:0.70 rgba(255, 106,  0, 160),
+        stop:1.00 rgba(255, 106,  0,   0)
+    );
+    qproperty-alignment: AlignCenter;
 }
+
+
+/* ── SUBTÍTULO ──────────────────────────────────────────────────────── */
+QLabel#lbl_subtitulo {
+    color: rgba(255, 255, 255, 75);
+    font-size: 11px;
+    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+    letter-spacing: 1px;
+    qproperty-alignment: AlignCenter;
+}
+
+
+/* ── ETIQUETAS DE CAMPO ─────────────────────────────────────────────── */
+QLabel#lbl_f_email,
+QLabel#lbl_f_pass {
+    color: rgba(255, 140, 0, 170);
+    font-size: 9px;
+    font-weight: 700;
+    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+    letter-spacing: 2.2px;
+    padding-left: 1px;
+}
+
+
+/* ── INPUTS ─────────────────────────────────────────────────────────── */
+QLineEdit {
+    background: qlineargradient(
+        x1:0, y1:0, x2:0, y2:1,
+        stop:0 rgba(255, 255, 255,  7),
+        stop:1 rgba(255, 255, 255,  3)
+    );
+    border: 1px solid rgba(255, 255, 255, 16);
+    border-bottom: 1px solid rgba(255, 255, 255, 26);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 215);
+    padding: 10px 14px;
+    font-size: 13px;
+    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+    min-height: 20px;
+    selection-background-color: rgba(255, 106, 0, 100);
+    selection-color: #FFFFFF;
+}
+
+QLineEdit:hover {
+    background: qlineargradient(
+        x1:0, y1:0, x2:0, y2:1,
+        stop:0 rgba(255, 255, 255, 11),
+        stop:1 rgba(255, 255, 255,  6)
+    );
+    border: 1px solid rgba(255, 255, 255, 40);
+    border-bottom: 1px solid rgba(255, 255, 255, 55);
+    color: #FFFFFF;
+}
+
 QLineEdit:focus {
-    border: 2px solid #FF4500; /* Naranja más intenso al escribir */
-    background-color: #161B22;
+    background: qlineargradient(
+        x1:0, y1:0, x2:0, y2:1,
+        stop:0 rgba(255, 106, 0, 20),
+        stop:1 rgba(255,  80, 0,  8)
+    );
+    border: 1px solid rgba(255, 130, 0, 180);
+    border-bottom: 1px solid rgba(255, 160, 0, 240);
+    color: #FFFFFF;
 }
 
-/* 1- BOTÓN INICIAR SESIÓN NARANJA PURO */
+
+/* ── BOTÓN PRIMARIO ─────────────────────────────────────────────────── */
 QPushButton#Aceptar {
-    background-color: #FF6A00; /* Naranja puro sólido */
-    color: #000000; /* Texto negro para contraste máximo */
-    font-weight: bold;
-    font-size: 18px;
-    border-radius: 8px;
-    padding: 18px;
-    letter-spacing: 2px;
-}
-QPushButton#Aceptar:hover { 
-    background-color: #FF4500; /* Naranja más oscuro al pasar el ratón */
+    background: qlineargradient(
+        x1:0, y1:0, x2:1, y2:1,
+        stop:0.0  #FF5E00,
+        stop:0.5  #FF8000,
+        stop:1.0  #FF5200
+    );
+    color: #000000;
+    font-weight: 800;
+    font-size: 11px;
+    font-family: "Helvetica Neue", "Segoe UI Semibold", Arial, sans-serif;
+    letter-spacing: 3.5px;
+    border-radius: 11px;
+    border-top:    1px solid rgba(255, 200, 100, 160);
+    border-left:   1px solid rgba(255, 200, 100,  80);
+    border-right:  1px solid rgba(180,  80,   0,  80);
+    border-bottom: 1px solid rgba(160,  60,   0, 120);
+    min-height: 48px;
+    padding: 0 20px;
 }
 
-/* ENLACE INFERIOR */
-QPushButton#btn_ir_registro { 
-    color: #8B94A5; 
-    background: transparent; 
-    border: none; 
-    font-size: 14px;
+QPushButton#Aceptar:hover {
+    background: qlineargradient(
+        x1:0, y1:0, x2:1, y2:1,
+        stop:0.0  #FF7520,
+        stop:0.5  #FFA040,
+        stop:1.0  #FF6A18
+    );
+    border-top:    1px solid rgba(255, 220, 140, 200);
+    border-left:   1px solid rgba(255, 220, 140, 100);
+    border-right:  1px solid rgba(200, 100,   0,  80);
+    border-bottom: 1px solid rgba(180,  80,   0, 120);
+    color: #000000;
 }
-QPushButton#btn_ir_registro:hover { color: #FF6A00; text-decoration: underline; }
+
+QPushButton#Aceptar:pressed {
+    background: qlineargradient(
+        x1:0, y1:0, x2:1, y2:1,
+        stop:0.0  #D94E00,
+        stop:0.5  #E06A00,
+        stop:1.0  #D04400
+    );
+    border-top:    1px solid rgba(120,  40,   0,  80);
+    border-left:   1px solid rgba(120,  40,   0,  60);
+    border-right:  1px solid rgba(255, 180,  80,  40);
+    border-bottom: 1px solid rgba(255, 180,  80,  60);
+    padding-top: 1px;
+}
+
+
+/* ── BOTÓN REGISTRO (link) ──────────────────────────────────────────── */
+QPushButton#btn_ir_registro {
+    color: rgba(255, 255, 255, 50);
+    background: transparent;
+    border: none;
+    font-size: 11px;
+    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+    letter-spacing: 0.3px;
+    padding: 6px 0;
+}
+QPushButton#btn_ir_registro:hover  { color: #FF7A00; }
+QPushButton#btn_ir_registro:pressed{ color: rgba(255, 122, 0, 160); }
+
+
+/* ── PIE DE PANTALLA ────────────────────────────────────────────────── */
+QLabel#lbl_version {
+    color: rgba(255, 255, 255, 18);
+    font-size: 9px;
+    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+    letter-spacing: 1.8px;
+    qproperty-alignment: AlignCenter;
+}
+
    </string>
   </property>
+
+
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
+     <horstretch>0</horstretch><verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QHBoxLayout" name="main_layout" stretch="1,0">
-    <property name="spacing">
-     <number>0</number>
-    </property>
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
+
+   <layout class="QHBoxLayout" name="main_layout" stretch="4,6">
+    <property name="spacing"><number>0</number></property>
+    <property name="leftMargin"><number>0</number></property>
+    <property name="topMargin"><number>0</number></property>
+    <property name="rightMargin"><number>0</number></property>
+    <property name="bottomMargin"><number>0</number></property>
+
+
+    <!-- ════════════════════════════
+         PANEL IZQUIERDO — imagen
+         ════════════════════════════ -->
+>>>>>>> e899965dacc71d19245bc289e6473aeeace7f971
     <item>
      <widget class="QFrame" name="frame_left">
-      <layout class="QVBoxLayout" name="verticalLayout_left">
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <property name="leftMargin">
-        <number>9</number>
-       </property>
-       <property name="topMargin">
-        <number>9</number>
-       </property>
-       <property name="rightMargin">
-        <number>9</number>
-       </property>
-       <property name="bottomMargin">
-        <number>9</number>
-       </property>
+      <layout class="QVBoxLayout" name="vl_left">
+       <property name="spacing"><number>0</number></property>
+       <property name="leftMargin"><number>0</number></property>
+       <property name="topMargin"><number>0</number></property>
+       <property name="rightMargin"><number>0</number></property>
+       <property name="bottomMargin"><number>0</number></property>
        <item>
         <widget class="QLabel" name="label">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
+           <horstretch>0</horstretch><verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="text">
-          <string/>
-         </property>
+         <property name="text"><string/></property>
          <property name="pixmap">
           <pixmap>../../../30c0b309-47ba-4936-b7ab-3a82a5bd0739.png</pixmap>
          </property>
-         <property name="scaledContents">
-          <bool>true</bool>
-         </property>
+         <property name="scaledContents"><bool>true</bool></property>
+         <property name="styleSheet"><string notr="true">border:none;</string></property>
         </widget>
        </item>
       </layout>
      </widget>
     </item>
+
+
+    <!-- ════════════════════════════
+         PANEL DERECHO — formulario
+         ════════════════════════════ -->
     <item>
      <widget class="QFrame" name="frame_right">
-      <layout class="QVBoxLayout" name="layout_right_main">
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
+      <layout class="QVBoxLayout" name="vl_right">
+       <property name="spacing"><number>0</number></property>
+       <property name="leftMargin"><number>0</number></property>
+       <property name="topMargin"><number>0</number></property>
+       <property name="rightMargin"><number>0</number></property>
+       <property name="bottomMargin"><number>0</number></property>
+
        <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>0</height>
-          </size>
-         </property>
+
+        <spacer name="vs_top">
+         <property name="orientation"><enum>Qt::Vertical</enum></property>
+         <property name="sizeType"><enum>QSizePolicy::Expanding</enum></property>
+         <property name="sizeHint" stdset="0"><size><width>20</width><height>20</height></size></property>
+>>>>>>> e899965dacc71d19245bc289e6473aeeace7f971
         </spacer>
        </item>
+
        <item>
-        <layout class="QHBoxLayout" name="layout_center_h">
-         <property name="leftMargin">
-          <number>45</number>
-         </property>
-         <property name="rightMargin">
-          <number>100</number>
-         </property>
+        <layout class="QHBoxLayout" name="hl_center">
+         <property name="spacing"><number>0</number></property>
          <item>
-          <layout class="QVBoxLayout" name="master_vertical_block">
-           <property name="spacing">
-            <number>20</number>
-           </property>
-           <item>
-            <layout class="QVBoxLayout" name="layout_logo">
-             <property name="spacing">
-              <number>6</number>
-             </property>
-             <property name="leftMargin">
-              <number>70</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lbl_logo">
-               <property name="minimumSize">
-                <size>
-                 <width>400</width>
-                 <height>400</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>400</width>
-                 <height>400</height>
-                </size>
-               </property>
-               <property name="pixmap">
-                <pixmap>../../../imagen.png</pixmap>
-               </property>
-               <property name="scaledContents">
-                <bool>true</bool>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QVBoxLayout" name="layout_formulario">
-             <property name="spacing">
-              <number>15</number>
-             </property>
-             <property name="leftMargin">
-              <number>40</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="lbl_titulo">
-               <property name="text">
-                <string>ACCESO A CRYPTOLEARNING</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="lbl_subtitulo">
-               <property name="text">
-                <string>Introduce tus credenciales para operar</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="lineEdit">
-               <property name="placeholderText">
-                <string>Email del trader</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="lineEdit_2">
-               <property name="echoMode">
-                <enum>QLineEdit::Password</enum>
-               </property>
-               <property name="placeholderText">
-                <string>Contraseña</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="Aceptar">
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="text">
-                <string>INICIAR SESIÓN</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="btn_ir_registro">
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="text">
-                <string>¿No tienes cuenta? Regístrate aquí</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
+
+          <spacer name="hs_l">
+           <property name="orientation"><enum>Qt::Horizontal</enum></property>
+           <property name="sizeType"><enum>QSizePolicy::Expanding</enum></property>
+           <property name="sizeHint" stdset="0"><size><width>20</width><height>0</height></size></property>
+          </spacer>
          </item>
+
+
+         <!-- ══════════════════════════════
+              GLASS CARD
+              ══════════════════════════════ -->
          <item>
-          <spacer name="spacer_push_right">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
+          <widget class="QFrame" name="form_card">
+           <property name="minimumSize"><size><width>460</width><height>0</height></size></property>
+           <property name="maximumSize"><size><width>460</width><height>16777215</height></size></property>
+           <layout class="QVBoxLayout" name="vl_card">
+            <property name="spacing"><number>0</number></property>
+            <property name="leftMargin"><number>0</number></property>
+            <property name="topMargin"><number>0</number></property>
+            <property name="rightMargin"><number>0</number></property>
+            <property name="bottomMargin"><number>0</number></property>
+
+            <!-- LÍNEA NARANJA TOP -->
+            <item>
+             <widget class="QFrame" name="card_glow_top">
+              <property name="frameShape"><enum>QFrame::HLine</enum></property>
+              <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+              <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+             </widget>
+            </item>
+
+            <!-- CONTENIDO INTERIOR -->
+            <item>
+             <layout class="QVBoxLayout" name="vl_inner">
+              <property name="spacing"><number>0</number></property>
+              <property name="leftMargin"><number>42</number></property>
+              <property name="topMargin"><number>36</number></property>
+              <property name="rightMargin"><number>42</number></property>
+              <property name="bottomMargin"><number>34</number></property>
+
+
+              <!-- LOGO 120×120 -->
+              <item>
+               <layout class="QHBoxLayout" name="hl_logo">
+                <item>
+                 <spacer name="hs_logo_l">
+                  <property name="orientation"><enum>Qt::Horizontal</enum></property>
+                  <property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QLabel" name="lbl_logo">
+                  <property name="minimumSize"><size><width>120</width><height>120</height></size></property>
+                  <property name="maximumSize"><size><width>120</width><height>120</height></size></property>
+                  <property name="pixmap"><pixmap>../../../imagen.png</pixmap></property>
+                  <property name="scaledContents"><bool>true</bool></property>
+                  <property name="alignment"><set>Qt::AlignCenter</set></property>
+                  <property name="styleSheet"><string notr="true">border:none;</string></property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="hs_logo_r">
+                  <property name="orientation"><enum>Qt::Horizontal</enum></property>
+                  <property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+
+              <item><spacer name="sp_a"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>18</height></size></property></spacer></item>
+
+              <!-- TÍTULO -->
+              <item>
+               <widget class="QLabel" name="lbl_titulo">
+                <property name="text"><string>ACCESO A CRYPTOLEARNING</string></property>
+                <property name="alignment"><set>Qt::AlignCenter</set></property>
+               </widget>
+              </item>
+
+              <item><spacer name="sp_b"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>5</height></size></property></spacer></item>
+
+              <!-- SUBTÍTULO -->
+              <item>
+               <widget class="QLabel" name="lbl_subtitulo">
+                <property name="text"><string>INTRODUCE TUS CREDENCIALES PARA OPERAR</string></property>
+                <property name="alignment"><set>Qt::AlignCenter</set></property>
+               </widget>
+              </item>
+
+              <item><spacer name="sp_c"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>20</height></size></property></spacer></item>
+
+              <!-- SEPARADOR SUTIL -->
+              <item>
+               <widget class="QFrame" name="separator">
+                <property name="frameShape"><enum>QFrame::HLine</enum></property>
+               </widget>
+              </item>
+
+              <item><spacer name="sp_d"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>20</height></size></property></spacer></item>
+
+
+              <!-- EMAIL -->
+              <item>
+               <widget class="QLabel" name="lbl_f_email">
+                <property name="text"><string>CORREO ELECTRÓNICO</string></property>
+               </widget>
+              </item>
+              <item><spacer name="s1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>3</height></size></property></spacer></item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit">
+                <property name="placeholderText"><string>correo@ejemplo.com</string></property>
+               </widget>
+              </item>
+
+              <item><spacer name="s2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>12</height></size></property></spacer></item>
+
+              <!-- CONTRASEÑA -->
+              <item>
+               <widget class="QLabel" name="lbl_f_pass">
+                <property name="text"><string>CONTRASEÑA</string></property>
+               </widget>
+              </item>
+              <item><spacer name="s3"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>3</height></size></property></spacer></item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_2">
+                <property name="echoMode"><enum>QLineEdit::Password</enum></property>
+                <property name="placeholderText"><string>Contraseña de acceso</string></property>
+               </widget>
+              </item>
+
+              <item><spacer name="s4"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>20</height></size></property></spacer></item>
+
+              <!-- BOTÓN PRIMARIO -->
+              <item>
+               <widget class="QPushButton" name="Aceptar">
+                <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+                <property name="text"><string>INICIAR SESIÓN</string></property>
+               </widget>
+              </item>
+
+              <item><spacer name="s5"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>8</height></size></property></spacer></item>
+
+              <!-- BOTÓN REGISTRO -->
+              <item>
+               <widget class="QPushButton" name="btn_ir_registro">
+                <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+                <property name="text"><string>¿No tienes cuenta?  Regístrate →</string></property>
+               </widget>
+              </item>
+
+             </layout>
+            </item>
+
+           </layout>
+          </widget>
+>>>>>>> e899965dacc71d19245bc289e6473aeeace7f971
+         </item>
+
+         <item>
+          <spacer name="hs_r">
+           <property name="orientation"><enum>Qt::Horizontal</enum></property>
+           <property name="sizeType"><enum>QSizePolicy::Expanding</enum></property>
+           <property name="sizeHint" stdset="0"><size><width>20</width><height>0</height></size></property>
           </spacer>
          </item>
         </layout>
        </item>
+
        <item>
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>100</height>
-          </size>
-         </property>
+
+        <spacer name="vs_bottom">
+         <property name="orientation"><enum>Qt::Vertical</enum></property>
+         <property name="sizeType"><enum>QSizePolicy::Expanding</enum></property>
+         <property name="sizeHint" stdset="0"><size><width>20</width><height>20</height></size></property>
+>>>>>>> e899965dacc71d19245bc289e6473aeeace7f971
         </spacer>
        </item>
+
+       <item>
+        <widget class="QLabel" name="lbl_version">
+         <property name="text"><string>CRYPTOLEARNING  ·  V1.0  ·  2025</string></property>
+         <property name="alignment"><set>Qt::AlignCenter</set></property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="vs_footer">
+         <property name="orientation"><enum>Qt::Vertical</enum></property>
+         <property name="sizeType"><enum>QSizePolicy::Fixed</enum></property>
+         <property name="sizeHint" stdset="0"><size><width>0</width><height>14</height></size></property>
+        </spacer>
+       </item>
+
       </layout>
      </widget>
     </item>
+
    </layout>
   </widget>
  </widget>

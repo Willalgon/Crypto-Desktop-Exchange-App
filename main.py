@@ -1,4 +1,3 @@
-
 from PyQt5.QtWidgets import QApplication
 from src.vista.Login import MiVentana
 from src.vista.Registro import VentanaRegistro
