@@ -27,7 +27,7 @@ class ControladorPrincipal:
             self.__vista_login.hide()
             self.__redirigir_segun_rol(resultado)
         else:
-            self.__vista_login.lanzaraviso("Login incorrecto. Verifica tus credenciales.")
+            self.__vista_login.lanzar_aviso("Login incorrecto. Verifica tus credenciales.")
 
     def __redirigir_segun_rol(self, usuario):
         """Crea la ventana correcta según el rol e inyecta el controlador."""

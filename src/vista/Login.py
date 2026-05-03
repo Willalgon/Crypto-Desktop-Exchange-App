@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QMessageBox # Plantilla de ventana principal y QMessageBox para las ventanas emergentes (pop-outs)
 from PyQt5 import uic # para traducir xml a python
 
-Form, Window = uic.loadUiType("./vista/ui/MainWindow.ui") # Form guarda los elementos visuales y Window es la base de la ventana.
+Form, Window = uic.loadUiType("src/vista/ui/MainWindow.ui") # Form guarda los elementos visuales y Window es la base de la ventana.
 
 class Login(QMainWindow, Form):
     def __init__(self):
