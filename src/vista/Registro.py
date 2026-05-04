@@ -3,7 +3,7 @@ from PyQt5 import uic
 
 Form, Window = uic.loadUiType("./src/vista/ui/RegistroWindow.ui")
 
-class VentanaRegistro(QMainWindow, Form):
+class Registro(QMainWindow, Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)  
@@ -36,7 +36,7 @@ class VentanaRegistro(QMainWindow, Form):
     @property
     def controlador(self):
         return self._controlador
-    
+
     @controlador.setter
-    def controlador(self, ref_controlador):
-        self._controlador = ref_controlador
+    def controlador(self, ref):
+        self._controlador = ref

@@ -1,4 +1,4 @@
-from src.modelo.dao.UsersDaoJDBC import UsersDaoJDBC
+from src.modelo.dao.LoginDaoJDBC import UsersDaoJDBC
 from src.modelo.vo.UsuarioVO import UsuarioVO
 
 class Logica:

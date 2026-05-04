@@ -12,13 +12,12 @@ class ControladorPrincipal:
         self.__modelo = ref_modelo
 
     def abrirIniciarSesion(self):
-        self.__vista_login.show()
+        self.__vista_login.showMaximized()
 
     def comprobarLogin(self, email, passw):
         if not email or not passw:
             self.__vista_login.lanzaraviso("Por favor, rellena todos los campos.")
             return
-
         pass_encriptada = self.__encriptar_contrasena(passw)
         loginVO = LoginVO(email, pass_encriptada)
         resultado = self.__modelo.hacerLogin(loginVO)  # devuelve UsuarioVO o None
@@ -48,11 +47,11 @@ class ControladorPrincipal:
 
     def abrirVentanaRegistro(self):
         self.__vista_login.hide()
-        self.__vista_registro.show()
+        self.__vista_registro.showMaximized()
 
     def volverAlLogin(self):
         self.__vista_registro.hide()
-        self.__vista_login.show()
+        self.__vista_login.showMaximized()
 
     def procesarRegistro(self, dni, nombre, ape1, ape2, email, contrasena):
         error = self.__validar_datos_registro(dni, nombre, ape1, ape2, email, contrasena)
@@ -73,7 +72,7 @@ class ControladorPrincipal:
     def cerrarSesion(self):
         if self.__vista_principal:
             self.__vista_principal.hide()
-        self.__vista_login.show()
+        self.__vista_login.showMaximized()
 
     def __validar_datos_registro(self, dni, nombre, ape1, ape2, email, contra):
         if not all([dni, nombre, ape1, ape2, email, contra]):
@@ -82,8 +81,8 @@ class ControladorPrincipal:
             return "El DNI/NIE debe tener 9 caracteres."
         if not re.search(r'^[\w\.-]+@[\w\.-]+\.\w{2,4}$', email):
             return "El formato del email no es válido."
-        if len(contra) < 8:
-            return "La contraseña debe tener al menos 8 caracteres."
+        if len(contra) < 4:
+            return "La contraseña debe tener al menos 4 caracteres."
         return None
 
     def __encriptar_contrasena(self, contrasena):
