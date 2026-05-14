@@ -1,11 +1,11 @@
 class LoginVO:
-    def __init__(self,nombre,contrasena):
-        self.__nombre=nombre
+    def __init__(self,email,contrasena):
+        self.__email=email
         self.__contrasena=contrasena
         
     @property
-    def nombre(self):
-        return self.__nombre
+    def email(self):
+        return self.__email
 
     @property
     def contrasena(self):

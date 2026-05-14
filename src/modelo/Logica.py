@@ -1,22 +1,21 @@
-from src.modelo.vo.UsuarioVo import UsuarioVo
+from src.modelo.dao.UsersDaoJDBC import UsersDaoJDBC
+from src.modelo.vo.UsuarioVO import UsuarioVO
 
 class Logica:
+    def __init__(self):
+        self.__users_dao = UsersDaoJDBC()
+
     def hacerLogin(self, loginVO):
-        # Si el usuario es admin, saltamos el DAO y entramos directo
-        if loginVO.nombre == "admin":
-            return UsuarioVo("12345678A", "Admin", "The Brain", "System", "admin@brain.com")
-        return None
+        return self.__users_dao.checkLogin(loginVO)
 
     def hacerRegistro(self, registroVO):
-        # Simplemente decimos que sí a todo para que no explote
-        print(f"DEBUG: Registro recibido correctamente en la lógica")
-        return True
+        try:
+            self.__users_dao.insertar(registroVO)
+            return True
+        except Exception as e:
+            print(f"Error en registro: {e}")
+            return False
 
-    def obtenerDatosSimulados(self):
-        # Datos extraídos del Apéndice 4.1 de tu ERS
-        return [
-            {'id': 'BTC', 'estado': 'Bitcoin', 'fecha': '$65,000', 'perf': 'Store Value'},
-            {'id': 'ETH', 'estado': 'Ethereum', 'fecha': '$3,500', 'perf': 'Smart contracts'},
-            {'id': 'GOLD', 'estado': 'Oro Digital', 'fecha': '$2,000', 'perf': 'Refugio'},
-            {'id': 'SOL', 'estado': 'Solana', 'fecha': '$150', 'perf': 'High Speed'}
-        ]
+    def obtenerActivos(self):
+        from src.modelo.dao.ActivosDaoJDBC import ActivosDaoJDBC
+        return ActivosDaoJDBC().obtener_todos()
