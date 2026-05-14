@@ -1,12 +1,13 @@
-# modelo/vo/UsuarioVO.py
-class UsuarioVO:
-    def __init__(self, dni, nombre, primer_apellido, segundo_apellido, email, rol):
-        self.__dni             = dni
-        self.__nombre          = nombre
+# modelo/vo/RegistroVO.py
+class RegistroVO:
+    def __init__(self, dni, nombre, primer_apellido, segundo_apellido, email, contrasena):
+        self.__dni = dni
+        self.__nombre = nombre
         self.__primer_apellido = primer_apellido
         self.__segundo_apellido = segundo_apellido
-        self.__email           = email
-        self.__rol             = rol   # 'ADMIN', 'ANALISTA', 'TRADER'
+        self.__email = email
+        self.__rol = 'TRADER'
+        self.__contrasena = contrasena
 
     @property
     def dni(self):
@@ -31,3 +32,7 @@ class UsuarioVO:
     @property
     def rol(self):
         return self.__rol
+
+    @property
+    def contrasena(self):
+        return self.__contrasena

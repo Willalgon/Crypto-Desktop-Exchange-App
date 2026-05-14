@@ -2,7 +2,7 @@
 import hashlib
 import re
 from src.modelo.vo.LoginVO  import LoginVO
-from src.modelo.vo.RegistroVo import RegistroVo
+from src.modelo.vo.RegistroVo import RegistroVO
 
 class ControladorPrincipal:
     def __init__(self, ref_vista_login, ref_vista_registro, ref_modelo):
@@ -60,7 +60,7 @@ class ControladorPrincipal:
             return
 
         contrasena_encriptada = self.__encriptar_contrasena(contrasena)
-        registroVO = RegistroVo(dni, nombre, ape1, ape2, email, contrasena_encriptada)
+        registroVO = RegistroVO(dni, nombre, ape1, ape2, email, contrasena_encriptada)
         resultado = self.__modelo.hacerRegistro(registroVO)
 
         if resultado:

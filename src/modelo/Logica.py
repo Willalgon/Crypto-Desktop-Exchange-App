@@ -1,20 +1,18 @@
-from src.modelo.dao.LoginDaoJDBC import UsersDaoJDBC
-from src.modelo.vo.UsuarioVO import UsuarioVO
+from src.modelo.dao.RegistroDaoJDBC import RegistroDaoJDBC
+from src.modelo.dao.LoginDaoJDBC import LoginDaoJDBC
+from src.modelo.vo.RegistroVO import UsuarioVO
 
 class Logica:
     def __init__(self):
-        self.__users_dao = UsersDaoJDBC()
+        self.__registro_dao = RegistroDaoJDBC()
+        self.__login_dao = LoginDaoJDBC()
+
 
     def hacerLogin(self, loginVO):
-        return self.__users_dao.checkLogin(loginVO)
+        return self.__login_dao.checkLogin(loginVO)
 
     def hacerRegistro(self, registroVO):
-        try:
-            self.__users_dao.insertar(registroVO)
-            return True
-        except Exception as e:
-            print(f"Error en registro: {e}")
-            return False
+        return self.__registro_dao.insertarUsuario(registroVO)
 
     def obtenerActivos(self):
         from src.modelo.dao.ActivosDaoJDBC import ActivosDaoJDBC

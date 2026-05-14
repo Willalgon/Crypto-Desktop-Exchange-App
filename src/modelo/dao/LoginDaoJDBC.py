@@ -1,5 +1,5 @@
 from src.modelo.conexion.Conexion import Conexion
-from src.modelo.vo.UsuarioVO import UsuarioVO
+from src.modelo.vo.RegistroVO import RegistroVO
 
 class LoginDaoJDBC(Conexion):
 
@@ -14,7 +14,7 @@ class LoginDaoJDBC(Conexion):
         partes      = apellidos.split(" ", 1) if apellidos else ["", ""]
         primer_ape  = partes[0]
         segundo_ape = partes[1] if len(partes) > 1 else ""
-        return UsuarioVO(dni, nombre, primer_ape, segundo_ape, email, rol)
+        return RegistroVO(dni, nombre, primer_ape, segundo_ape, email, rol)
 
     def checkLogin(self, loginVO):
         cursor = self.getCursor()
