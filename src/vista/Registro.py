@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5 import uic
 
-Form, Window = uic.loadUiType("./src/vista/ui/RegistroWindow.ui")
+Form, Window = uic.loadUiType("./src/vista/ui/Registro.ui")
 
 class Registro(QMainWindow, Form):
     def __init__(self):
@@ -32,7 +32,7 @@ class Registro(QMainWindow, Form):
 
     def mostrarError(self, mensaje):
         QMessageBox.warning(self, "Error", mensaje)
-        
+
 
     @property
     def controlador(self):
