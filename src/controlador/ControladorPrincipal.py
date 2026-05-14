@@ -31,18 +31,18 @@ class ControladorPrincipal:
 
     def __redirigir_segun_rol(self, usuario):
         self.__usuario_actual = usuario
+        rol = usuario.rol
+        print(f"ROL RECIBIDO: '{rol}'")
+        # if rol == "TRADER":
+        #     from src.vista.VentanaTrader import VentanaTrader
+        #     self.__vista_principal = VentanaTrader()
+        # elif rol == "ADMIN":
+        #     from src.vista.VentanaAdmin import VentanaAdmin
+        #     self.__vista_principal = VentanaAdmin()
 
-        rol = usuario.rol  # 'TRADER', 'ANALISTA' o 'ADMIN'
-
-        if rol == "TRADER":
-            from src.vista.VentanaTrader import VentanaTrader
-            self.__vista_principal = VentanaTrader()
-        elif rol == "ANALISTA":
+        if rol == "ANALISTA":
             from src.vista.Analista import Analista
             self.__vista_principal = Analista()
-        elif rol == "ADMIN":
-            from src.vista.VentanaAdmin import VentanaAdmin
-            self.__vista_principal = VentanaAdmin()
 
         self.__vista_principal.controlador = self
         self.__vista_principal.showMaximized()

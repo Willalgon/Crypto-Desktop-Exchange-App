@@ -19,5 +19,5 @@ class Logica:
         from src.modelo.dao.ActivosDaoJDBC import ActivosDaoJDBC
         return ActivosDaoJDBC().obtener_todos()
 
-    def publicarNoticia(self, noticiaVO):
+    def publicarNoticia(self, noticiaVO, id_analista):
         return self.__noticia_dao.insertarNoticia(noticiaVO, id_analista)

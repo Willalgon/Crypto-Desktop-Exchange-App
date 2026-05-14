@@ -1,13 +1,18 @@
 # modelo/vo/RegistroVO.py
 class RegistroVO:
-    def __init__(self, dni, nombre, primer_apellido, segundo_apellido, email, contrasena):
+    def __init__(self, dni, nombre, primer_apellido, segundo_apellido, email, contrasena, rol='TRADER', id_usuario=None):
+        self.__id_usuario = id_usuario
         self.__dni = dni
         self.__nombre = nombre
         self.__primer_apellido = primer_apellido
         self.__segundo_apellido = segundo_apellido
         self.__email = email
-        self.__rol = 'TRADER'
         self.__contrasena = contrasena
+        self.__rol = rol
+
+    @property
+    def id_usuario(self):  # ← añade esta property
+        return self.__id_usuario
 
     @property
     def dni(self):

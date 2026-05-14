@@ -15,7 +15,7 @@ class Conexion:
             jar_file    = "lib/mysql-connector-j-9.6.0.jar"
             self.conexion = jaydebeapi.connect(
                 jdbc_driver,
-                f"jdbc:mysql://{self._host}/{self._database}?allowPublicKeyRetrieval=true&useSSL=false",
+                f"jdbc:mysql://127.0.0.1/{self._database}?allowPublicKeyRetrieval=true&useSSL=false",
                 [self._user, self._password],
                 jar_file
             )
