@@ -2,7 +2,7 @@
 import hashlib
 import re
 from src.modelo.vo.LoginVO  import LoginVO
-from src.modelo.vo.RegistroVo import RegistroVO
+from src.modelo.vo.RegistroVO import RegistroVO
 
 class ControladorPrincipal:
     def __init__(self, ref_vista_login, ref_vista_registro, ref_modelo):
