@@ -1,6 +1,6 @@
 from src.modelo.conexion.Conexion import Conexion
 
-class NoticiasDaoJDBC(Conexion):
+class NoticiaDaoJDBC(Conexion):
 
     def insertarNoticia(self, noticiaVO, id_analista):  # ← recibe id_analista por parámetro
         SQL = """

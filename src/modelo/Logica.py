@@ -1,6 +1,6 @@
 from src.modelo.dao.RegistroDaoJDBC import RegistroDaoJDBC
 from src.modelo.dao.LoginDaoJDBC import LoginDaoJDBC
-from src.modelo.vo.RegistroVO import RegistroVO
+from src.modelo.dao.NoticiaDaoJDBC import NoticiaDaoJDBC
 
 class Logica:
     def __init__(self):
