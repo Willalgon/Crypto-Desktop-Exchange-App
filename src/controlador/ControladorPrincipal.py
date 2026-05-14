@@ -3,6 +3,7 @@ import hashlib
 import re
 from src.modelo.vo.LoginVO  import LoginVO
 from src.modelo.vo.RegistroVO import RegistroVO
+from src.modelo.vo.NoticiaVO import NoticiaVO
 
 class ControladorPrincipal:
     def __init__(self, ref_vista_login, ref_vista_registro, ref_modelo):
@@ -29,21 +30,22 @@ class ControladorPrincipal:
             self.__vista_login.lanzar_aviso("Login incorrecto. Verifica tus credenciales.")
 
     def __redirigir_segun_rol(self, usuario):
-        """Crea la ventana correcta según el rol e inyecta el controlador."""
+        self.__usuario_actual = usuario
+
         rol = usuario.rol  # 'TRADER', 'ANALISTA' o 'ADMIN'
 
         if rol == "TRADER":
             from src.vista.VentanaTrader import VentanaTrader
             self.__vista_principal = VentanaTrader()
         elif rol == "ANALISTA":
-            from src.vista.VentanaAnalista import VentanaAnalista
-            self.__vista_principal = VentanaAnalista()
+            from src.vista.Analista import Analista
+            self.__vista_principal = Analista()
         elif rol == "ADMIN":
             from src.vista.VentanaAdmin import VentanaAdmin
             self.__vista_principal = VentanaAdmin()
 
         self.__vista_principal.controlador = self
-        self.__vista_principal.show()
+        self.__vista_principal.showMaximized()
 
     def abrirVentanaRegistro(self):
         self.__vista_login.hide()
@@ -89,3 +91,11 @@ class ControladorPrincipal:
         sha256 = hashlib.sha256()
         sha256.update(contrasena.encode('utf-8'))
         return sha256.hexdigest()
+
+    def publicarNoticia(self, titulo, cuerpo, es_aviso):
+        noticiaVO = NoticiaVO(titulo, cuerpo, es_aviso)
+        resultado = self.__modelo.publicarNoticia(noticiaVO, self.__usuario_actual.id_usuario)
+        if resultado:
+            self.__vista_principal.mostrarExitoPublicacion(titulo, es_aviso)
+        else:
+            self.__vista_principal.mostrar_error("No se pudo publicar la noticia.")

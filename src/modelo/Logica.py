@@ -6,6 +6,7 @@ class Logica:
     def __init__(self):
         self.__registro_dao = RegistroDaoJDBC()
         self.__login_dao = LoginDaoJDBC()
+        self.__noticia_dao = NoticiaDaoJDBC()
 
 
     def hacerLogin(self, loginVO):
@@ -17,3 +18,6 @@ class Logica:
     def obtenerActivos(self):
         from src.modelo.dao.ActivosDaoJDBC import ActivosDaoJDBC
         return ActivosDaoJDBC().obtener_todos()
+
+    def publicarNoticia(self, noticiaVO):
+        return self.__noticia_dao.insertarNoticia(noticiaVO, id_analista)
