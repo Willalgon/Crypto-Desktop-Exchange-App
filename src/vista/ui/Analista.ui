@@ -14,450 +14,485 @@
 
 /* ═══════════════════════════════════════════════════════════════════════
    CRYPTOLEARNING  ·  PANEL ANALISTA
-   Pure Black Spatial  ·  Deep Dark Edition
+   Apple Spatial Design  ·  Dark Matter Edition
+   ═══════════════════════════════════════════════════════════════════════
+   Palette:
+     Surface-0  #0A0A0B   — void black
+     Surface-1  #111113   — deep base
+     Surface-2  #18181B   — card ground
+     Surface-3  #222226   — raised card
+     Surface-4  #2C2C31   — input field
+     Divider    rgba(255,255,255,0.06)
+     Border     rgba(255,255,255,0.10)
+     Border-hi  rgba(255,255,255,0.16)
+     Accent     #FF6B00   — CryptoOrange
+     Accent-hi  #FF8C2A   — warm highlight
+     Accent-glo rgba(255,107,0,0.14)
+     Text-pri   rgba(255,255,255,0.92)
+     Text-sec   rgba(255,255,255,0.50)
+     Text-ter   rgba(255,255,255,0.25)
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* ── VENTANA BASE ───────────────────────────────────────────────────── */
+/* ── BASE ───────────────────────────────────────────────────────────── */
 QMainWindow, QWidget#centralwidget {
-    background-color: #000000;
+    background-color: #0A0A0B;
+    font-family: "SF Pro Display", "Helvetica Neue", "Segoe UI Variable", Arial, sans-serif;
 }
 QFrame { background: transparent; border: none; }
 
 /* ── SIDEBAR ────────────────────────────────────────────────────────── */
 QFrame#sidebar {
-    background: qlineargradient(
-        x1:0, y1:0, x2:1, y2:0,
-        stop:0.00 rgba(10, 8, 14, 255),
-        stop:1.00 rgba(6, 5, 9, 255)
-    );
-    border-right: 1px solid rgba(255, 106, 0, 40);
+    background-color: #111113;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* ── LOGO SIDEBAR ───────────────────────────────────────────────────── */
+/* ── LOGO ───────────────────────────────────────────────────────────── */
 QLabel#lbl_sidebar_logo {
-    color: #FFFFFF;
+    color: rgba(255, 255, 255, 0.92);
     font-size: 13px;
-    font-weight: 800;
-    font-family: "Helvetica Neue", "Segoe UI Semibold", Arial, sans-serif;
-    letter-spacing: 4px;
-    qproperty-alignment: AlignCenter;
+    font-weight: 700;
+    font-family: "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 2px;
+    qproperty-alignment: AlignLeft;
 }
 QLabel#lbl_sidebar_sub {
-    color: rgba(255, 120, 0, 160);
-    font-size: 8px;
-    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-    letter-spacing: 3px;
-    qproperty-alignment: AlignCenter;
+    color: #FF6B00;
+    font-size: 10px;
+    font-weight: 500;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 1.5px;
+    qproperty-alignment: AlignLeft;
 }
 
-/* ── SEPARADOR SIDEBAR ──────────────────────────────────────────────── */
+/* ── SEPARADOR ──────────────────────────────────────────────────────── */
 QFrame#sep_sidebar {
-    background: qlineargradient(
-        x1:0, y1:0, x2:1, y2:0,
-        stop:0.00 rgba(255, 106, 0,   0),
-        stop:0.40 rgba(255, 106, 0, 100),
-        stop:0.60 rgba(255, 160, 0, 180),
-        stop:1.00 rgba(255, 106, 0,   0)
-    );
+    background-color: rgba(255, 255, 255, 0.06);
     min-height: 1px;
     max-height: 1px;
     border: none;
 }
 
-/* ── BOTONES SIDEBAR NAV ────────────────────────────────────────────── */
+/* ── SECCIÓN NAV LABEL ──────────────────────────────────────────────── */
+QLabel#lbl_nav_section {
+    color: rgba(255, 255, 255, 0.22);
+    font-size: 9px;
+    font-weight: 600;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 2px;
+    padding-left: 16px;
+}
+
+/* ── BOTONES NAV ────────────────────────────────────────────────────── */
 QPushButton#btn_nav_noticias,
 QPushButton#btn_nav_historial,
 QPushButton#btn_nav_salir {
     background: transparent;
-    color: rgba(255, 255, 255, 110);
-    font-size: 10px;
-    font-weight: 600;
-    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 12px;
+    font-weight: 500;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0.2px;
     border: none;
     border-radius: 10px;
-    padding: 14px 16px;
+    padding: 10px 14px 10px 14px;
     text-align: left;
 }
 QPushButton#btn_nav_noticias:hover,
 QPushButton#btn_nav_historial:hover {
-    background: rgba(255, 106, 0, 18);
-    color: #FF8C00;
-    border-left: 2px solid rgba(255, 130, 0, 200);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.80);
 }
 QPushButton#btn_nav_noticias:pressed,
 QPushButton#btn_nav_historial:pressed {
-    background: rgba(255, 106, 0, 30);
-    color: #FFA040;
+    background: rgba(255, 107, 0, 0.10);
+    color: #FF8C2A;
 }
 QPushButton#btn_nav_salir {
-    color: rgba(255, 80, 80, 120);
+    color: rgba(255, 80, 80, 0.45);
 }
 QPushButton#btn_nav_salir:hover {
-    background: rgba(200, 40, 40, 18);
-    color: rgba(255, 100, 100, 220);
-    border-left: 2px solid rgba(220, 60, 60, 180);
+    background: rgba(255, 60, 60, 0.07);
+    color: rgba(255, 100, 100, 0.80);
+}
+
+/* ── INDICADOR ACTIVO ───────────────────────────────────────────────── */
+QPushButton#btn_nav_noticias[active="true"] {
+    background: rgba(255, 107, 0, 0.12);
+    color: #FF8C2A;
+}
+
+/* ── AVATAR USUARIO ─────────────────────────────────────────────────── */
+QFrame#user_pill {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
+QLabel#lbl_user_name {
+    color: rgba(255, 255, 255, 0.70);
+    font-size: 11px;
+    font-weight: 500;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+}
+QLabel#lbl_user_role {
+    color: rgba(255, 107, 0, 0.70);
+    font-size: 9px;
+    font-weight: 400;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0.5px;
+}
+QLabel#lbl_user_avatar {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
+        stop:0 #FF6B00, stop:1 #FF3D00);
+    color: #000000;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    border-radius: 10px;
+    qproperty-alignment: AlignCenter;
 }
 
 /* ── ÁREA PRINCIPAL ─────────────────────────────────────────────────── */
 QFrame#main_area {
-    background: qradialgradient(
-        cx: 0.30, cy: 0.20, radius: 1.10,
-        stop: 0.00 rgba(18, 14, 24, 255),
-        stop: 0.50 rgba(9,  7, 13, 255),
-        stop: 1.00 rgba(4,  3,  7, 255)
-    );
+    background-color: #0A0A0B;
 }
 
-/* ── HEADER PRINCIPAL ───────────────────────────────────────────────── */
-QFrame#header_bar {
-    background: qlineargradient(
-        x1:0, y1:0, x2:0, y2:1,
-        stop:0 rgba(20, 16, 28, 255),
-        stop:1 rgba(10,  8, 14, 255)
-    );
-    border-bottom: 1px solid rgba(255, 106, 0, 35);
+/* ── TOPBAR ─────────────────────────────────────────────────────────── */
+QFrame#topbar {
+    background-color: rgba(10, 10, 11, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
-QLabel#lbl_header_titulo {
-    color: #FFFFFF;
-    font-size: 14px;
-    font-weight: 700;
-    font-family: "Helvetica Neue", "Segoe UI Semibold", Arial, sans-serif;
-    letter-spacing: 3px;
+QLabel#lbl_topbar_title {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 15px;
+    font-weight: 600;
+    font-family: "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: -0.2px;
 }
-QLabel#lbl_header_rol {
-    color: rgba(255, 130, 0, 180);
-    font-size: 9px;
-    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-    letter-spacing: 2.5px;
+QLabel#lbl_topbar_breadcrumb {
+    color: rgba(255, 255, 255, 0.28);
+    font-size: 11px;
+    font-weight: 400;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
 }
-QLabel#lbl_header_usuario {
-    color: rgba(255, 255, 255, 140);
+QLabel#lbl_topbar_breadcrumb_sep {
+    color: rgba(255, 255, 255, 0.15);
+    font-size: 11px;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+}
+QLabel#lbl_topbar_breadcrumb_active {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 11px;
+    font-weight: 500;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ── BADGE LIVE ─────────────────────────────────────────────────────── */
+QLabel#lbl_live_dot {
+    background: #34C759;
+    border-radius: 4px;
+    min-width: 8px;
+    max-width: 8px;
+    min-height: 8px;
+    max-height: 8px;
+}
+QLabel#lbl_live_text {
+    color: rgba(52, 199, 89, 0.80);
     font-size: 10px;
-    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-    letter-spacing: 1px;
-    qproperty-alignment: AlignRight;
+    font-weight: 600;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0.5px;
 }
 
-/* ── GLOW LINE HEADER ───────────────────────────────────────────────── */
-QFrame#header_glow {
-    background: qlineargradient(
-        x1:0, y1:0, x2:1, y2:0,
-        stop:0.00 rgba(255, 106,  0,   0),
-        stop:0.20 rgba(255, 106,  0,  80),
-        stop:0.50 rgba(255, 160,  0, 200),
-        stop:0.80 rgba(255, 106,  0,  80),
-        stop:1.00 rgba(255, 106,  0,   0)
-    );
-    min-height: 1px;
-    max-height: 1px;
-    border: none;
-}
+/* ── CONTENIDO ──────────────────────────────────────────────────────── */
 
-/* ── CARD PUBLICAR NOTICIA ──────────────────────────────────────────── */
+/* ── CARD GLASSMORPHISM ─────────────────────────────────────────────── */
 QFrame#card_publicar {
-    background: qradialgradient(
-        cx: 0.50, cy: 0.30, radius: 0.90,
-        stop: 0.00 rgba(26, 20, 36, 255),
-        stop: 0.60 rgba(14, 11, 20, 255),
-        stop: 1.00 rgba( 7,  5, 11, 255)
-    );
-    border-top:    1px solid rgba(255, 255, 255, 50);
-    border-left:   1px solid rgba(255, 255, 255, 28);
-    border-right:  1px solid rgba(255, 255, 255, 16);
-    border-bottom: 1px solid rgba(255, 255, 255, 10);
-    border-radius: 20px;
+    background-color: #18181B;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
 }
-QFrame#card_glow_publicar {
-    background: qlineargradient(
-        x1:0, y1:0, x2:1, y2:0,
-        stop:0.00 rgba(255, 106,  0,   0),
-        stop:0.25 rgba(255, 106,  0, 110),
-        stop:0.50 rgba(255, 160,  0, 240),
-        stop:0.75 rgba(255, 106,  0, 110),
-        stop:1.00 rgba(255, 106,  0,   0)
-    );
-    min-height: 1px;
-    max-height: 1px;
-    border: none;
+QFrame#card_historial {
+    background-color: #18181B;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
 }
 
-/* ── CARD HISTORIAL ─────────────────────────────────────────────────── */
-QFrame#card_historial {
-    background: qradialgradient(
-        cx: 0.50, cy: 0.20, radius: 0.90,
-        stop: 0.00 rgba(22, 17, 30, 255),
-        stop: 0.60 rgba(12, 10, 17, 255),
-        stop: 1.00 rgba( 6,  5,  9, 255)
-    );
-    border-top:    1px solid rgba(255, 255, 255, 45);
-    border-left:   1px solid rgba(255, 255, 255, 25);
-    border-right:  1px solid rgba(255, 255, 255, 14);
-    border-bottom: 1px solid rgba(255, 255, 255, 8);
-    border-radius: 20px;
-}
-QFrame#card_glow_historial {
+/* ── ACCENT LINE TOP CARD ───────────────────────────────────────────── */
+QFrame#card_accent_pub,
+QFrame#card_accent_hist {
     background: qlineargradient(
         x1:0, y1:0, x2:1, y2:0,
-        stop:0.00 rgba(255, 106,  0,   0),
-        stop:0.25 rgba(255, 106,  0,  80),
-        stop:0.50 rgba(255, 160,  0, 180),
-        stop:0.75 rgba(255, 106,  0,  80),
-        stop:1.00 rgba(255, 106,  0,   0)
+        stop:0.00 rgba(255, 107, 0,   0),
+        stop:0.30 rgba(255, 107, 0, 160),
+        stop:0.50 rgba(255, 160, 0, 255),
+        stop:0.70 rgba(255, 107, 0, 160),
+        stop:1.00 rgba(255, 107, 0,   0)
     );
     min-height: 1px;
     max-height: 1px;
     border: none;
+    border-radius: 0px;
 }
 
 /* ── TÍTULOS DE CARD ────────────────────────────────────────────────── */
+QLabel#lbl_card_eyebrow,
+QLabel#lbl_hist_eyebrow {
+    color: #FF6B00;
+    font-size: 9px;
+    font-weight: 600;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 2px;
+}
 QLabel#lbl_card_titulo,
 QLabel#lbl_hist_titulo {
-    color: #FFFFFF;
-    font-size: 11px;
-    font-weight: 700;
-    font-family: "Helvetica Neue", "Segoe UI Semibold", Arial, sans-serif;
-    letter-spacing: 2.5px;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 17px;
+    font-weight: 600;
+    font-family: "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: -0.3px;
 }
 QLabel#lbl_card_desc,
 QLabel#lbl_hist_desc {
-    color: rgba(255, 255, 255, 55);
-    font-size: 9px;
-    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 11px;
+    font-weight: 400;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0.1px;
 }
 
-/* ── ETIQUETAS DE CAMPO ─────────────────────────────────────────────── */
+/* ── ETIQUETAS CAMPO ────────────────────────────────────────────────── */
 QLabel#lbl_f_titulo,
 QLabel#lbl_f_cuerpo,
 QLabel#lbl_f_tipo {
-    color: rgba(255, 140, 0, 170);
-    font-size: 9px;
-    font-weight: 700;
-    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-    letter-spacing: 2.2px;
-    padding-left: 1px;
+    color: rgba(255, 255, 255, 0.40);
+    font-size: 10px;
+    font-weight: 600;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 1.5px;
 }
 
-/* ── INPUT TÍTULO ───────────────────────────────────────────────────── */
+/* ── INPUT TITLE ────────────────────────────────────────────────────── */
 QLineEdit#input_titulo {
-    background: qlineargradient(
-        x1:0, y1:0, x2:0, y2:1,
-        stop:0 rgba(255, 255, 255,  7),
-        stop:1 rgba(255, 255, 255,  3)
-    );
-    border: 1px solid rgba(255, 255, 255, 16);
-    border-bottom: 1px solid rgba(255, 255, 255, 26);
+    background-color: #222226;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 10px;
-    color: rgba(255, 255, 255, 215);
-    padding: 10px 14px;
+    color: rgba(255, 255, 255, 0.88);
+    padding: 11px 14px;
     font-size: 13px;
-    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-    min-height: 20px;
-    selection-background-color: rgba(255, 106, 0, 100);
+    font-weight: 400;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    min-height: 22px;
+    selection-background-color: rgba(255, 107, 0, 0.30);
     selection-color: #FFFFFF;
 }
 QLineEdit#input_titulo:hover {
-    background: qlineargradient(
-        x1:0, y1:0, x2:0, y2:1,
-        stop:0 rgba(255, 255, 255, 11),
-        stop:1 rgba(255, 255, 255,  6)
-    );
-    border: 1px solid rgba(255, 255, 255, 40);
-    border-bottom: 1px solid rgba(255, 255, 255, 55);
-    color: #FFFFFF;
+    background-color: #27272C;
+    border: 1px solid rgba(255, 255, 255, 0.13);
 }
 QLineEdit#input_titulo:focus {
-    background: qlineargradient(
-        x1:0, y1:0, x2:0, y2:1,
-        stop:0 rgba(255, 106, 0, 20),
-        stop:1 rgba(255,  80, 0,  8)
-    );
-    border: 1px solid rgba(255, 130, 0, 180);
-    border-bottom: 1px solid rgba(255, 160, 0, 240);
+    background-color: #222226;
+    border: 1px solid rgba(255, 107, 0, 0.60);
     color: #FFFFFF;
 }
 
 /* ── TEXTAREA CUERPO ────────────────────────────────────────────────── */
 QTextEdit#input_cuerpo {
-    background: qlineargradient(
-        x1:0, y1:0, x2:0, y2:1,
-        stop:0 rgba(255, 255, 255,  6),
-        stop:1 rgba(255, 255, 255,  2)
-    );
-    border: 1px solid rgba(255, 255, 255, 14);
-    border-bottom: 1px solid rgba(255, 255, 255, 22);
-    border-radius: 12px;
-    color: rgba(255, 255, 255, 200);
+    background-color: #222226;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.82);
     padding: 12px 14px;
-    font-size: 12px;
-    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-    selection-background-color: rgba(255, 106, 0, 100);
+    font-size: 13px;
+    font-weight: 400;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    selection-background-color: rgba(255, 107, 0, 0.30);
     selection-color: #FFFFFF;
 }
+QTextEdit#input_cuerpo:hover {
+    background-color: #27272C;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+}
 QTextEdit#input_cuerpo:focus {
-    background: qlineargradient(
-        x1:0, y1:0, x2:0, y2:1,
-        stop:0 rgba(255, 106, 0, 16),
-        stop:1 rgba(255,  80, 0,  6)
-    );
-    border: 1px solid rgba(255, 130, 0, 160);
-    border-bottom: 1px solid rgba(255, 160, 0, 220);
+    background-color: #222226;
+    border: 1px solid rgba(255, 107, 0, 0.60);
     color: #FFFFFF;
 }
 
-/* ── CHECKBOX AVISO ─────────────────────────────────────────────────── */
+/* ── CHECKBOX ───────────────────────────────────────────────────────── */
 QCheckBox#chk_aviso {
-    color: rgba(255, 255, 255, 140);
-    font-size: 10px;
-    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-    letter-spacing: 1px;
-    spacing: 8px;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 12px;
+    font-weight: 400;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0.1px;
+    spacing: 9px;
 }
 QCheckBox#chk_aviso::indicator {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 30);
-    background: rgba(255, 255, 255, 6);
+    width: 17px;
+    height: 17px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background-color: #222226;
 }
 QCheckBox#chk_aviso::indicator:hover {
-    border: 1px solid rgba(255, 130, 0, 180);
-    background: rgba(255, 106, 0, 14);
+    border: 1px solid rgba(255, 107, 0, 0.55);
+    background-color: rgba(255, 107, 0, 0.08);
 }
 QCheckBox#chk_aviso::indicator:checked {
     background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
-        stop:0 #FF5E00, stop:1 #FF8000);
-    border: 1px solid rgba(255, 200, 100, 160);
+        stop:0 #FF6B00, stop:1 #FF3D00);
+    border: 1px solid rgba(255, 150, 50, 0.50);
 }
 
-/* ── BOTÓN PUBLICAR ─────────────────────────────────────────────────── */
+/* ── BOTÓN PUBLICAR (CTA primario) ──────────────────────────────────── */
 QPushButton#btn_publicar {
     background: qlineargradient(
-        x1:0, y1:0, x2:1, y2:1,
-        stop:0.0  #FF5E00,
-        stop:0.5  #FF8000,
-        stop:1.0  #FF5200
+        x1:0, y1:0, x2:0, y2:1,
+        stop:0.0  #FF7A1A,
+        stop:1.0  #FF5500
     );
-    color: #000000;
-    font-weight: 800;
-    font-size: 11px;
-    font-family: "Helvetica Neue", "Segoe UI Semibold", Arial, sans-serif;
-    letter-spacing: 3.5px;
-    border-radius: 11px;
-    border-top:    1px solid rgba(255, 200, 100, 160);
-    border-left:   1px solid rgba(255, 200, 100,  80);
-    border-right:  1px solid rgba(180,  80,   0,  80);
-    border-bottom: 1px solid rgba(160,  60,   0, 120);
-    min-height: 46px;
-    padding: 0 20px;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 12px;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0.3px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 180, 80, 0.20);
+    border-bottom: 1px solid rgba(150, 50, 0, 0.40);
+    min-height: 42px;
+    padding: 0 22px;
 }
 QPushButton#btn_publicar:hover {
     background: qlineargradient(
-        x1:0, y1:0, x2:1, y2:1,
-        stop:0.0  #FF7520,
-        stop:0.5  #FFA040,
-        stop:1.0  #FF6A18
+        x1:0, y1:0, x2:0, y2:1,
+        stop:0.0  #FF8C2A,
+        stop:1.0  #FF6600
     );
-    color: #000000;
 }
 QPushButton#btn_publicar:pressed {
     background: qlineargradient(
-        x1:0, y1:0, x2:1, y2:1,
-        stop:0.0  #D94E00,
-        stop:0.5  #E06A00,
-        stop:1.0  #D04400
+        x1:0, y1:0, x2:0, y2:1,
+        stop:0.0  #E05800,
+        stop:1.0  #CC4400
     );
     padding-top: 1px;
 }
 
-/* ── BOTÓN LIMPIAR ──────────────────────────────────────────────────── */
+/* ── BOTÓN LIMPIAR (secundario) ─────────────────────────────────────── */
 QPushButton#btn_limpiar {
-    background: transparent;
-    color: rgba(255, 255, 255, 55);
-    font-size: 10px;
-    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-    letter-spacing: 1.5px;
-    border: 1px solid rgba(255, 255, 255, 18);
-    border-radius: 11px;
-    min-height: 46px;
-    padding: 0 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 12px;
+    font-weight: 500;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0.2px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 10px;
+    min-height: 42px;
+    padding: 0 22px;
 }
 QPushButton#btn_limpiar:hover {
-    color: rgba(255, 255, 255, 180);
-    border: 1px solid rgba(255, 255, 255, 50);
+    background-color: rgba(255, 255, 255, 0.09);
+    color: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 QPushButton#btn_limpiar:pressed {
-    background: rgba(255, 255, 255, 8);
+    background-color: rgba(255, 255, 255, 0.04);
 }
 
-/* ── TABLA HISTORIAL ────────────────────────────────────────────────── */
+/* ── TABLA ──────────────────────────────────────────────────────────── */
 QTableWidget#tabla_noticias {
     background: transparent;
     border: none;
-    gridline-color: rgba(255, 255, 255, 10);
-    color: rgba(255, 255, 255, 200);
-    font-size: 11px;
-    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-    selection-background-color: rgba(255, 106, 0, 40);
-    selection-color: #FFFFFF;
+    gridline-color: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.80);
+    font-size: 12px;
+    font-weight: 400;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    selection-background-color: rgba(255, 107, 0, 0.10);
+    selection-color: rgba(255, 255, 255, 0.92);
     outline: none;
 }
 QTableWidget#tabla_noticias::item {
-    padding: 10px 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 8);
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 QTableWidget#tabla_noticias::item:selected {
-    background: rgba(255, 106, 0, 35);
-    color: #FFFFFF;
+    background-color: rgba(255, 107, 0, 0.08);
+    color: rgba(255, 255, 255, 0.92);
+    border-radius: 0px;
+}
+QTableWidget#tabla_noticias::item:hover {
+    background-color: rgba(255, 255, 255, 0.03);
 }
 QHeaderView::section {
-    background: rgba(255, 255, 255, 6);
-    color: rgba(255, 140, 0, 180);
-    font-size: 9px;
-    font-weight: 700;
-    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-    letter-spacing: 2px;
-    padding: 10px 12px;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.28);
+    font-size: 10px;
+    font-weight: 600;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 1.5px;
+    padding: 10px 14px;
     border: none;
-    border-bottom: 1px solid rgba(255, 106, 0, 50);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
+QHeaderView::section:first {
+    border-top-left-radius: 0px;
+}
+QHeaderView::section:last {
+    border-top-right-radius: 0px;
+}
+
+/* ── SCROLLBAR ──────────────────────────────────────────────────────── */
 QScrollBar:vertical {
-    background: rgba(255, 255, 255, 4);
-    width: 6px;
+    background: transparent;
+    width: 5px;
     border-radius: 3px;
-    margin: 0;
+    margin: 4px 0;
 }
 QScrollBar::handle:vertical {
-    background: rgba(255, 106, 0, 120);
+    background: rgba(255, 255, 255, 0.14);
     border-radius: 3px;
-    min-height: 30px;
+    min-height: 24px;
 }
 QScrollBar::handle:vertical:hover {
-    background: rgba(255, 130, 0, 200);
+    background: rgba(255, 107, 0, 0.45);
 }
 QScrollBar::add-line:vertical,
 QScrollBar::sub-line:vertical { height: 0; }
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical { background: transparent; }
 
-/* ── BADGE AVISO ────────────────────────────────────────────────────── */
+/* ── BADGE AVISO URGENTE ────────────────────────────────────────────── */
 QLabel#lbl_badge_aviso {
-    color: #FF6A00;
-    background: rgba(255, 106, 0, 18);
-    border: 1px solid rgba(255, 106, 0, 80);
-    border-radius: 6px;
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    padding: 2px 7px;
-    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+    color: #FF6B00;
+    background: rgba(255, 107, 0, 0.10);
+    border: 1px solid rgba(255, 107, 0, 0.22);
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 600;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+}
+
+/* ── SEPARADOR INTERNO ──────────────────────────────────────────────── */
+QFrame#sep_card {
+    background-color: rgba(255, 255, 255, 0.05);
+    min-height: 1px;
+    max-height: 1px;
+    border: none;
 }
 
 /* ── PIE ────────────────────────────────────────────────────────────── */
 QLabel#lbl_version {
-    color: rgba(255, 255, 255, 15);
-    font-size: 9px;
-    font-family: "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-    letter-spacing: 1.8px;
+    color: rgba(255, 255, 255, 0.10);
+    font-size: 10px;
+    font-weight: 400;
+    font-family: "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 1px;
     qproperty-alignment: AlignCenter;
 }
 
@@ -472,13 +507,13 @@ QLabel#lbl_version {
     <property name="rightMargin"><number>0</number></property>
     <property name="bottomMargin"><number>0</number></property>
 
-    <!-- ══════════════════════════════
-         SIDEBAR
-         ══════════════════════════════ -->
+    <!-- ══════════════════════════════════
+         SIDEBAR — 220px fixed
+         ══════════════════════════════════ -->
     <item>
      <widget class="QFrame" name="sidebar">
-      <property name="minimumSize"><size><width>200</width><height>0</height></size></property>
-      <property name="maximumSize"><size><width>200</width><height>16777215</height></size></property>
+      <property name="minimumSize"><size><width>220</width><height>0</height></size></property>
+      <property name="maximumSize"><size><width>220</width><height>16777215</height></size></property>
       <layout class="QVBoxLayout" name="vl_sidebar">
        <property name="spacing"><number>0</number></property>
        <property name="leftMargin"><number>0</number></property>
@@ -488,26 +523,26 @@ QLabel#lbl_version {
 
        <!-- LOGO BLOQUE -->
        <item>
-        <layout class="QVBoxLayout" name="vl_logo_bloque">
+        <layout class="QVBoxLayout" name="vl_logo">
          <property name="leftMargin"><number>20</number></property>
-         <property name="topMargin"><number>32</number></property>
+         <property name="topMargin"><number>28</number></property>
          <property name="rightMargin"><number>20</number></property>
-         <property name="bottomMargin"><number>20</number></property>
+         <property name="bottomMargin"><number>24</number></property>
+         <property name="spacing"><number>3</number></property>
          <item>
           <widget class="QLabel" name="lbl_sidebar_logo">
            <property name="text"><string>CRYPTOLEARNING</string></property>
           </widget>
          </item>
-         <item><spacer name="sp_logo_s"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>4</height></size></property></spacer></item>
          <item>
           <widget class="QLabel" name="lbl_sidebar_sub">
-           <property name="text"><string>PANEL ANALISTA</string></property>
+           <property name="text"><string>Panel Analista</string></property>
           </widget>
          </item>
         </layout>
        </item>
 
-       <!-- LÍNEA NARANJA -->
+       <!-- DIVISOR -->
        <item>
         <widget class="QFrame" name="sep_sidebar">
          <property name="frameShape"><enum>QFrame::HLine</enum></property>
@@ -516,24 +551,35 @@ QLabel#lbl_version {
         </widget>
        </item>
 
-       <item><spacer name="sp_nav_top"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>18</height></size></property></spacer></item>
-
-       <!-- BOTONES NAV -->
+       <!-- NAVEGACIÓN -->
        <item>
         <layout class="QVBoxLayout" name="vl_nav">
-         <property name="spacing"><number>4</number></property>
+         <property name="spacing"><number>2</number></property>
          <property name="leftMargin"><number>12</number></property>
+         <property name="topMargin"><number>20</number></property>
          <property name="rightMargin"><number>12</number></property>
+         <property name="bottomMargin"><number>0</number></property>
+
+         <!-- Etiqueta sección -->
+         <item>
+          <widget class="QLabel" name="lbl_nav_section">
+           <property name="text"><string>CONTENIDO</string></property>
+           <property name="minimumSize"><size><width>0</width><height>24</height></size></property>
+          </widget>
+         </item>
+
+         <item><spacer name="sp_nav_lbl"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>4</height></size></property></spacer></item>
+
          <item>
           <widget class="QPushButton" name="btn_nav_noticias">
            <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
-           <property name="text"><string>  ✦  PUBLICAR NOTICIA</string></property>
+           <property name="text"><string>Publicar Noticia</string></property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="btn_nav_historial">
            <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
-           <property name="text"><string>  ◈  HISTORIAL</string></property>
+           <property name="text"><string>Historial</string></property>
           </widget>
          </item>
         </layout>
@@ -548,16 +594,70 @@ QLabel#lbl_version {
         </spacer>
        </item>
 
-       <!-- BOTÓN SALIR -->
+       <!-- DIVISOR inferior -->
+       <item>
+        <widget class="QFrame" name="sep_sidebar_bot">
+         <property name="objectName"><string>sep_sidebar</string></property>
+         <property name="frameShape"><enum>QFrame::HLine</enum></property>
+         <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+         <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+        </widget>
+       </item>
+
+       <!-- USER PILL -->
+       <item>
+        <layout class="QVBoxLayout" name="vl_user">
+         <property name="leftMargin"><number>12</number></property>
+         <property name="topMargin"><number>14</number></property>
+         <property name="rightMargin"><number>12</number></property>
+         <property name="bottomMargin"><number>14</number></property>
+         <item>
+          <widget class="QFrame" name="user_pill">
+           <layout class="QHBoxLayout" name="hl_user_pill">
+            <property name="leftMargin"><number>10</number></property>
+            <property name="topMargin"><number>8</number></property>
+            <property name="rightMargin"><number>10</number></property>
+            <property name="bottomMargin"><number>8</number></property>
+            <property name="spacing"><number>10</number></property>
+            <item>
+             <widget class="QLabel" name="lbl_user_avatar">
+              <property name="text"><string>A</string></property>
+              <property name="minimumSize"><size><width>30</width><height>30</height></size></property>
+              <property name="maximumSize"><size><width>30</width><height>30</height></size></property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="vl_user_info">
+              <property name="spacing"><number>1</number></property>
+              <item>
+               <widget class="QLabel" name="lbl_user_name">
+                <property name="text"><string>analista@unileon.es</string></property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="lbl_user_role">
+                <property name="text"><string>ANALISTA DE MERCADO</string></property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+
+       <!-- CERRAR SESIÓN -->
        <item>
         <layout class="QVBoxLayout" name="vl_salir">
          <property name="leftMargin"><number>12</number></property>
+         <property name="topMargin"><number>0</number></property>
          <property name="rightMargin"><number>12</number></property>
-         <property name="bottomMargin"><number>20</number></property>
+         <property name="bottomMargin"><number>16</number></property>
          <item>
           <widget class="QPushButton" name="btn_nav_salir">
            <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
-           <property name="text"><string>  ⏻  CERRAR SESIÓN</string></property>
+           <property name="text"><string>Cerrar Sesión</string></property>
           </widget>
          </item>
         </layout>
@@ -567,9 +667,9 @@ QLabel#lbl_version {
      </widget>
     </item>
 
-    <!-- ══════════════════════════════
+    <!-- ══════════════════════════════════
          ÁREA PRINCIPAL
-         ══════════════════════════════ -->
+         ══════════════════════════════════ -->
     <item>
      <widget class="QFrame" name="main_area">
       <layout class="QVBoxLayout" name="vl_main">
@@ -579,65 +679,86 @@ QLabel#lbl_version {
        <property name="rightMargin"><number>0</number></property>
        <property name="bottomMargin"><number>0</number></property>
 
-       <!-- HEADER BAR -->
+       <!-- TOPBAR -->
        <item>
-        <widget class="QFrame" name="header_bar">
-         <property name="minimumSize"><size><width>0</width><height>64</height></size></property>
-         <property name="maximumSize"><size><width>16777215</width><height>64</height></size></property>
-         <layout class="QHBoxLayout" name="hl_header">
-          <property name="leftMargin"><number>32</number></property>
-          <property name="rightMargin"><number>32</number></property>
+        <widget class="QFrame" name="topbar">
+         <property name="minimumSize"><size><width>0</width><height>56</height></size></property>
+         <property name="maximumSize"><size><width>16777215</width><height>56</height></size></property>
+         <layout class="QHBoxLayout" name="hl_topbar">
+          <property name="leftMargin"><number>28</number></property>
+          <property name="rightMargin"><number>28</number></property>
+          <property name="topMargin"><number>0</number></property>
+          <property name="bottomMargin"><number>0</number></property>
+          <property name="spacing"><number>6</number></property>
+
+          <!-- Breadcrumb izquierda -->
           <item>
-           <layout class="QVBoxLayout" name="vl_header_left">
-            <property name="spacing"><number>2</number></property>
+           <layout class="QHBoxLayout" name="hl_breadcrumb">
+            <property name="spacing"><number>5</number></property>
             <item>
-             <widget class="QLabel" name="lbl_header_titulo">
-              <property name="text"><string>PUBLICACIÓN DE NOTICIAS</string></property>
+             <widget class="QLabel" name="lbl_topbar_breadcrumb">
+              <property name="text"><string>CryptoLearning</string></property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="lbl_header_rol">
-              <property name="text"><string>ANALISTA DE MERCADO  ·  CRYPTOLEARNING V1.0</string></property>
+             <widget class="QLabel" name="lbl_topbar_breadcrumb_sep">
+              <property name="text"><string>/</string></property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbl_topbar_breadcrumb_active">
+              <property name="text"><string>Publicar Noticia</string></property>
              </widget>
             </item>
            </layout>
           </item>
-          <item>
-           <spacer name="hs_header"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property></spacer>
-          </item>
-          <item>
-           <widget class="QLabel" name="lbl_header_usuario">
-            <property name="text"><string>analista@unileon.es</string></property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
 
-       <!-- GLOW LINE HEADER -->
-       <item>
-        <widget class="QFrame" name="header_glow">
-         <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
-         <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+          <item>
+           <spacer name="hs_topbar">
+            <property name="orientation"><enum>Qt::Horizontal</enum></property>
+            <property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property>
+           </spacer>
+          </item>
+
+          <!-- Badge LIVE -->
+          <item>
+           <layout class="QHBoxLayout" name="hl_live">
+            <property name="spacing"><number>5</number></property>
+            <item>
+             <widget class="QLabel" name="lbl_live_dot">
+              <property name="text"><string></string></property>
+              <property name="minimumSize"><size><width>8</width><height>8</height></size></property>
+              <property name="maximumSize"><size><width>8</width><height>8</height></size></property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbl_live_text">
+              <property name="text"><string>EN VIVO</string></property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+
+         </layout>
         </widget>
        </item>
 
        <!-- CONTENIDO CENTRAL -->
        <item>
         <layout class="QHBoxLayout" name="hl_content">
-         <property name="spacing"><number>20</number></property>
-         <property name="leftMargin"><number>28</number></property>
-         <property name="topMargin"><number>28</number></property>
-         <property name="rightMargin"><number>28</number></property>
-         <property name="bottomMargin"><number>20</number></property>
+         <property name="spacing"><number>16</number></property>
+         <property name="leftMargin"><number>24</number></property>
+         <property name="topMargin"><number>24</number></property>
+         <property name="rightMargin"><number>24</number></property>
+         <property name="bottomMargin"><number>16</number></property>
 
          <!-- ══════════════════════
-              CARD PUBLICAR (izq)
+              CARD PUBLICAR
               ══════════════════════ -->
          <item>
           <widget class="QFrame" name="card_publicar">
-           <property name="minimumSize"><size><width>420</width><height>0</height></size></property>
-           <property name="maximumSize"><size><width>480</width><height>16777215</height></size></property>
+           <property name="minimumSize"><size><width>400</width><height>0</height></size></property>
+           <property name="maximumSize"><size><width>460</width><height>16777215</height></size></property>
            <layout class="QVBoxLayout" name="vl_publicar">
             <property name="spacing"><number>0</number></property>
             <property name="leftMargin"><number>0</number></property>
@@ -645,46 +766,66 @@ QLabel#lbl_version {
             <property name="rightMargin"><number>0</number></property>
             <property name="bottomMargin"><number>0</number></property>
 
+            <!-- Accent line top -->
             <item>
-             <widget class="QFrame" name="card_glow_publicar">
+             <widget class="QFrame" name="card_accent_pub">
               <property name="frameShape"><enum>QFrame::HLine</enum></property>
               <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
               <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
              </widget>
             </item>
 
+            <!-- Inner padding -->
             <item>
              <layout class="QVBoxLayout" name="vl_pub_inner">
               <property name="spacing"><number>0</number></property>
-              <property name="leftMargin"><number>30</number></property>
-              <property name="topMargin"><number>28</number></property>
-              <property name="rightMargin"><number>30</number></property>
-              <property name="bottomMargin"><number>28</number></property>
+              <property name="leftMargin"><number>26</number></property>
+              <property name="topMargin"><number>26</number></property>
+              <property name="rightMargin"><number>26</number></property>
+              <property name="bottomMargin"><number>26</number></property>
 
+              <!-- Header card -->
+              <item>
+               <widget class="QLabel" name="lbl_card_eyebrow">
+                <property name="text"><string>REDACCIÓN</string></property>
+               </widget>
+              </item>
+              <item><spacer name="sp_ey1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>5</height></size></property></spacer></item>
               <item>
                <widget class="QLabel" name="lbl_card_titulo">
-                <property name="text"><string>NUEVA NOTICIA</string></property>
+                <property name="text"><string>Nueva Noticia</string></property>
                </widget>
               </item>
-              <item><spacer name="sp_ct"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>4</height></size></property></spacer></item>
+              <item><spacer name="sp_ey2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>3</height></size></property></spacer></item>
               <item>
                <widget class="QLabel" name="lbl_card_desc">
-                <property name="text"><string>Redacta y publica información de mercado para los traders</string></property>
+                <property name="text"><string>Publica información de mercado para los traders</string></property>
                </widget>
               </item>
 
-              <item><spacer name="sp_c1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>22</height></size></property></spacer></item>
+              <item><spacer name="sp_c1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
+
+              <!-- Divisor -->
+              <item>
+               <widget class="QFrame" name="sep_card">
+                <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+               </widget>
+              </item>
+
+              <item><spacer name="sp_c2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>20</height></size></property></spacer></item>
 
               <!-- CAMPO TÍTULO -->
               <item>
                <widget class="QLabel" name="lbl_f_titulo">
-                <property name="text"><string>TÍTULO DE LA NOTICIA</string></property>
+                <property name="text"><string>TÍTULO</string></property>
                </widget>
               </item>
-              <item><spacer name="sp_t1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>4</height></size></property></spacer></item>
+              <item><spacer name="sp_t1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
               <item>
                <widget class="QLineEdit" name="input_titulo">
-                <property name="placeholderText"><string>Ej: Análisis Bull Market — BTC supera máximos</string></property>
+                <property name="placeholderText"><string>Ej: BTC supera máximos históricos en Bull Market</string></property>
                </widget>
               </item>
 
@@ -693,33 +834,33 @@ QLabel#lbl_version {
               <!-- CAMPO CUERPO -->
               <item>
                <widget class="QLabel" name="lbl_f_cuerpo">
-                <property name="text"><string>CONTENIDO DE LA NOTICIA</string></property>
+                <property name="text"><string>CONTENIDO</string></property>
                </widget>
               </item>
-              <item><spacer name="sp_t3"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>4</height></size></property></spacer></item>
+              <item><spacer name="sp_t3"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
               <item>
                <widget class="QTextEdit" name="input_cuerpo">
-                <property name="minimumSize"><size><width>0</width><height>160</height></size></property>
-                <property name="placeholderText"><string>Redacta aquí el análisis o la noticia de mercado...</string></property>
+                <property name="minimumSize"><size><width>0</width><height>150</height></size></property>
+                <property name="placeholderText"><string>Redacta aquí el análisis o la noticia de mercado…</string></property>
                </widget>
               </item>
 
               <item><spacer name="sp_t4"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>16</height></size></property></spacer></item>
 
-              <!-- CHECKBOX AVISO -->
+              <!-- TIPO DE PUBLICACIÓN -->
               <item>
                <widget class="QLabel" name="lbl_f_tipo">
                 <property name="text"><string>TIPO DE PUBLICACIÓN</string></property>
                </widget>
               </item>
-              <item><spacer name="sp_t5"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
+              <item><spacer name="sp_t5"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>7</height></size></property></spacer></item>
               <item>
                <widget class="QCheckBox" name="chk_aviso">
-                <property name="text"><string>Marcar como AVISO URGENTE</string></property>
+                <property name="text"><string>Marcar como aviso urgente</string></property>
                </widget>
               </item>
 
-              <item><spacer name="sp_t6"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>24</height></size></property></spacer></item>
+              <item><spacer name="sp_t6"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>22</height></size></property></spacer></item>
 
               <!-- BOTONES -->
               <item>
@@ -728,13 +869,13 @@ QLabel#lbl_version {
                 <item>
                  <widget class="QPushButton" name="btn_limpiar">
                   <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
-                  <property name="text"><string>LIMPIAR</string></property>
+                  <property name="text"><string>Limpiar</string></property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QPushButton" name="btn_publicar">
                   <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
-                  <property name="text"><string>PUBLICAR  →</string></property>
+                  <property name="text"><string>Publicar noticia →</string></property>
                  </widget>
                 </item>
                </layout>
@@ -755,7 +896,7 @@ QLabel#lbl_version {
          </item>
 
          <!-- ══════════════════════
-              CARD HISTORIAL (der)
+              CARD HISTORIAL
               ══════════════════════ -->
          <item>
           <widget class="QFrame" name="card_historial">
@@ -766,14 +907,16 @@ QLabel#lbl_version {
             <property name="rightMargin"><number>0</number></property>
             <property name="bottomMargin"><number>0</number></property>
 
+            <!-- Accent line top -->
             <item>
-             <widget class="QFrame" name="card_glow_historial">
+             <widget class="QFrame" name="card_accent_hist">
               <property name="frameShape"><enum>QFrame::HLine</enum></property>
               <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
               <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
              </widget>
             </item>
 
+            <!-- Inner padding -->
             <item>
              <layout class="QVBoxLayout" name="vl_hist_inner">
               <property name="spacing"><number>0</number></property>
@@ -782,25 +925,37 @@ QLabel#lbl_version {
               <property name="rightMargin"><number>26</number></property>
               <property name="bottomMargin"><number>26</number></property>
 
+              <!-- Header historial -->
               <item>
                <layout class="QHBoxLayout" name="hl_hist_header">
+                <property name="spacing"><number>10</number></property>
                 <item>
                  <layout class="QVBoxLayout" name="vl_hist_titles">
-                  <property name="spacing"><number>4</number></property>
+                  <property name="spacing"><number>0</number></property>
                   <item>
-                   <widget class="QLabel" name="lbl_hist_titulo">
-                    <property name="text"><string>NOTICIAS PUBLICADAS</string></property>
+                   <widget class="QLabel" name="lbl_hist_eyebrow">
+                    <property name="text"><string>PUBLICACIONES</string></property>
                    </widget>
                   </item>
+                  <item><spacer name="sp_he1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>5</height></size></property></spacer></item>
+                  <item>
+                   <widget class="QLabel" name="lbl_hist_titulo">
+                    <property name="text"><string>Noticias Publicadas</string></property>
+                   </widget>
+                  </item>
+                  <item><spacer name="sp_he2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>3</height></size></property></spacer></item>
                   <item>
                    <widget class="QLabel" name="lbl_hist_desc">
-                    <property name="text"><string>Historial de publicaciones realizadas en esta sesión</string></property>
+                    <property name="text"><string>Historial de esta sesión</string></property>
                    </widget>
                   </item>
                  </layout>
                 </item>
                 <item>
-                 <spacer name="hs_hist"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property></spacer>
+                 <spacer name="hs_hist">
+                  <property name="orientation"><enum>Qt::Horizontal</enum></property>
+                  <property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property>
+                 </spacer>
                 </item>
                 <item>
                  <widget class="QLabel" name="lbl_badge_aviso">
@@ -810,8 +965,21 @@ QLabel#lbl_version {
                </layout>
               </item>
 
-              <item><spacer name="sp_h1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>16</height></size></property></spacer></item>
+              <item><spacer name="sp_h1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
 
+              <!-- Divisor -->
+              <item>
+               <widget class="QFrame" name="sep_card_hist">
+                <property name="objectName"><string>sep_card</string></property>
+                <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+               </widget>
+              </item>
+
+              <item><spacer name="sp_h2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>14</height></size></property></spacer></item>
+
+              <!-- TABLA -->
               <item>
                <widget class="QTableWidget" name="tabla_noticias">
                 <property name="frameShape"><enum>QFrame::NoFrame</enum></property>
@@ -846,9 +1014,9 @@ QLabel#lbl_version {
        <!-- PIE -->
        <item>
         <widget class="QLabel" name="lbl_version">
-         <property name="text"><string>CRYPTOLEARNING  ·  V1.0  ·  2025</string></property>
-         <property name="minimumSize"><size><width>0</width><height>24</height></size></property>
-         <property name="maximumSize"><size><width>16777215</width><height>24</height></size></property>
+         <property name="text"><string>CryptoLearning  ·  v1.0  ·  2025</string></property>
+         <property name="minimumSize"><size><width>0</width><height>28</height></size></property>
+         <property name="maximumSize"><size><width>16777215</width><height>28</height></size></property>
         </widget>
        </item>
 
