@@ -1,21 +1,15 @@
-# Binarios y compilación (C#, Java, etc)
-bin/
-obj/
-*.exe
-*.dll
+# Archivos compilados de Python
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
-# Frontend (Node/React)
-node_modules/
-dist/
-.env
-
-# Base de Datos (SQL Server local)
-*.mdf
-*.ldf
-*.bak
-
-# IDEs (VS Code, Visual Studio)
+# Archivos generados por entornos de desarrollo (IDE) y sistemas
 .vscode/
 .idea/
-*.suo
-*.user
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración locales o temporales
+*.log
+.env
