@@ -24,7 +24,7 @@ class NoticiaDaoJDBC(Conexion):
 
     def obtenerNoticias(self):
         SQL = """
-              SELECT DATE_FORMAT(fecha_publicacion, '%d/%m/%Y  %H:%i'), titulo, es_aviso
+              SELECT DATE_FORMAT(fecha_publicacion, '%d/%m/%Y  %H:%i'), titulo, cuerpo, es_aviso
               FROM NOTICIAS
               ORDER BY fecha_publicacion DESC
               """

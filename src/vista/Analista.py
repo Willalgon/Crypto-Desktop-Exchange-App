@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem, QHeaderView
+from PyQt5.QtWidgets import QMainWindow, QMessageBox, QTableWidgetItem, QHeaderView, QDialog, QVBoxLayout, QLabel, QTextEdit, QPushButton
 from PyQt5.QtCore import Qt, QDateTime
 from PyQt5 import uic
 
@@ -25,6 +25,7 @@ class Analista(QMainWindow, Form):
         self.btn_nav_noticias.clicked.connect(self._scroll_to_form)
         self.btn_nav_historial.clicked.connect(self._scroll_to_hist)
         self.btn_nav_salir.clicked.connect(self._on_cerrar_sesion)
+        self.tabla_noticias.cellDoubleClicked.connect(self._ver_detalle_noticia)
 
     def _on_publicar(self):
         titulo = self.input_titulo.text().strip()
@@ -57,19 +58,16 @@ class Analista(QMainWindow, Form):
             self._controlador.cargarHistorial()  # ← pide los datos al controlador
         self.tabla_noticias.setFocus()
 
-    def mostrarExitoPublicacion(self, titulo, es_aviso):
-        if es_aviso:
-            tipo = "AVISO"
-        else:
-            tipo = "NO_AVISO"
+    def mostrarExitoPublicacion(self, titulo, cuerpo, es_aviso):  # ← añadir cuerpo
+        tipo = "AVISO" if es_aviso else "NO_AVISO"
         fecha = QDateTime.currentDateTime().toString("dd/MM/yyyy  hh:mm")
-        self._anadir_fila_tabla(fecha, titulo, tipo)
+        self._anadir_fila_tabla(fecha, titulo, tipo, cuerpo)  # ← pasar cuerpo
         self._limpiar_formulario()
         self._mostrar_info(f"Noticia publicada correctamente.\n\nTítulo: {titulo}")
 
-    def _anadir_fila_tabla(self, fecha, titulo, tipo):
-        fila = self.tabla_noticias.rowCount() # devuelve el numero de filas de la tabla
-        self.tabla_noticias.insertRow(fila) # insertar fila en la última posición
+    def _anadir_fila_tabla(self, fecha, titulo, tipo, cuerpo=""):
+        fila = self.tabla_noticias.rowCount()
+        self.tabla_noticias.insertRow(fila)
 
         item_fecha = QTableWidgetItem(fecha)
         item_fecha.setForeground(Qt.white)
@@ -77,15 +75,15 @@ class Analista(QMainWindow, Form):
 
         item_titulo = QTableWidgetItem(titulo)
         item_titulo.setForeground(Qt.white)
+        item_titulo.setData(Qt.UserRole, cuerpo)  # ← cuerpo guardado oculto aquí
 
         item_tipo = QTableWidgetItem(tipo)
         item_tipo.setTextAlignment(Qt.AlignCenter)
 
+        from PyQt5.QtGui import QColor
         if tipo == "AVISO":
-            from PyQt5.QtGui import QColor
             item_tipo.setForeground(QColor("#FF6A00"))
         else:
-            from PyQt5.QtGui import QColor
             item_tipo.setForeground(QColor(180, 180, 180))
 
         self.tabla_noticias.setItem(fila, 0, item_fecha)
@@ -93,14 +91,56 @@ class Analista(QMainWindow, Form):
         self.tabla_noticias.setItem(fila, 2, item_tipo)
         self.tabla_noticias.scrollToBottom()
 
+    def _ver_detalle_noticia(self, fila, columna):
+        item_titulo = self.tabla_noticias.item(fila, 1)
+        if not item_titulo:
+            return
+        titulo = item_titulo.text()
+        cuerpo = item_titulo.data(Qt.UserRole) or "Sin contenido."
+
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Detalle de noticia")
+        dialog.resize(600, 380)
+        dialog.setStyleSheet("background:#18181B; color:rgba(255,255,255,0.88);")
+
+        layout = QVBoxLayout(dialog)
+        layout.setSpacing(14)
+        layout.setContentsMargins(28, 28, 28, 28)
+
+        lbl = QLabel(titulo)
+        lbl.setStyleSheet("font-size:15px; font-weight:700; color:#FF8C2A;")
+        lbl.setWordWrap(True)
+
+        txt = QTextEdit()
+        txt.setReadOnly(True)
+        txt.setPlainText(cuerpo)
+        txt.setStyleSheet(
+            "background:#222226; border:1px solid rgba(255,255,255,0.08);"
+            "border-radius:10px; padding:12px; font-size:13px;"
+            "color:rgba(255,255,255,0.82);"
+        )
+
+        btn = QPushButton("Cerrar")
+        btn.setStyleSheet(
+            "background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.6);"
+            "border:1px solid rgba(255,255,255,0.12); border-radius:8px;"
+            "padding:8px 20px; font-size:12px;"
+        )
+        btn.clicked.connect(dialog.accept)
+
+        layout.addWidget(lbl)
+        layout.addWidget(txt)
+        layout.addWidget(btn)
+        dialog.exec_()
+
     def cargarHistorial(self, noticias):
         self.tabla_noticias.setRowCount(0)
-        for fecha, titulo, es_aviso in noticias:
+        for fecha, titulo, cuerpo, es_aviso in noticias:
             if es_aviso:
                 tipo = "AVISO"
             else:
                 tipo = "NO_AVISO"
-            self._anadir_fila_tabla(fecha, titulo, tipo)
+            self._anadir_fila_tabla(fecha, titulo, tipo, cuerpo)
 
     def setNombreUsuario(self, email):
         self.lbl_header_usuario.setText(email)

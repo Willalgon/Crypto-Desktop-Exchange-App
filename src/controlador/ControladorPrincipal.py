@@ -96,7 +96,7 @@ class ControladorPrincipal:
         noticiaVO = NoticiaVO(titulo, cuerpo, es_aviso)
         resultado = self.__modelo.publicarNoticia(noticiaVO, self.__usuario_actual.id_usuario)
         if resultado:
-            self.__vista_principal.mostrarExitoPublicacion(titulo, es_aviso)
+            self.__vista_principal.mostrarExitoPublicacion(titulo, cuerpo, es_aviso)  # ← añadir cuerpo
         else:
             self.__vista_principal.mostrar_error("No se pudo publicar la noticia.")
 
