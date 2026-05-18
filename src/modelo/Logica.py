@@ -21,3 +21,6 @@ class Logica:
 
     def publicarNoticia(self, noticiaVO, id_analista):
         return self.__noticia_dao.insertarNoticia(noticiaVO, id_analista)
+
+    def obtenerNoticias(self):
+        return self.__noticia_dao.obtenerNoticias()

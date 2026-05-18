@@ -53,6 +53,8 @@ class Analista(QMainWindow, Form):
         self.input_titulo.setFocus()
 
     def _scroll_to_hist(self):
+        if self._controlador:
+            self._controlador.cargarHistorial()  # ← pide los datos al controlador
         self.tabla_noticias.setFocus()
 
     def mostrarExitoPublicacion(self, titulo, es_aviso):
@@ -98,7 +100,7 @@ class Analista(QMainWindow, Form):
                 tipo = "AVISO"
             else:
                 tipo = "NO_AVISO"
-            self._añadir_fila_tabla(fecha, titulo, tipo)
+            self._anadir_fila_tabla(fecha, titulo, tipo)
 
     def setNombreUsuario(self, email):
         self.lbl_header_usuario.setText(email)

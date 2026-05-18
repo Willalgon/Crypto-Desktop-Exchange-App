@@ -99,3 +99,7 @@ class ControladorPrincipal:
             self.__vista_principal.mostrarExitoPublicacion(titulo, es_aviso)
         else:
             self.__vista_principal.mostrar_error("No se pudo publicar la noticia.")
+
+    def cargarHistorial(self):
+        noticias = self.__modelo.obtenerNoticias()
+        self.__vista_principal.cargarHistorial(noticias)

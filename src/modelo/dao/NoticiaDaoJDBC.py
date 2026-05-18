@@ -8,7 +8,7 @@ class NoticiaDaoJDBC(Conexion):
               VALUES (?, ?, ?, ?)
               """
         try:
-            cursor = self.getCursor()  # ← usa getCursor() no getConexion()
+            cursor = self.getCursor()
             cursor.execute(SQL, [
                 id_analista,
                 noticiaVO.titulo,
