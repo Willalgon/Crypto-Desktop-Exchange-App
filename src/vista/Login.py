@@ -8,7 +8,7 @@ class Login(QMainWindow, Form):
         super().__init__()
         self.setupUi(self) # construye la interfaz
         self._controlador = None
-        self.Aceptar.clicked.connect(self.on_login_click) # Aceptar es el nombre del botón de iniciar sesión.
+        self.Aceptar.clicked.connect(self.on_login_click)
         self.btn_ir_registro.clicked.connect(self.on_registro_click)
 
     def on_login_click(self):

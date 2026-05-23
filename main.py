@@ -2,7 +2,7 @@
 from PyQt5.QtWidgets import QApplication
 from src.vista.Login    import Login
 from src.vista.Registro import Registro
-from src.modelo.Logica  import Logica
+from src.Modelo.Logica  import Logica
 from src.controlador.ControladorPrincipal import ControladorPrincipal
 
 if __name__ == "__main__":

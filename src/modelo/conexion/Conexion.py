@@ -2,7 +2,7 @@
 import jaydebeapi
 
 class Conexion:
-    def __init__(self, host='localhost', database='CryptoLearning', user='root', password='1234'):
+    def __init__(self, host='localhost', database='CryptoLearning', user='root', password='221322S@muel'):
         self._host     = host
         self._database = database
         self._user     = user

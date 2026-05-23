@@ -1,4 +1,4 @@
-from src.modelo.conexion.Conexion import Conexion
+from src.Modelo.conexion.Conexion import Conexion
 
 class RegistroDaoJDBC(Conexion):
 

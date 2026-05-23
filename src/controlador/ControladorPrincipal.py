@@ -1,15 +1,16 @@
 # controlador/ControladorPrincipal.py
 import hashlib
 import re
-from src.modelo.vo.LoginVO  import LoginVO
-from src.modelo.vo.RegistroVO import RegistroVO
-from src.modelo.vo.NoticiaVO import NoticiaVO
+from src.Modelo.vo.LoginVO  import LoginVO
+from src.Modelo.vo.RegistroVO import RegistroVO
+from src.Modelo.vo.NoticiaVO import NoticiaVO
+from src.vista.Administrador import Administrador
 
 class ControladorPrincipal:
     def __init__(self, ref_vista_login, ref_vista_registro, ref_modelo):
         self.__vista_login = ref_vista_login
         self.__vista_registro = ref_vista_registro
-        self.__vista_principal = None   # se asigna tras login según rol
+        self.__vista_principal = None
         self.__modelo = ref_modelo
 
     def abrirIniciarSesion(self):
@@ -21,7 +22,7 @@ class ControladorPrincipal:
             return
         pass_encriptada = self.__encriptar_contrasena(passw)
         loginVO = LoginVO(email, pass_encriptada)
-        resultado = self.__modelo.hacerLogin(loginVO)  # devuelve UsuarioVO o None
+        resultado = self.__modelo.hacerLogin(loginVO)
 
         if resultado:
             self.__vista_login.hide()
@@ -36,9 +37,11 @@ class ControladorPrincipal:
         # if rol == "TRADER":
         #     from src.vista.VentanaTrader import VentanaTrader
         #     self.__vista_principal = VentanaTrader()
-        # elif rol == "ADMIN":
-        #     from src.vista.VentanaAdmin import VentanaAdmin
-        #     self.__vista_principal = VentanaAdmin()
+        if rol == "ADMIN":
+            self.__vista_principal = Administrador()
+            self.__vista_principal.setControlador(self)
+            self.actualizar_vista_admin()  # Carga los datos
+            self.__vista_principal.showMaximized()
 
         if rol == "ANALISTA":
             from src.vista.Analista import Analista
@@ -103,3 +106,34 @@ class ControladorPrincipal:
     def cargarHistorial(self):
         noticias = self.__modelo.obtenerNoticias()
         self.__vista_principal.cargarHistorial(noticias)
+
+    def actualizar_vista_admin(self):
+        usuarios = self.__modelo.obtener_usuarios_para_admin()
+        self.__vista_principal.cargar_usuarios(usuarios)
+
+        activos = self.__modelo.obtener_activos_admin()
+        self.__vista_principal.cargar_activos(activos)
+
+    def admin_desactivar_usuario(self, email):
+        exito = self.__modelo.desactivar_usuario(email)
+        if exito:
+            self.actualizar_vista_admin()
+        else:
+            print("Error: No se pudo desactivar el usuario en la BD.")
+
+    def admin_retirar_activo(self, id_activo):
+        exito = self.__modelo.admin_retirar_activo(id_activo)
+        if exito:
+            self.actualizar_vista_admin()  # Recarga las tablas
+        else:
+            print("Error: No se pudo retirar el activo en la BD.")
+
+    def admin_lanzar_evento(self, nombre_evento, descripcion):
+        id_admin = 1
+
+        exito = self.__modelo.lanzar_evento_mercado(id_admin, nombre_evento, descripcion)
+
+        if exito:
+            self.actualizar_vista_admin()
+        else:
+            print("Error crítico: El evento de mercado no pudo ejecutarse.")
