@@ -19,7 +19,7 @@ class Administrador(QMainWindow, Form):
         self.tabla_activos.setColumnHidden(0, True)  # Ocultamos el ID
         self.btn_retirar_activo.clicked.connect(self._on_retirar_activo)
         self.btn_lanzar_evento.clicked.connect(self._on_lanzar_evento)
-        self.btn_logout.clicked.connect(self._on_cerrar_sesion)
+
 
     def setControlador(self, controlador):
         self._controlador = controlador
