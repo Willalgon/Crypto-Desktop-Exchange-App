@@ -294,7 +294,9 @@ INSERT INTO USUARIOS (dni, nombre, apellidos, email, password, rol) VALUES
 ('00000000A', 'Profesor', 'Administrador', 'admin@unileon.es',
     SHA2('admin123', 256), 'ADMIN'),
 ('11111111B', 'Profesor', 'Analista', 'analista@unileon.es',
-    SHA2('analista123', 256), 'ANALISTA');
+    SHA2('analista123', 256), 'ANALISTA'),
+('54544087B', 'Alumno', 'Trader', 'trader@unileon.es',
+    SHA2('trader123', 256), 'TRADER');
 
 INSERT INTO ACTIVOS (nombre, simbolo, slug, precio_actual, descripcion_especial, es_cripto) VALUES
 ('Bitcoin',     'BTC',  'bitcoin',      65000.00, 'Store Value - volatilidad media, REY',       TRUE),

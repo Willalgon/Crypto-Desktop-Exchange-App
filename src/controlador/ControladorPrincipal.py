@@ -5,6 +5,7 @@ from src.Modelo.vo.LoginVO  import LoginVO
 from src.Modelo.vo.RegistroVO import RegistroVO
 from src.Modelo.vo.NoticiaVO import NoticiaVO
 from src.vista.Administrador import Administrador
+from src.Modelo.vo.operacionVO import OperacionVO
 
 class ControladorPrincipal:
     def __init__(self, ref_vista_login, ref_vista_registro, ref_modelo):
@@ -46,6 +47,14 @@ class ControladorPrincipal:
         if rol == "ANALISTA":
             from src.vista.Analista import Analista
             self.__vista_principal = Analista()
+
+        if rol == "TRADER":                          # ← descomenta esto
+            from src.vista.trader import Trader
+            self.__vista_principal = Trader()
+            self.__vista_principal.controlador = self
+            self._cargar_vista_trader()
+            self.__vista_principal.showMaximized()
+            return
 
         self.__vista_principal.controlador = self
         self.__vista_principal.showMaximized()
@@ -137,3 +146,99 @@ class ControladorPrincipal:
             self.actualizar_vista_admin()
         else:
             print("Error crítico: El evento de mercado no pudo ejecutarse.")
+
+    def _cargar_vista_trader(self):
+        """
+        Inicializa la VentanaTrader con todos los datos necesarios:
+          · nombre del trader en topbar        (actualizar_nombre)
+          · saldo y patrimonio en el banner    (actualizar_saldo)
+          · lista de activos en tabla mercado  (cargar_mercado)    CU4
+          · historial de operaciones           (cargar_historial)  CU8/CU9
+        """
+        # Nombre en topbar
+        nombre_completo = (
+            f"{self.__usuario_actual.nombre} {self.__usuario_actual.apellidos}"
+        )
+        self.__vista_principal.actualizar_nombre(nombre_completo)
+
+        # Saldo y patrimonio
+        cartera = self.__modelo.obtener_cartera_trader(
+            self.__usuario_actual.id_usuario
+        )
+        if cartera:
+            self.__vista_principal.actualizar_saldo(
+                saldo_fiat=float(cartera["saldo_fiat"]),
+                patrimonio_total=float(cartera["patrimonio_total"]),
+            )
+
+        # Mercado (CU4)
+        activos = self.__modelo.obtener_activos_para_trader()
+        self.__vista_principal.cargar_mercado(activos)
+
+        # Historial (CU8 / CU9)
+        operaciones = self.__modelo.obtener_historial_operaciones(
+            self.__usuario_actual.id_usuario
+        )
+        self.__vista_principal.cargar_historial(operaciones)
+
+    def trader_realizar_operacion(self, id_activo: int, tipo: str, cantidad: float):
+        """
+        Orquesta CU6 + CU7 + CU8.
+
+        Flujo:
+          1. Construye el OperacionVO con los datos de la orden.
+          2. Llama al Modelo → sp_realizar_operacion (que internamente
+             ejecuta CU7: verifica saldo y CU8: registra la operación).
+          3. Si hay éxito, refresca la vista (saldo + historial).
+          4. Si hay error (saldo insuficiente, etc.), muestra aviso en Vista.
+
+        Parámetros
+        ----------
+        id_activo : int
+        tipo      : str   'COMPRA' | 'VENTA'
+        cantidad  : float
+        """
+        from src.Modelo.vo.operacionVO import OperacionVO
+
+        # Validación mínima de cantidad antes de tocar la BD (CU7 adelantado)
+        if cantidad <= 0:
+            self.__vista_principal.mostrar_error(
+                "La cantidad debe ser mayor que cero."
+            )
+            return
+
+        operacionVO = OperacionVO(
+            id_usuario=self.__usuario_actual.id_usuario,
+            id_activo=id_activo,
+            tipo=tipo,
+            cantidad=cantidad,
+        )
+
+        resultado = self.__modelo.realizar_operacion(operacionVO)
+
+        if resultado["exito"]:
+            # ── Éxito: refrescar saldo, historial y mostrar mensaje ──────────
+            self.__vista_principal.mostrar_exito_operacion(resultado["mensaje"])
+            self._refrescar_datos_trader()
+        else:
+            # ── Error de BD (saldo insuficiente, cantidad insuficiente…) ─────
+            self.__vista_principal.mostrar_error(resultado["mensaje"])
+
+    def _refrescar_datos_trader(self):
+        """
+        Actualiza saldo y historial en la Vista tras una operación exitosa.
+        No recarga el mercado entero (precios no han cambiado).
+        """
+        cartera = self.__modelo.obtener_cartera_trader(
+            self.__usuario_actual.id_usuario
+        )
+        if cartera:
+            self.__vista_principal.actualizar_saldo(
+                saldo_fiat=float(cartera["saldo_fiat"]),
+                patrimonio_total=float(cartera["patrimonio_total"]),
+            )
+
+        operaciones = self.__modelo.obtener_historial_operaciones(
+            self.__usuario_actual.id_usuario
+        )
+        self.__vista_principal.cargar_historial(operaciones)

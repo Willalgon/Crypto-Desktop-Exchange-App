@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TraderWindow</class>
+ <widget class="QMainWindow" name="TraderWindow">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>1400</width><height>900</height></rect>
+  </property>
+  <property name="windowTitle">
+   <string>CryptoLearning — Panel Trader</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+/* ═══════════════════════════════════════════
+   CRYPTOLEARNING · TRADER PANEL
+   Dark Matter · Robinhood Style
+   ═══════════════════════════════════════════ */
+
+QMainWindow, QWidget#centralwidget {
+    background-color: #000000;
+}
+
+/* ── TOPBAR ──────────────────────────────── */
+QWidget#topbar {
+    background-color: #000000;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+QLabel#lbl_logo        { color: #FF6B00; font-size: 18px; font-weight: 800; letter-spacing: 1px; }
+QLabel#lbl_logo_suffix { color: rgba(255,255,255,0.45); font-size: 18px; font-weight: 700; }
+QLabel#lbl_bienvenida  { color: rgba(255,255,255,0.40); font-size: 13px; font-weight: 500; }
+QLabel#lbl_avatar      { background-color: #FF6B00; color: #000; font-size: 12px; font-weight: 800; border-radius: 16px; padding: 4px 10px; }
+QPushButton#btn_cerrar_sesion {
+    background: transparent; color: rgba(255,255,255,0.30);
+    font-size: 12px; font-weight: 600; border: none; padding: 4px 10px;
+}
+QPushButton#btn_cerrar_sesion:hover { color: #FF6B00; }
+
+/* ── PAGE HEADER ─────────────────────────── */
+QLabel#lbl_titulo    { color: #FFFFFF; font-size: 32px; font-weight: 800; letter-spacing: -1px; }
+QLabel#lbl_subtitulo { color: rgba(255,255,255,0.35); font-size: 13px; font-weight: 500; }
+
+/* ── SALDO FIAT BANNER ───────────────────── */
+QFrame#frame_saldo {
+    background-color: #0D0D0D;
+    border-radius: 14px;
+    border: 1px solid rgba(255,107,0,0.15);
+}
+QLabel#lbl_saldo_label     { color: rgba(255,255,255,0.30); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; }
+QLabel#lbl_saldo_valor     { color: #FFFFFF; font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+QLabel#lbl_patrimonio_label { color: rgba(255,255,255,0.25); font-size: 10px; font-weight: 700; letter-spacing: 1.2px; }
+QLabel#lbl_patrimonio_valor { color: rgba(255,255,255,0.60); font-size: 20px; font-weight: 700; }
+
+/* ── CARDS ───────────────────────────────── */
+QFrame#frame_mercado,
+QFrame#frame_operar,
+QFrame#frame_historial {
+    background-color: #0D0D0D;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+QLabel#lbl_card_mercado,
+QLabel#lbl_card_operar,
+QLabel#lbl_card_historial {
+    color: #FFFFFF; font-size: 15px; font-weight: 700; letter-spacing: -0.2px;
+}
+
+/* ── TABLAS ──────────────────────────────── */
+QTableWidget {
+    background-color: transparent;
+    color: rgba(255,255,255,0.90);
+    font-size: 13px; font-weight: 500;
+    border: none;
+    gridline-color: transparent;
+    selection-background-color: rgba(255,107,0,0.10);
+    selection-color: #FF8A33;
+    outline: none;
+}
+QHeaderView { background-color: transparent; }
+QHeaderView::section {
+    background-color: transparent;
+    color: rgba(255,255,255,0.30);
+    font-size: 10px; font-weight: 700; letter-spacing: 1.4px;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 10px 6px;
+    text-transform: uppercase;
+}
+QTableWidget::item          { border: none; padding: 10px 6px; }
+QTableWidget::item:selected { background-color: rgba(255,107,0,0.10); color: #FF8A33; }
+QTableWidget::item:hover    { background-color: rgba(255,255,255,0.03); }
+
+/* ── PANEL OPERAR ────────────────────────── */
+QLabel#lbl_activo_sel   { color: rgba(255,255,255,0.50); font-size: 12px; font-weight: 500; }
+QLabel#lbl_precio_actual { color: #FF6B00; font-size: 22px; font-weight: 800; }
+QLabel#lbl_activo_desc  { color: rgba(255,255,255,0.30); font-size: 11px; font-weight: 500; font-style: italic; }
+
+QLabel { color: rgba(255,255,255,0.60); font-size: 12px; font-weight: 600; letter-spacing: 0.3px; }
+
+QDoubleSpinBox {
+    background-color: #1A1A1E;
+    color: #FFFFFF;
+    font-size: 15px; font-weight: 700;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 10px 14px;
+}
+QDoubleSpinBox:focus { border-color: rgba(255,107,0,0.40); }
+QDoubleSpinBox::up-button, QDoubleSpinBox::down-button { width: 0; border: none; }
+
+QLabel#lbl_total_label { color: rgba(255,255,255,0.35); font-size: 11px; font-weight: 600; letter-spacing: 0.5px; }
+QLabel#lbl_total_valor { color: #FFFFFF; font-size: 18px; font-weight: 800; }
+
+QPushButton#btn_comprar {
+    background-color: #00C851;
+    color: #000000;
+    font-size: 14px; font-weight: 800;
+    border: none; border-radius: 10px;
+    padding: 13px; letter-spacing: 0.3px;
+}
+QPushButton#btn_comprar:hover   { background-color: #00E65C; }
+QPushButton#btn_comprar:pressed { background-color: #00A844; }
+
+QPushButton#btn_vender {
+    background-color: #FF3B30;
+    color: #FFFFFF;
+    font-size: 14px; font-weight: 800;
+    border: none; border-radius: 10px;
+    padding: 13px; letter-spacing: 0.3px;
+}
+QPushButton#btn_vender:hover   { background-color: #FF5C52; }
+QPushButton#btn_vender:pressed { background-color: #D93228; }
+
+/* ── SCROLLBAR ───────────────────────────── */
+QScrollBar:vertical { background: transparent; width: 4px; }
+QScrollBar::handle:vertical { background: rgba(255,255,255,0.10); border-radius: 2px; }
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0px; }
+   </string>
+  </property>
+
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="vl_root">
+    <property name="spacing"><number>0</number></property>
+    <property name="leftMargin"><number>0</number></property>
+    <property name="topMargin"><number>0</number></property>
+    <property name="rightMargin"><number>0</number></property>
+    <property name="bottomMargin"><number>0</number></property>
+
+    <!-- ══ TOPBAR ══ -->
+    <item>
+     <widget class="QWidget" name="topbar">
+      <property name="minimumHeight"><number>56</number></property>
+      <property name="maximumHeight"><number>56</number></property>
+      <layout class="QHBoxLayout" name="hl_topbar">
+       <property name="leftMargin"><number>40</number></property>
+       <property name="rightMargin"><number>40</number></property>
+       <property name="topMargin"><number>0</number></property>
+       <property name="bottomMargin"><number>0</number></property>
+       <property name="spacing"><number>4</number></property>
+       <item><widget class="QLabel" name="lbl_logo"><property name="text"><string>CRYPTO</string></property></widget></item>
+       <item><widget class="QLabel" name="lbl_logo_suffix"><property name="text"><string>LEARNING</string></property></widget></item>
+       <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+       <item><widget class="QLabel" name="lbl_bienvenida"><property name="text"><string>Hola, Trader</string></property></widget></item>
+       <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>20</height></size></property></spacer></item>
+       <item><widget class="QPushButton" name="btn_cerrar_sesion"><property name="text"><string>Cerrar sesión</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+       <item><widget class="QLabel" name="lbl_avatar"><property name="text"><string>TR</string></property></widget></item>
+      </layout>
+     </widget>
+    </item>
+
+    <!-- ══ SCROLL AREA ══ -->
+    <item>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="widgetResizable"><bool>true</bool></property>
+      <property name="frameShape"><enum>QFrame::NoFrame</enum></property>
+      <property name="styleSheet"><string notr="true">QScrollArea { background: #000000; border: none; }</string></property>
+      <widget class="QWidget" name="scrollContents">
+       <layout class="QVBoxLayout" name="vl_scroll">
+        <property name="spacing"><number>20</number></property>
+        <property name="leftMargin"><number>40</number></property>
+        <property name="topMargin"><number>36</number></property>
+        <property name="rightMargin"><number>40</number></property>
+        <property name="bottomMargin"><number>50</number></property>
+
+        <!-- PAGE HEADER -->
+        <item>
+         <layout class="QVBoxLayout" name="vl_header">
+          <property name="spacing"><number>4</number></property>
+          <item><widget class="QLabel" name="lbl_titulo"><property name="text"><string>Mi Mercado</string></property></widget></item>
+          <item><widget class="QLabel" name="lbl_subtitulo"><property name="text"><string>Compra y vende activos con tu saldo virtual</string></property></widget></item>
+         </layout>
+        </item>
+
+        <!-- SALDO BANNER -->
+        <item>
+         <widget class="QFrame" name="frame_saldo">
+          <layout class="QHBoxLayout" name="hl_saldo">
+           <property name="leftMargin"><number>28</number></property>
+           <property name="topMargin"><number>20</number></property>
+           <property name="rightMargin"><number>28</number></property>
+           <property name="bottomMargin"><number>20</number></property>
+           <property name="spacing"><number>0</number></property>
+           <item>
+            <layout class="QVBoxLayout" name="vl_saldo">
+             <property name="spacing"><number>4</number></property>
+             <item><widget class="QLabel" name="lbl_saldo_label"><property name="text"><string>LIQUIDEZ DISPONIBLE</string></property></widget></item>
+             <item><widget class="QLabel" name="lbl_saldo_valor"><property name="text"><string>$10,000.00</string></property></widget></item>
+            </layout>
+           </item>
+           <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+           <item>
+            <layout class="QVBoxLayout" name="vl_patrimonio">
+             <property name="spacing"><number>4</number></property>
+             <item><widget class="QLabel" name="lbl_patrimonio_label"><property name="text"><string>PATRIMONIO TOTAL</string></property></widget></item>
+             <item><widget class="QLabel" name="lbl_patrimonio_valor"><property name="text"><string>$10,000.00</string></property></widget></item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+
+        <!-- GRID PRINCIPAL -->
+        <item>
+         <layout class="QHBoxLayout" name="hl_main">
+          <property name="spacing"><number>20</number></property>
+
+          <!-- CARD MERCADO -->
+          <item>
+           <widget class="QFrame" name="frame_mercado">
+            <layout class="QVBoxLayout" name="vl_mercado">
+             <property name="spacing"><number>0</number></property>
+             <property name="leftMargin"><number>0</number></property>
+             <property name="topMargin"><number>0</number></property>
+             <property name="rightMargin"><number>0</number></property>
+             <property name="bottomMargin"><number>0</number></property>
+             <item>
+              <layout class="QHBoxLayout" name="hl_mercado_hdr">
+               <property name="leftMargin"><number>22</number></property>
+               <property name="topMargin"><number>20</number></property>
+               <property name="rightMargin"><number>22</number></property>
+               <property name="bottomMargin"><number>14</number></property>
+               <item><widget class="QLabel" name="lbl_card_mercado"><property name="text"><string>Mercado</string></property></widget></item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QFrame" name="line_mercado">
+               <property name="frameShape"><enum>QFrame::HLine</enum></property>
+               <property name="frameShadow"><enum>QFrame::Plain</enum></property>
+               <property name="styleSheet"><string notr="true">color: rgba(255,255,255,0.06);</string></property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTableWidget" name="tabla_mercado">
+               <property name="columnCount"><number>3</number></property>
+               <property name="minimumHeight"><number>320</number></property>
+               <attribute name="verticalHeaderVisible"><bool>false</bool></attribute>
+               <attribute name="horizontalHeaderStretchLastSection"><bool>true</bool></attribute>
+               <column><property name="text"><string>Activo</string></property></column>
+               <column><property name="text"><string>Ticker</string></property></column>
+               <column><property name="text"><string>Precio ($)</string></property></column>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+
+          <!-- COLUMNA DERECHA: OPERAR + HISTORIAL -->
+          <item>
+           <layout class="QVBoxLayout" name="vl_derecha">
+            <property name="spacing"><number>20</number></property>
+
+            <!-- CARD OPERAR -->
+            <item>
+             <widget class="QFrame" name="frame_operar">
+              <layout class="QVBoxLayout" name="vl_operar">
+               <property name="spacing"><number>0</number></property>
+               <property name="leftMargin"><number>0</number></property>
+               <property name="topMargin"><number>0</number></property>
+               <property name="rightMargin"><number>0</number></property>
+               <property name="bottomMargin"><number>0</number></property>
+               <item>
+                <layout class="QHBoxLayout" name="hl_operar_hdr">
+                 <property name="leftMargin"><number>22</number></property>
+                 <property name="topMargin"><number>20</number></property>
+                 <property name="rightMargin"><number>22</number></property>
+                 <property name="bottomMargin"><number>14</number></property>
+                 <item><widget class="QLabel" name="lbl_card_operar"><property name="text"><string>Operar</string></property></widget></item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QFrame" name="line_operar">
+                 <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                 <property name="frameShadow"><enum>QFrame::Plain</enum></property>
+                 <property name="styleSheet"><string notr="true">color: rgba(255,255,255,0.06);</string></property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="vl_operar_body">
+                 <property name="spacing"><number>12</number></property>
+                 <property name="leftMargin"><number>22</number></property>
+                 <property name="topMargin"><number>16</number></property>
+                 <property name="rightMargin"><number>22</number></property>
+                 <property name="bottomMargin"><number>20</number></property>
+
+                 <!-- Activo seleccionado -->
+                 <item><widget class="QLabel" name="lbl_activo_sel"><property name="text"><string>← Selecciona un activo del mercado</string></property></widget></item>
+                 <item><widget class="QLabel" name="lbl_precio_actual"><property name="text"><string>—</string></property></widget></item>
+                 <item><widget class="QLabel" name="lbl_activo_desc"><property name="text"><string></string></property></widget></item>
+
+                 <!-- Cantidad -->
+                 <item>
+                  <layout class="QVBoxLayout" name="vl_cantidad">
+                   <property name="spacing"><number>6</number></property>
+                   <item>
+                    <widget class="QLabel" name="lbl_cantidad_label">
+                     <property name="text"><string>CANTIDAD</string></property>
+                     <property name="styleSheet"><string notr="true">color: rgba(255,255,255,0.30); font-size:10px; font-weight:700; letter-spacing:1.2px;</string></property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="spin_cantidad">
+                     <property name="minimum"><double>0.00000001</double></property>
+                     <property name="maximum"><double>999999.99999999</double></property>
+                     <property name="singleStep"><double>0.01</double></property>
+                     <property name="decimals"><int>8</int></property>
+                     <property name="value"><double>1.0</double></property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+
+                 <!-- Total estimado -->
+                 <item>
+                  <layout class="QHBoxLayout" name="hl_total">
+                   <item><widget class="QLabel" name="lbl_total_label"><property name="text"><string>COSTE ESTIMADO</string></property></widget></item>
+                   <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>10</width><height>10</height></size></property></spacer></item>
+                   <item><widget class="QLabel" name="lbl_total_valor"><property name="text"><string>—</string></property></widget></item>
+                  </layout>
+                 </item>
+
+                 <!-- Botones -->
+                 <item>
+                  <layout class="QHBoxLayout" name="hl_botones">
+                   <property name="spacing"><number>10</number></property>
+                   <item>
+                    <widget class="QPushButton" name="btn_comprar">
+                     <property name="text"><string>COMPRAR</string></property>
+                     <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="btn_vender">
+                     <property name="text"><string>VENDER</string></property>
+                     <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+
+            <!-- CARD HISTORIAL -->
+            <item>
+             <widget class="QFrame" name="frame_historial">
+              <layout class="QVBoxLayout" name="vl_historial">
+               <property name="spacing"><number>0</number></property>
+               <property name="leftMargin"><number>0</number></property>
+               <property name="topMargin"><number>0</number></property>
+               <property name="rightMargin"><number>0</number></property>
+               <property name="bottomMargin"><number>0</number></property>
+               <item>
+                <layout class="QHBoxLayout" name="hl_historial_hdr">
+                 <property name="leftMargin"><number>22</number></property>
+                 <property name="topMargin"><number>20</number></property>
+                 <property name="rightMargin"><number>22</number></property>
+                 <property name="bottomMargin"><number>14</number></property>
+                 <item><widget class="QLabel" name="lbl_card_historial"><property name="text"><string>Mis Operaciones</string></property></widget></item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QFrame" name="line_historial">
+                 <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                 <property name="frameShadow"><enum>QFrame::Plain</enum></property>
+                 <property name="styleSheet"><string notr="true">color: rgba(255,255,255,0.06);</string></property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QTableWidget" name="tabla_historial">
+                 <property name="columnCount"><number>5</number></property>
+                 <property name="minimumHeight"><number>180</number></property>
+                 <attribute name="verticalHeaderVisible"><bool>false</bool></attribute>
+                 <attribute name="horizontalHeaderStretchLastSection"><bool>true</bool></attribute>
+                 <column><property name="text"><string>Fecha</string></property></column>
+                 <column><property name="text"><string>Tipo</string></property></column>
+                 <column><property name="text"><string>Activo</string></property></column>
+                 <column><property name="text"><string>Cantidad</string></property></column>
+                 <column><property name="text"><string>Total ($)</string></property></column>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+
+           </layout>
+          </item>
+
+         </layout>
+        </item>
+
+       </layout>
+      </widget>
+     </widget>
+    </item>
+
+   </layout>
+  </widget>
+ </widget>
+</ui>
