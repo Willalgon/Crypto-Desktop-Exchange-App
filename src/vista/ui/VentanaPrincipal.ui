@@ -3,42 +3,201 @@
  <class>VentanaPrincipal</class>
  <widget class="QMainWindow" name="VentanaPrincipal">
   <property name="geometry">
-   <rect><x>0</x><y>0</y><width>1000</width><height>700</height></rect>
+   <rect><x>0</x><y>0</y><width>1200</width><height>750</height></rect>
   </property>
   <property name="windowTitle">
    <string>CryptoLearning - Terminal de Trader</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">
+/* ═══════════════════════════════════════════════════════════════════════
+   CRYPTOLEARNING  ·  TERMINAL PRINCIPAL
+   Pure Black Spatial  ·  Deep Dark Edition
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── VENTANA BASE ───────────────────────────────────────────────────── */
+QMainWindow, QWidget#centralwidget {
+    background-color: #000000;
+}
+QFrame { background: transparent; border: none; }
+
+/* ── SIDEBAR (Panel Izquierdo) ──────────────────────────────────────── */
+QFrame#sidebar_frame {
+    background: qradialgradient(
+        cx: 0.50, cy: 0.38, radius: 0.85,
+        stop: 0.00  rgba(20, 20, 28, 255),
+        stop: 1.00  rgba( 7,  7, 11, 255)
+    );
+    border-right: 1px solid rgba(255, 255, 255, 15);
+}
+
+/* ── CONTENIDO CENTRAL (Card) ───────────────────────────────────────── */
+QFrame#content_frame {
+    background: qradialgradient(
+        cx: 0.50, cy: 0.38, radius: 0.85,
+        stop: 0.00  rgba(26, 26, 36, 255),
+        stop: 0.55  rgba(15, 15, 22, 255),
+        stop: 1.00  rgba( 7,  7, 11, 255)
+    );
+    border-top:    1px solid rgba(255, 255, 255, 55);
+    border-left:   1px solid rgba(255, 255, 255, 30);
+    border-radius: 20px;
+    margin: 15px;
+}
+
+/* ── TÍTULO PRINCIPAL ───────────────────────────────────────────────── */
+QLabel#lbl_bienvenida {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: &quot;Helvetica Neue&quot;, &quot;Segoe UI Semibold&quot;, Arial, sans-serif;
+    letter-spacing: 2px;
+    padding-bottom: 9px;
+    border-bottom: 2px solid qlineargradient(
+        x1:0, y1:0, x2:1, y2:0,
+        stop:0.00 rgba(255, 106,  0,   0),
+        stop:0.10 rgba(255, 106,  0, 160),
+        stop:0.50 rgba(255, 180,  0, 255),
+        stop:0.90 rgba(255, 106,  0, 160),
+        stop:1.00 rgba(255, 106,  0,   0)
+    );
+    qproperty-alignment: AlignCenter;
+}
+
+/* ── BOTONES DEL MENÚ (Estilo Naranja) ──────────────────────────────── */
+QPushButton {
+    background: qlineargradient(
+        x1:0, y1:0, x2:1, y2:1,
+        stop:0.0  #FF5E00,
+        stop:0.5  #FF8000,
+        stop:1.0  #FF5200
+    );
+    color: #000000;
+    font-weight: 800;
+    font-size: 11px;
+    font-family: &quot;Helvetica Neue&quot;, &quot;Segoe UI Semibold&quot;, Arial, sans-serif;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    border-top:    1px solid rgba(255, 200, 100, 160);
+    border-left:   1px solid rgba(255, 200, 100,  80);
+    border-right:  1px solid rgba(180,  80,   0,  80);
+    border-bottom: 1px solid rgba(160,  60,   0, 120);
+    padding: 10px;
+    margin: 5px 15px;
+}
+
+QPushButton:hover {
+    background: qlineargradient(
+        x1:0, y1:0, x2:1, y2:1,
+        stop:0.0  #FF7520,
+        stop:0.5  #FFA040,
+        stop:1.0  #FF6A18
+    );
+    color: #000000;
+}
+
+QPushButton:pressed {
+    background: qlineargradient(
+        x1:0, y1:0, x2:1, y2:1,
+        stop:0.0  #D94E00,
+        stop:0.5  #E06A00,
+        stop:1.0  #D04400
+    );
+    padding-top: 12px;
+}
+
+/* ── BOTÓN CERRAR SESIÓN (Estilo Link Oscuro) ───────────────────────── */
+QPushButton#btn_logout {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 80);
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+QPushButton#btn_logout:hover { color: #FF7A00; }
+
+/* ── TABLA DE DATOS (Estilo Oscuro/Neón) ────────────────────────────── */
+QTableWidget {
+    background-color: rgba(0, 0, 0, 80);
+    color: rgba(255, 255, 255, 215);
+    border: 1px solid rgba(255, 255, 255, 15);
+    border-radius: 10px;
+    font-size: 12px;
+    font-family: &quot;Helvetica Neue&quot;, &quot;Segoe UI&quot;, Arial, sans-serif;
+    gridline-color: rgba(255, 255, 255, 10);
+    selection-background-color: rgba(255, 106, 0, 80);
+    selection-color: #FFFFFF;
+    outline: none;
+}
+
+QHeaderView::section {
+    background-color: rgba(20, 20, 28, 255);
+    color: rgba(255, 140, 0, 190);
+    font-weight: bold;
+    font-size: 10px;
+    letter-spacing: 1px;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 20);
+    padding: 8px;
+}
+
+QTableCornerButton::section {
+    background-color: rgba(20, 20, 28, 255);
+    border: none;
+}
+   </string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <!-- BARRA LATERAL -->
+   <layout class="QHBoxLayout" name="main_layout">
+    <property name="spacing"><number>0</number></property>
+    <property name="leftMargin"><number>0</number></property>
+    <property name="topMargin"><number>0</number></property>
+    <property name="rightMargin"><number>0</number></property>
+    <property name="bottomMargin"><number>0</number></property>
+    
     <item>
-     <layout class="QVBoxLayout" name="sidebar">
-      <item><widget class="QPushButton" name="btn_mercado"><property name="text"><string>Mercado (Comprar/Vender)</string></property><property name="minimumSize"><size><width>200</width><height>40</height></size></property></widget></item>
-      <item><widget class="QPushButton" name="btn_cartera"><property name="text"><string>Mi Cartera (Wallet)</string></property><property name="minimumSize"><size><width>200</width><height>40</height></size></property></widget></item>
-      <item><widget class="QPushButton" name="btn_noticias"><property name="text"><string>Noticias e Informes</string></property><property name="minimumSize"><size><width>200</width><height>40</height></size></property></widget></item>
-      <item><spacer name="verticalSpacer"><property name="orientation"><enum>Qt::Vertical</enum></property></spacer></item>
-      <item><widget class="QPushButton" name="btn_logout"><property name="text"><string>Cerrar Sesión</string></property></widget></item>
-     </layout>
+     <widget class="QFrame" name="sidebar_frame">
+      <property name="minimumSize"><size><width>220</width><height>0</height></size></property>
+      <property name="maximumSize"><size><width>220</width><height>16777215</height></size></property>
+      <layout class="QVBoxLayout" name="sidebar">
+       <property name="topMargin"><number>30</number></property>
+       <property name="bottomMargin"><number>20</number></property>
+       <item><widget class="QPushButton" name="btn_mercado"><property name="text"><string>MERCADO</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+       <item><widget class="QPushButton" name="btn_cartera"><property name="text"><string>MI CARTERA</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+       <item><widget class="QPushButton" name="btn_noticias"><property name="text"><string>NOTICIAS</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+       <item><spacer name="verticalSpacer"><property name="orientation"><enum>Qt::Vertical</enum></property></spacer></item>
+       <item><widget class="QPushButton" name="btn_logout"><property name="text"><string>CERRAR SESIÓN</string></property><property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property></widget></item>
+      </layout>
+     </widget>
     </item>
-    <!-- CONTENIDO CENTRAL -->
+    
     <item>
-     <layout class="QVBoxLayout" name="content">
-      <item>
-       <widget class="QLabel" name="lbl_bienvenida">
-        <property name="font"><font><pointsize>18</pointsize><bold>true</bold></font></property>
-        <property name="text"><string>Mercado Actual | Saldo Fiat: $10,000.00</string></property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QTableWidget" name="tabla_datos">
-        <property name="columnCount"><number>4</number></property>
-        <column><property name="text"><string>Símbolo</string></property></column>
-        <column><property name="text"><string>Activo Digital</string></property></column>
-        <column><property name="text"><string>Precio Actual (Fiat)</string></property></column>
-        <column><property name="text"><string>Tipo</string></property></column>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QFrame" name="content_frame">
+      <layout class="QVBoxLayout" name="content">
+       <property name="leftMargin"><number>30</number></property>
+       <property name="topMargin"><number>30</number></property>
+       <property name="rightMargin"><number>30</number></property>
+       <property name="bottomMargin"><number>30</number></property>
+       <property name="spacing"><number>20</number></property>
+       <item>
+        <widget class="QLabel" name="lbl_bienvenida">
+         <property name="text"><string>MERCADO ACTUAL | SALDO FIAT: 0.00 €</string></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="tabla_datos">
+         <property name="columnCount"><number>4</number></property>
+         <property name="showGrid"><bool>true</bool></property>
+         <property name="alternatingRowColors"><bool>true</bool></property>
+         <attribute name="verticalHeaderVisible"><bool>false</bool></attribute>
+         <column><property name="text"><string>SÍMBOLO</string></property></column>
+         <column><property name="text"><string>ACTIVO DIGITAL</string></property></column>
+         <column><property name="text"><string>PRECIO (FIAT)</string></property></column>
+         <column><property name="text"><string>TIPO</string></property></column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
    </layout>
   </widget>

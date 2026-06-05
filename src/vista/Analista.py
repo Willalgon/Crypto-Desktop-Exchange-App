@@ -98,7 +98,7 @@ class Analista(QMainWindow, Form):
                 tipo = "AVISO"
             else:
                 tipo = "NO_AVISO"
-            self._añadir_fila_tabla(fecha, titulo, tipo)
+            self._anadir_fila_tabla(fecha, titulo, tipo)
 
     def setNombreUsuario(self, email):
         self.lbl_header_usuario.setText(email)

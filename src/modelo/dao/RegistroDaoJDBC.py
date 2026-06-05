@@ -11,19 +11,34 @@ class RegistroDaoJDBC(Conexion):
     def insertarUsuario(self, registroVO):
         cursor = self.getCursor()
         try:
-            apellidos = f"{registroVO.primerapellido} {registroVO.segundoapellido}".strip()
+            # 1. Ajuste exacto a las propiedades del RegistroVO
+            apellidos = f"{registroVO.primer_apellido} {registroVO.segundo_apellido}".strip()
+            
             cursor.execute(self.SQL_INSERT, (
                 registroVO.dni,
                 registroVO.nombre,
                 apellidos,
-                registroVO.mail,        # ← comprueba que RegistroVO tiene .mail
+                registroVO.email,       # ← Corregido para que coincida con el VO
                 registroVO.contrasena   # ← ya llega encriptada en SHA-256
             ))
-            self.conexion.commit()
+            
+            # Intentamos el commit protegiéndolo de fallos de autocommit
+            try:
+                self.conexion.commit()
+            except Exception:
+                pass 
+                
             return True
+            
         except Exception as e:
             print("Error en insertarUsuario:", e)
-            self.conexion.rollback()
+            # 2. Protección anticrash para el rollback
+            try:
+                self.conexion.rollback()
+            except Exception:
+                pass # Ignoramos el error de Java silenciosamente para no cerrar PyQt5
+                
             return False
+            
         finally:
             cursor.close()

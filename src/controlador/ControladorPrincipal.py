@@ -33,12 +33,12 @@ class ControladorPrincipal:
         self.__usuario_actual = usuario
         rol = usuario.rol
         print(f"ROL RECIBIDO: '{rol}'")
-        # if rol == "TRADER":
-        #     from src.vista.VentanaTrader import VentanaTrader
-        #     self.__vista_principal = VentanaTrader()
-        # elif rol == "ADMIN":
-        #     from src.vista.VentanaAdmin import VentanaAdmin
-        #     self.__vista_principal = VentanaAdmin()
+        if rol == "TRADER":
+             from src.vista.Principal import VentanaPrincipal
+             self.__vista_principal = VentanaPrincipal()
+        elif rol == "ADMIN":
+             from src.vista.VentanaAdmin import VentanaAdmin
+             self.__vista_principal = VentanaAdmin()
 
         if rol == "ANALISTA":
             from src.vista.Analista import Analista
@@ -99,3 +99,24 @@ class ControladorPrincipal:
             self.__vista_principal.mostrarExitoPublicacion(titulo, es_aviso)
         else:
             self.__vista_principal.mostrar_error("No se pudo publicar la noticia.")
+
+
+    def solicitarEstadoCarteraTrader(self):
+        id_u = self.__usuario_actual.id_usuario
+        cartera = self.__modelo.obtenerEstadoPortfolio(id_u) 
+        posiciones = self.__modelo.obtenerPosiciones(id_u)
+        self.__vista_principal.refrescar_cartera(cartera, posiciones)
+
+    def solicitarNoticias(self):
+        noticias=self.__modelo.obtenerTodasLasNoticias()
+        if noticias:
+            self.__vista_principal.refrescar_noticias(noticias)
+        else:
+            self.__vista_principal.mostrar_mensaje("Noticias", "No hay noticias recientes.")
+
+    def solicitarMercado(self):
+        activos=self.__modelo.obtenerTodosLosActivos()
+        self.__vista__principal.refrescar_mercado(activos)
+
+    def solicitarAvisoUrgente(self):
+        return self.__modelo.obtenerAvisoUrgente()
