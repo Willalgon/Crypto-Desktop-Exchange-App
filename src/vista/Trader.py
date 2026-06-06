@@ -19,6 +19,7 @@ class Trader(QMainWindow, Form):
         self._controlador = None
         self._canvas_cartera = None
         self._ultimo_aviso_mostrado = None
+        self._avisos_mostrados = set()
 
         self._configurar_tablas()
         self._conectar_senales()
@@ -290,10 +291,124 @@ class Trader(QMainWindow, Form):
     def _check_avisos_urgentes(self):
         if not self._controlador:
             return
+
         aviso = self._controlador.solicitarAvisoUrgente()
-        if aviso and aviso.titulo != self._ultimo_aviso_mostrado:
-            QMessageBox.warning(self, f"⚠  {aviso.titulo}", aviso.cuerpo)
-            self._ultimo_aviso_mostrado = aviso.titulo
+        if aviso and aviso.titulo not in self._avisos_mostrados:
+            QMessageBox.warning(self, aviso.titulo, aviso.cuerpo)
+            self._avisos_mostrados.add(aviso.titulo)
+            return
+
+        evento = self._controlador.solicitarUltimoEvento()
+        if evento and evento.nombre_evento not in self._avisos_mostrados:
+            QMessageBox.warning(
+                self,
+                evento.nombre_evento,
+                evento.descripcion or "Se ha producido un evento de mercado."
+            )
+            self._avisos_mostrados.add(evento.nombre_evento)
+            self._controlador.solicitarMercado()
+
+    def _dibujar_grafico_cartera(self, lista_posiciones: list):
+        posiciones_validas = [p for p in lista_posiciones if float(p.cantidad) > 0]
+        nombres = [p.simbolo for p in posiciones_validas]
+        valores = [float(p.cantidad) * float(p.precio_actual) for p in posiciones_validas]
+
+        if not valores:
+            return
+
+        plt.rcParams.update({"font.family": "sans-serif"})
+        fig, ax = plt.subplots(figsize=(6, 4), dpi=100)
+        fig.patch.set_facecolor("#0D0D0F")
+        ax.set_facecolor("#0D0D0F")
+
+        colores = [
+            "#FF6B00", "#FFFFFF", "#FF9A45",
+            "#B0B0B0", "#FFD199", "#787878",
+            "#CC4400", "#D4D4D4",
+        ]
+
+        total = sum(valores)
+
+        wedges, *_ = ax.pie(
+            valores,
+            labels=None,
+            autopct=None,  # sin porcentajes encima
+            startangle=90,
+            colors=colores[:len(valores)],
+            wedgeprops={"width": 0.35, "edgecolor": "#0D0D0F", "linewidth": 2},
+        )
+
+        # Leyenda con símbolo + valor + porcentaje
+        ax.legend(
+            wedges,
+            [f"{n}  ${v:,.0f}  ({v / total * 100:.1f}%)" for n, v in zip(nombres, valores)],
+            loc="center left",
+            bbox_to_anchor=(1.0, 0.5),
+            frameon=False,
+            fontsize=8,
+            labelcolor="white",
+        )
+
+        # Texto central
+        ax.text(0, 0.1, "TOTAL", ha="center", va="center",
+                fontsize=7, color=(1, 1, 1, 0.4))
+        ax.text(0, -0.15, f"${total:,.0f}", ha="center", va="center",
+                fontsize=10, weight="bold", color=(1, 1, 1, 1))
+
+        fig.subplots_adjust(left=0.05, right=0.62, top=0.95, bottom=0.05)
+
+        canvas = FigureCanvas(fig)
+        canvas.setStyleSheet("background-color: transparent;")
+
+        layout = self.page_cartera.layout()
+        if self._canvas_cartera:
+            layout.removeWidget(self._canvas_cartera)
+            self._canvas_cartera.deleteLater()
+            plt.close("all")
+
+        layout.addWidget(canvas)
+        self._canvas_cartera = canvas
+
+    def refrescar_cartera(self, carteraVO, lista_posiciones: list):
+        if carteraVO is None:
+            return
+
+        self.actualizar_saldo(
+            float(carteraVO.saldo_fiat),
+            float(carteraVO.patrimonio_total),
+        )
+        self.tabla_posiciones.setRowCount(len(lista_posiciones))
+        for i, pos in enumerate(lista_posiciones):
+            pnl = float(pos.pnl) if hasattr(pos, "pnl") else 0.0
+            roi = float(pos.roi) if hasattr(pos, "roi") else 0.0
+            color = QColor("#34C759") if pnl >= 0 else QColor("#FF3B30")
+            items = [
+                QTableWidgetItem(pos.activo if hasattr(pos, "activo") else ""),
+                QTableWidgetItem(pos.simbolo if hasattr(pos, "simbolo") else ""),
+                QTableWidgetItem(f"{float(pos.cantidad):,.8f}"),
+                QTableWidgetItem(f"${float(pos.precio_medio_compra):,.2f}"),
+                QTableWidgetItem(f"${float(pos.precio_actual) * float(pos.cantidad):,.2f}"),
+                QTableWidgetItem(f"${pnl:,.2f}  ({roi:.2f}%)"),
+            ]
+            for col, item in enumerate(items):
+                if col == 5:
+                    item.setForeground(color)
+                self.tabla_posiciones.setItem(i, col, item)
+        self._dibujar_grafico_cartera(lista_posiciones)
+
+    def _refrescar_datos_trader(self):
+        cartera = self.__modelo.obtener_cartera(self.__usuario_actual.id_usuario)
+        if cartera:
+            self.__vista_principal.actualizar_saldo(
+                saldo_fiat=cartera.saldo_fiat,
+                patrimonio_total=cartera.patrimonio_total,
+            )
+        operaciones = self.__modelo.obtener_historial_operaciones(self.__usuario_actual.id_usuario)
+        self.__vista_principal.cargar_historial(operaciones)
+
+        # ← AÑADIR ESTO para que el gráfico se redibuje tras compra/venta
+        posiciones = self.__modelo.obtenerPosiciones(self.__usuario_actual.id_usuario)
+        self.__vista_principal.refrescar_cartera(cartera, posiciones)
 
     # ── Utilidades ────────────────────────────────────────────────────────────
 

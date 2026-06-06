@@ -129,13 +129,12 @@ class ControladorPrincipal:
     # ── Admin: Eventos de mercado ─────────────────────────────────────────────
 
     def admin_lanzar_evento(self, nombre_evento, descripcion):
-        # BUG FIX: id_admin del usuario autenticado, no hardcodeado a 1
         id_admin = self.__usuario_actual.id_usuario
-        exito    = self.__modelo.lanzar_evento_mercado(id_admin, nombre_evento, descripcion)
+        exito = self.__modelo.lanzar_evento_mercado(id_admin, nombre_evento, descripcion)
         if exito:
-            self.actualizar_vista_admin()
+            self.actualizar_vista_admin()  # recarga activos con precios actualizados
         else:
-            self.__vista_principal.mostrar_error("El evento de mercado no pudo ejecutarse.")
+            self.__vista_principal.mostrar_error("No se pudo lanzar el evento de mercado.")
 
     # ── Analista: Noticias ────────────────────────────────────────────────────
 
@@ -243,6 +242,9 @@ class ControladorPrincipal:
 
     def solicitarAvisoUrgente(self):
         return self.__modelo.obtenerAvisoUrgente()
+
+    def solicitarUltimoEvento(self):
+        return self.__modelo.obtenerUltimoEvento()
 
     def cargar_historial_trader(self):
         operaciones = self.__modelo.obtener_historial_operaciones(
