@@ -1,0 +1,1397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TraderWindow</class>
+ <widget class="QMainWindow" name="TraderWindow">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>1440</width><height>900</height></rect>
+  </property>
+  <property name="windowTitle">
+   <string>CryptoLearning — Panel Trader</string>
+  </property>
+
+  <property name="styleSheet">
+   <string notr="true">
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CRYPTOLEARNING  ·  PANEL TRADER
+   Apple Spatial Design  ·  Dark Matter Edition
+   ═══════════════════════════════════════════════════════════════════════
+   Palette:
+     Surface-0  #0A0A0B   — void black
+     Surface-1  #111113   — deep base
+     Surface-2  #18181B   — card ground
+     Surface-3  #222226   — raised card
+     Surface-4  #2C2C31   — input field
+     Divider    rgba(255,255,255,0.06)
+     Border     rgba(255,255,255,0.10)
+     Border-hi  rgba(255,255,255,0.16)
+     Accent     #FF6B00   — CryptoOrange
+     Accent-hi  #FF8C2A   — warm highlight
+     Green      #34C759   — profit
+     Red        #FF3B30   — loss
+     Text-pri   rgba(255,255,255,0.92)
+     Text-sec   rgba(255,255,255,0.50)
+     Text-ter   rgba(255,255,255,0.25)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── BASE ───────────────────────────────────────────────────────────── */
+QMainWindow, QWidget#centralwidget {
+    background-color: #0A0A0B;
+    font-family: "SF Pro Display", "Helvetica Neue", "Segoe UI Variable", Arial, sans-serif;
+}
+QFrame { background: transparent; border: none; }
+
+/* ── SIDEBAR ────────────────────────────────────────────────────────── */
+QFrame#sidebar {
+    background-color: #111113;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ── LOGO ───────────────────────────────────────────────────────────── */
+QLabel#lbl_sidebar_logo {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    qproperty-alignment: AlignLeft;
+}
+QLabel#lbl_sidebar_sub {
+    color: #FF6B00;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    qproperty-alignment: AlignLeft;
+}
+
+/* ── SEPARADOR ──────────────────────────────────────────────────────── */
+QFrame#sep_sidebar {
+    background-color: rgba(255, 255, 255, 0.06);
+    min-height: 1px;
+    max-height: 1px;
+    border: none;
+}
+
+/* ── SECCIÓN NAV LABEL ──────────────────────────────────────────────── */
+QLabel#lbl_nav_section {
+    color: rgba(255, 255, 255, 0.22);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding-left: 16px;
+}
+
+/* ── BOTONES NAV ────────────────────────────────────────────────────── */
+QPushButton#btn_nav_mercado,
+QPushButton#btn_nav_cartera,
+QPushButton#btn_nav_noticias,
+QPushButton#btn_nav_historial {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px 10px 14px;
+    text-align: left;
+}
+QPushButton#btn_nav_mercado:hover,
+QPushButton#btn_nav_cartera:hover,
+QPushButton#btn_nav_noticias:hover,
+QPushButton#btn_nav_historial:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.80);
+}
+QPushButton#btn_nav_mercado:pressed,
+QPushButton#btn_nav_cartera:pressed,
+QPushButton#btn_nav_noticias:pressed,
+QPushButton#btn_nav_historial:pressed {
+    background: rgba(255, 107, 0, 0.10);
+    color: #FF8C2A;
+}
+QPushButton#btn_nav_salir {
+    background: transparent;
+    color: rgba(255, 80, 80, 0.45);
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px 10px 14px;
+    text-align: left;
+}
+QPushButton#btn_nav_salir:hover {
+    background: rgba(255, 60, 60, 0.07);
+    color: rgba(255, 100, 100, 0.80);
+}
+
+/* ── AVATAR USUARIO ─────────────────────────────────────────────────── */
+QFrame#user_pill {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
+QLabel#lbl_user_name {
+    color: rgba(255, 255, 255, 0.70);
+    font-size: 11px;
+    font-weight: 500;
+}
+QLabel#lbl_user_role {
+    color: rgba(255, 107, 0, 0.70);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+QLabel#lbl_user_avatar {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
+        stop:0 #FF6B00, stop:1 #FF3D00);
+    color: #000000;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 10px;
+    qproperty-alignment: AlignCenter;
+}
+
+/* ── ÁREA PRINCIPAL ─────────────────────────────────────────────────── */
+QFrame#main_area {
+    background-color: #0A0A0B;
+}
+
+/* ── TOPBAR ─────────────────────────────────────────────────────────── */
+QFrame#topbar {
+    background-color: rgba(10, 10, 11, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+QLabel#lbl_topbar_breadcrumb {
+    color: rgba(255, 255, 255, 0.28);
+    font-size: 11px;
+    font-weight: 400;
+}
+QLabel#lbl_topbar_breadcrumb_sep {
+    color: rgba(255, 255, 255, 0.15);
+    font-size: 11px;
+}
+QLabel#lbl_topbar_breadcrumb_active {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* ── BADGE LIVE ─────────────────────────────────────────────────────── */
+QLabel#lbl_live_dot {
+    background: #34C759;
+    border-radius: 4px;
+    min-width: 8px;
+    max-width: 8px;
+    min-height: 8px;
+    max-height: 8px;
+}
+QLabel#lbl_live_text {
+    color: rgba(52, 199, 89, 0.80);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* ── CARDS ──────────────────────────────────────────────────────────── */
+QFrame#card_mercado,
+QFrame#card_operacion,
+QFrame#card_cartera,
+QFrame#card_posiciones,
+QFrame#card_noticias,
+QFrame#card_historial_ops {
+    background-color: #18181B;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+}
+
+/* ── ACCENT LINE TOP ────────────────────────────────────────────────── */
+QFrame#card_accent_mkt,
+QFrame#card_accent_op,
+QFrame#card_accent_cart,
+QFrame#card_accent_pos,
+QFrame#card_accent_not,
+QFrame#card_accent_hist {
+    background: qlineargradient(
+        x1:0, y1:0, x2:1, y2:0,
+        stop:0.00 rgba(255, 107, 0,   0),
+        stop:0.30 rgba(255, 107, 0, 160),
+        stop:0.50 rgba(255, 160, 0, 255),
+        stop:0.70 rgba(255, 107, 0, 160),
+        stop:1.00 rgba(255, 107, 0,   0)
+    );
+    min-height: 1px;
+    max-height: 1px;
+    border: none;
+    border-radius: 0px;
+}
+
+/* ── EYEBROW / TÍTULOS CARD ─────────────────────────────────────────── */
+QLabel#lbl_ey_mkt, QLabel#lbl_ey_op,
+QLabel#lbl_ey_cart, QLabel#lbl_ey_pos,
+QLabel#lbl_ey_not, QLabel#lbl_ey_hist {
+    color: #FF6B00;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2.2px;
+}
+QLabel#lbl_tit_mkt, QLabel#lbl_tit_op,
+QLabel#lbl_tit_cart, QLabel#lbl_tit_pos,
+QLabel#lbl_tit_not, QLabel#lbl_tit_hist {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+QLabel#lbl_desc_mkt, QLabel#lbl_desc_op,
+QLabel#lbl_desc_cart, QLabel#lbl_desc_pos,
+QLabel#lbl_desc_not, QLabel#lbl_desc_hist {
+    color: rgba(255, 255, 255, 0.32);
+    font-size: 11px;
+}
+
+/* ── SEPARADOR INTERNO ──────────────────────────────────────────────── */
+QFrame#sep_card {
+    background-color: rgba(255, 255, 255, 0.05);
+    min-height: 1px;
+    max-height: 1px;
+    border: none;
+}
+
+/* ── KPI CARDS (saldo / patrimonio) ─────────────────────────────────── */
+QFrame#kpi_saldo, QFrame#kpi_patrimonio {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+}
+QLabel#lbl_kpi_label_saldo, QLabel#lbl_kpi_label_pat {
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+}
+QLabel#lbl_kpi_saldo {
+    color: #34C759;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+QLabel#lbl_kpi_patrimonio {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* ── ETIQUETAS CAMPO ────────────────────────────────────────────────── */
+QLabel#lbl_f_activo, QLabel#lbl_f_tipo,
+QLabel#lbl_f_cantidad {
+    color: rgba(255, 255, 255, 0.40);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+}
+
+/* ── COMBO BOX ──────────────────────────────────────────────────────── */
+QComboBox#combo_activo, QComboBox#combo_tipo {
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+        stop:0 rgba(255,255,255,8), stop:1 rgba(255,255,255,4));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.88);
+    padding: 10px 14px;
+    font-size: 13px;
+    min-height: 20px;
+    selection-background-color: rgba(255, 107, 0, 0.18);
+    selection-color: #FF8C2A;
+}
+QComboBox#combo_activo:hover, QComboBox#combo_tipo:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    color: #FFFFFF;
+}
+QComboBox#combo_activo:focus, QComboBox#combo_tipo:focus {
+    border: 1px solid rgba(255, 130, 0, 0.65);
+    color: #FFFFFF;
+}
+QComboBox#combo_activo::drop-down, QComboBox#combo_tipo::drop-down {
+    border: none;
+    padding-right: 12px;
+}
+QComboBox QAbstractItemView {
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.80);
+    selection-background-color: rgba(255, 107, 0, 0.18);
+    selection-color: #FF8C2A;
+    padding: 4px;
+}
+
+/* ── INPUT CANTIDAD ─────────────────────────────────────────────────── */
+QDoubleSpinBox#input_cantidad {
+    background-color: #222226;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.88);
+    padding: 10px 14px;
+    font-size: 13px;
+    min-height: 20px;
+    selection-background-color: rgba(255, 107, 0, 0.30);
+    selection-color: #FFFFFF;
+}
+QDoubleSpinBox#input_cantidad:hover {
+    background-color: #27272C;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+QDoubleSpinBox#input_cantidad:focus {
+    background-color: #222226;
+    border: 1px solid rgba(255, 107, 0, 0.60);
+    color: #FFFFFF;
+}
+QDoubleSpinBox#input_cantidad::up-button,
+QDoubleSpinBox#input_cantidad::down-button {
+    background: rgba(255,255,255,0.05);
+    border: none;
+    border-radius: 4px;
+    width: 18px;
+}
+QDoubleSpinBox#input_cantidad::up-button:hover,
+QDoubleSpinBox#input_cantidad::down-button:hover {
+    background: rgba(255,107,0,0.18);
+}
+
+/* ── BOTÓN COMPRAR (verde) ──────────────────────────────────────────── */
+QPushButton#btn_comprar {
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+        stop:0 #28A745, stop:1 #1E7A32);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    border-radius: 10px;
+    border-top: 1px solid rgba(100,255,130,0.20);
+    border-bottom: 1px solid rgba(0,80,20,0.40);
+    min-height: 42px;
+    padding: 0 18px;
+}
+QPushButton#btn_comprar:hover {
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+        stop:0 #34C759, stop:1 #28A745);
+}
+QPushButton#btn_comprar:pressed {
+    background: #1A6B2A;
+    padding-top: 1px;
+}
+
+/* ── BOTÓN VENDER (rojo) ────────────────────────────────────────────── */
+QPushButton#btn_vender {
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+        stop:0 #D63031, stop:1 #A11212);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    border-radius: 10px;
+    border-top: 1px solid rgba(255,120,120,0.18);
+    border-bottom: 1px solid rgba(100,0,0,0.40);
+    min-height: 42px;
+    padding: 0 18px;
+}
+QPushButton#btn_vender:hover {
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+        stop:0 #FF3B30, stop:1 #D63031);
+}
+QPushButton#btn_vender:pressed {
+    background: #8B0000;
+    padding-top: 1px;
+}
+
+/* ── BOTÓN VER DETALLES (secundario naranja) ────────────────────────── */
+QPushButton#btn_ver_detalles {
+    background: rgba(255, 107, 0, 0.10);
+    color: #FF8C2A;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    border: 1px solid rgba(255, 107, 0, 0.22);
+    border-radius: 10px;
+    min-height: 38px;
+    padding: 0 18px;
+}
+QPushButton#btn_ver_detalles:hover {
+    background: rgba(255, 107, 0, 0.18);
+    border: 1px solid rgba(255, 107, 0, 0.40);
+    color: #FFA040;
+}
+QPushButton#btn_ver_detalles:pressed {
+    background: rgba(255, 107, 0, 0.08);
+    padding-top: 1px;
+}
+
+/* ── TABLAS ─────────────────────────────────────────────────────────── */
+QTableWidget#tabla_mercado,
+QTableWidget#tabla_posiciones,
+QTableWidget#tabla_noticias,
+QTableWidget#tabla_historial {
+    background: transparent;
+    border: none;
+    gridline-color: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.80);
+    font-size: 12px;
+    selection-background-color: rgba(255, 107, 0, 0.10);
+    selection-color: rgba(255, 255, 255, 0.92);
+    outline: none;
+}
+QTableWidget#tabla_mercado::item,
+QTableWidget#tabla_posiciones::item,
+QTableWidget#tabla_noticias::item,
+QTableWidget#tabla_historial::item {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+QTableWidget#tabla_mercado::item:selected,
+QTableWidget#tabla_posiciones::item:selected,
+QTableWidget#tabla_noticias::item:selected,
+QTableWidget#tabla_historial::item:selected {
+    background: rgba(255, 107, 0, 0.08);
+    color: rgba(255, 255, 255, 0.92);
+}
+QTableWidget#tabla_mercado::item:hover,
+QTableWidget#tabla_posiciones::item:hover,
+QTableWidget#tabla_noticias::item:hover,
+QTableWidget#tabla_historial::item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+QHeaderView::section {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.28);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    padding: 10px 14px;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ── SCROLLBAR ──────────────────────────────────────────────────────── */
+QScrollBar:vertical {
+    background: transparent;
+    width: 5px;
+    border-radius: 3px;
+    margin: 4px 0;
+}
+QScrollBar::handle:vertical {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 3px;
+    min-height: 24px;
+}
+QScrollBar::handle:vertical:hover {
+    background: rgba(255, 107, 0, 0.45);
+}
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical { height: 0; }
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical { background: transparent; }
+
+/* ── BADGE AVISO URGENTE ────────────────────────────────────────────── */
+QLabel#lbl_badge_aviso {
+    color: #FF6B00;
+    background: rgba(255, 107, 0, 0.10);
+    border: 1px solid rgba(255, 107, 0, 0.22);
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+}
+
+/* ── PIE ────────────────────────────────────────────────────────────── */
+QLabel#lbl_version {
+    color: rgba(255, 255, 255, 0.10);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    qproperty-alignment: AlignCenter;
+}
+
+   </string>
+  </property>
+
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="root_layout">
+    <property name="spacing"><number>0</number></property>
+    <property name="leftMargin"><number>0</number></property>
+    <property name="topMargin"><number>0</number></property>
+    <property name="rightMargin"><number>0</number></property>
+    <property name="bottomMargin"><number>0</number></property>
+
+    <!-- ══════════════════════════════════
+         SIDEBAR — 220px fixed
+         ══════════════════════════════════ -->
+    <item>
+     <widget class="QFrame" name="sidebar">
+      <property name="minimumSize"><size><width>220</width><height>0</height></size></property>
+      <property name="maximumSize"><size><width>220</width><height>16777215</height></size></property>
+      <layout class="QVBoxLayout" name="vl_sidebar">
+       <property name="spacing"><number>0</number></property>
+       <property name="leftMargin"><number>0</number></property>
+       <property name="topMargin"><number>0</number></property>
+       <property name="rightMargin"><number>0</number></property>
+       <property name="bottomMargin"><number>0</number></property>
+
+       <!-- LOGO BLOQUE -->
+       <item>
+        <layout class="QVBoxLayout" name="vl_logo">
+         <property name="leftMargin"><number>20</number></property>
+         <property name="topMargin"><number>28</number></property>
+         <property name="rightMargin"><number>20</number></property>
+         <property name="bottomMargin"><number>24</number></property>
+         <property name="spacing"><number>3</number></property>
+         <item>
+          <widget class="QLabel" name="lbl_sidebar_logo">
+           <property name="text"><string>CRYPTOLEARNING</string></property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lbl_sidebar_sub">
+           <property name="text"><string>Panel Trader</string></property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+
+       <!-- DIVISOR TOP -->
+       <item>
+        <widget class="QFrame" name="sep_sidebar">
+         <property name="frameShape"><enum>QFrame::HLine</enum></property>
+         <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+         <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+        </widget>
+       </item>
+
+       <!-- NAVEGACIÓN -->
+       <item>
+        <layout class="QVBoxLayout" name="vl_nav">
+         <property name="spacing"><number>2</number></property>
+         <property name="leftMargin"><number>12</number></property>
+         <property name="topMargin"><number>20</number></property>
+         <property name="rightMargin"><number>12</number></property>
+         <property name="bottomMargin"><number>0</number></property>
+
+         <item>
+          <widget class="QLabel" name="lbl_nav_section">
+           <property name="text"><string>TRADING</string></property>
+           <property name="minimumSize"><size><width>0</width><height>24</height></size></property>
+          </widget>
+         </item>
+         <item><spacer name="sp_nav_lbl"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>4</height></size></property></spacer></item>
+
+         <item>
+          <widget class="QPushButton" name="btn_nav_mercado">
+           <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+           <property name="text"><string>📊  Mercado</string></property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_nav_cartera">
+           <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+           <property name="text"><string>💼  Mi Cartera</string></property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_nav_noticias">
+           <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+           <property name="text"><string>📰  Noticias</string></property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_nav_historial">
+           <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+           <property name="text"><string>🕘  Historial</string></property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+
+       <!-- SPACER CRECER -->
+       <item>
+        <spacer name="sp_nav_grow">
+         <property name="orientation"><enum>Qt::Vertical</enum></property>
+         <property name="sizeType"><enum>QSizePolicy::Expanding</enum></property>
+         <property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property>
+        </spacer>
+       </item>
+
+       <!-- DIVISOR INFERIOR -->
+       <item>
+        <widget class="QFrame" name="sep_sidebar_bot">
+         <property name="objectName"><string>sep_sidebar</string></property>
+         <property name="frameShape"><enum>QFrame::HLine</enum></property>
+         <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+         <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+        </widget>
+       </item>
+
+       <!-- USER PILL -->
+       <item>
+        <layout class="QVBoxLayout" name="vl_user">
+         <property name="leftMargin"><number>12</number></property>
+         <property name="topMargin"><number>14</number></property>
+         <property name="rightMargin"><number>12</number></property>
+         <property name="bottomMargin"><number>14</number></property>
+         <item>
+          <widget class="QFrame" name="user_pill">
+           <layout class="QHBoxLayout" name="hl_user_pill">
+            <property name="leftMargin"><number>10</number></property>
+            <property name="topMargin"><number>8</number></property>
+            <property name="rightMargin"><number>10</number></property>
+            <property name="bottomMargin"><number>8</number></property>
+            <property name="spacing"><number>10</number></property>
+            <item>
+             <widget class="QLabel" name="lbl_user_avatar">
+              <property name="text"><string>T</string></property>
+              <property name="minimumSize"><size><width>30</width><height>30</height></size></property>
+              <property name="maximumSize"><size><width>30</width><height>30</height></size></property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="vl_user_info">
+              <property name="spacing"><number>1</number></property>
+              <item>
+               <widget class="QLabel" name="lbl_user_name">
+                <property name="text"><string>trader@unileon.es</string></property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="lbl_user_role">
+                <property name="text"><string>TRADER</string></property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+
+       <!-- CERRAR SESIÓN -->
+       <item>
+        <layout class="QVBoxLayout" name="vl_salir">
+         <property name="leftMargin"><number>12</number></property>
+         <property name="topMargin"><number>0</number></property>
+         <property name="rightMargin"><number>12</number></property>
+         <property name="bottomMargin"><number>16</number></property>
+         <item>
+          <widget class="QPushButton" name="btn_nav_salir">
+           <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+           <property name="text"><string>Cerrar Sesión</string></property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+
+      </layout>
+     </widget>
+    </item>
+
+    <!-- ══════════════════════════════════
+         ÁREA PRINCIPAL
+         ══════════════════════════════════ -->
+    <item>
+     <widget class="QFrame" name="main_area">
+      <layout class="QVBoxLayout" name="vl_main">
+       <property name="spacing"><number>0</number></property>
+       <property name="leftMargin"><number>0</number></property>
+       <property name="topMargin"><number>0</number></property>
+       <property name="rightMargin"><number>0</number></property>
+       <property name="bottomMargin"><number>0</number></property>
+
+       <!-- TOPBAR -->
+       <item>
+        <widget class="QFrame" name="topbar">
+         <property name="minimumSize"><size><width>0</width><height>52</height></size></property>
+         <property name="maximumSize"><size><width>16777215</width><height>52</height></size></property>
+         <layout class="QHBoxLayout" name="hl_topbar">
+          <property name="leftMargin"><number>28</number></property>
+          <property name="rightMargin"><number>28</number></property>
+          <property name="topMargin"><number>0</number></property>
+          <property name="bottomMargin"><number>0</number></property>
+          <property name="spacing"><number>5</number></property>
+          <item>
+           <layout class="QHBoxLayout" name="hl_breadcrumb">
+            <property name="spacing"><number>5</number></property>
+            <item>
+             <widget class="QLabel" name="lbl_topbar_breadcrumb">
+              <property name="text"><string>CryptoLearning</string></property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbl_topbar_breadcrumb_sep">
+              <property name="text"><string>/</string></property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbl_topbar_breadcrumb_active">
+              <property name="text"><string>Mercado</string></property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="hs_topbar">
+            <property name="orientation"><enum>Qt::Horizontal</enum></property>
+            <property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hl_live">
+            <property name="spacing"><number>5</number></property>
+            <item>
+             <widget class="QLabel" name="lbl_live_dot">
+              <property name="text"><string></string></property>
+              <property name="minimumSize"><size><width>8</width><height>8</height></size></property>
+              <property name="maximumSize"><size><width>8</width><height>8</height></size></property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbl_live_text">
+              <property name="text"><string>EN VIVO</string></property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- STACKED WIDGET -->
+       <item>
+        <widget class="QStackedWidget" name="stacked_trader">
+         <property name="currentIndex"><number>0</number></property>
+
+         <!-- ══════════════════════════════════
+              PAGE 0 — MERCADO + OPERACIÓN
+              ══════════════════════════════════ -->
+         <widget class="QWidget" name="page_mercado">
+          <layout class="QHBoxLayout" name="hl_mercado_page">
+           <property name="spacing"><number>16</number></property>
+           <property name="leftMargin"><number>24</number></property>
+           <property name="topMargin"><number>24</number></property>
+           <property name="rightMargin"><number>24</number></property>
+           <property name="bottomMargin"><number>16</number></property>
+
+           <!-- CARD MERCADO (tabla activos) -->
+           <item>
+            <widget class="QFrame" name="card_mercado">
+             <layout class="QVBoxLayout" name="vl_card_mkt">
+              <property name="spacing"><number>0</number></property>
+              <property name="leftMargin"><number>0</number></property>
+              <property name="topMargin"><number>0</number></property>
+              <property name="rightMargin"><number>0</number></property>
+              <property name="bottomMargin"><number>0</number></property>
+
+              <item>
+               <widget class="QFrame" name="card_accent_mkt">
+                <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+               </widget>
+              </item>
+
+              <item>
+               <layout class="QVBoxLayout" name="vl_mkt_inner">
+                <property name="spacing"><number>0</number></property>
+                <property name="leftMargin"><number>26</number></property>
+                <property name="topMargin"><number>26</number></property>
+                <property name="rightMargin"><number>26</number></property>
+                <property name="bottomMargin"><number>26</number></property>
+
+                <item>
+                 <widget class="QLabel" name="lbl_ey_mkt">
+                  <property name="text"><string>MERCADO EN TIEMPO REAL</string></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_ey_m1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>5</height></size></property></spacer></item>
+                <item>
+                 <widget class="QLabel" name="lbl_tit_mkt">
+                  <property name="text"><string>Activos Disponibles</string></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_ey_m2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>3</height></size></property></spacer></item>
+                <item>
+                 <widget class="QLabel" name="lbl_desc_mkt">
+                  <property name="text"><string>Selecciona un activo para operar o ver su historial de precios</string></property>
+                 </widget>
+                </item>
+
+                <item><spacer name="sp_m1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
+                <item>
+                 <widget class="QFrame" name="sep_card">
+                  <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                  <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                  <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_m2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>14</height></size></property></spacer></item>
+
+                <!-- TABLA MERCADO -->
+                <item>
+                 <widget class="QTableWidget" name="tabla_mercado">
+                  <property name="frameShape"><enum>QFrame::NoFrame</enum></property>
+                  <property name="showGrid"><bool>false</bool></property>
+                  <property name="selectionBehavior"><enum>QAbstractItemView::SelectRows</enum></property>
+                  <property name="selectionMode"><enum>QAbstractItemView::SingleSelection</enum></property>
+                  <property name="editTriggers"><set>QAbstractItemView::NoEditTriggers</set></property>
+                  <property name="alternatingRowColors"><bool>false</bool></property>
+                  <property name="verticalScrollBarPolicy"><enum>Qt::ScrollBarAsNeeded</enum></property>
+                  <property name="horizontalScrollBarPolicy"><enum>Qt::ScrollBarAlwaysOff</enum></property>
+                  <column><property name="text"><string>ACTIVO</string></property></column>
+                  <column><property name="text"><string>SÍMBOLO</string></property></column>
+                  <column><property name="text"><string>PRECIO ACTUAL</string></property></column>
+                  <column><property name="text"><string>TIPO</string></property></column>
+                  <column><property name="text"><string>DESCRIPCIÓN</string></property></column>
+                 </widget>
+                </item>
+
+                <item><spacer name="sp_m3"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>14</height></size></property></spacer></item>
+
+                <!-- BOTÓN VER DETALLES -->
+                <item>
+                 <layout class="QHBoxLayout" name="hl_mkt_btns">
+                  <property name="spacing"><number>10</number></property>
+                  <item>
+                   <spacer name="hs_mkt_l"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property></spacer>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btn_ver_detalles">
+                    <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+                    <property name="text"><string>Ver historial de precios →</string></property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+
+           <!-- CARD OPERACIÓN (comprar / vender) -->
+           <item>
+            <widget class="QFrame" name="card_operacion">
+             <property name="minimumSize"><size><width>300</width><height>0</height></size></property>
+             <property name="maximumSize"><size><width>340</width><height>16777215</height></size></property>
+             <layout class="QVBoxLayout" name="vl_card_op">
+              <property name="spacing"><number>0</number></property>
+              <property name="leftMargin"><number>0</number></property>
+              <property name="topMargin"><number>0</number></property>
+              <property name="rightMargin"><number>0</number></property>
+              <property name="bottomMargin"><number>0</number></property>
+
+              <item>
+               <widget class="QFrame" name="card_accent_op">
+                <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+               </widget>
+              </item>
+
+              <item>
+               <layout class="QVBoxLayout" name="vl_op_inner">
+                <property name="spacing"><number>0</number></property>
+                <property name="leftMargin"><number>26</number></property>
+                <property name="topMargin"><number>26</number></property>
+                <property name="rightMargin"><number>26</number></property>
+                <property name="bottomMargin"><number>26</number></property>
+
+                <item>
+                 <widget class="QLabel" name="lbl_ey_op">
+                  <property name="text"><string>EJECUTAR ORDEN</string></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_ey_o1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>5</height></size></property></spacer></item>
+                <item>
+                 <widget class="QLabel" name="lbl_tit_op">
+                  <property name="text"><string>Nueva Operación</string></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_ey_o2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>3</height></size></property></spacer></item>
+                <item>
+                 <widget class="QLabel" name="lbl_desc_op">
+                  <property name="text"><string>Compra o vende al precio actual del mercado</string></property>
+                 </widget>
+                </item>
+
+                <item><spacer name="sp_o1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
+                <item>
+                 <widget class="QFrame" name="sep_card_op">
+                  <property name="objectName"><string>sep_card</string></property>
+                  <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                  <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                  <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_o2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>20</height></size></property></spacer></item>
+
+                <!-- KPIs saldo y patrimonio -->
+                <item>
+                 <layout class="QHBoxLayout" name="hl_kpis">
+                  <property name="spacing"><number>10</number></property>
+                  <item>
+                   <widget class="QFrame" name="kpi_saldo">
+                    <layout class="QVBoxLayout" name="vl_kpi_s">
+                     <property name="leftMargin"><number>14</number></property>
+                     <property name="topMargin"><number>12</number></property>
+                     <property name="rightMargin"><number>14</number></property>
+                     <property name="bottomMargin"><number>12</number></property>
+                     <property name="spacing"><number>4</number></property>
+                     <item>
+                      <widget class="QLabel" name="lbl_kpi_label_saldo">
+                       <property name="text"><string>SALDO FIAT</string></property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="lbl_kpi_saldo">
+                       <property name="text"><string>$0.00</string></property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QFrame" name="kpi_patrimonio">
+                    <layout class="QVBoxLayout" name="vl_kpi_p">
+                     <property name="leftMargin"><number>14</number></property>
+                     <property name="topMargin"><number>12</number></property>
+                     <property name="rightMargin"><number>14</number></property>
+                     <property name="bottomMargin"><number>12</number></property>
+                     <property name="spacing"><number>4</number></property>
+                     <item>
+                      <widget class="QLabel" name="lbl_kpi_label_pat">
+                       <property name="text"><string>PATRIMONIO TOTAL</string></property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="lbl_kpi_patrimonio">
+                       <property name="text"><string>$0.00</string></property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+
+                <item><spacer name="sp_o3"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>20</height></size></property></spacer></item>
+
+                <!-- CAMPO ACTIVO -->
+                <item>
+                 <widget class="QLabel" name="lbl_f_activo">
+                  <property name="text"><string>ACTIVO</string></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_fa1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
+                <item>
+                 <widget class="QComboBox" name="combo_activo">
+                  <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+                 </widget>
+                </item>
+
+                <item><spacer name="sp_fa2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>16</height></size></property></spacer></item>
+
+                <!-- CAMPO CANTIDAD -->
+                <item>
+                 <widget class="QLabel" name="lbl_f_cantidad">
+                  <property name="text"><string>CANTIDAD</string></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_fc1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="input_cantidad">
+                  <property name="minimum"><double>0.000000</double></property>
+                  <property name="maximum"><double>999999.990000</double></property>
+                  <property name="singleStep"><double>0.010000</double></property>
+                  <property name="decimals"><number>4</number></property>
+                  <property name="value"><double>1.000000</double></property>
+                 </widget>
+                </item>
+
+                <item><spacer name="sp_fc2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>24</height></size></property></spacer></item>
+
+                <!-- BOTONES COMPRAR / VENDER -->
+                <item>
+                 <layout class="QHBoxLayout" name="hl_op_btns">
+                  <property name="spacing"><number>10</number></property>
+                  <item>
+                   <widget class="QPushButton" name="btn_comprar">
+                    <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+                    <property name="text"><string>COMPRAR</string></property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btn_vender">
+                    <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+                    <property name="text"><string>VENDER</string></property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+
+                <item>
+                 <spacer name="sp_op_grow">
+                  <property name="orientation"><enum>Qt::Vertical</enum></property>
+                  <property name="sizeType"><enum>QSizePolicy::Expanding</enum></property>
+                  <property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property>
+                 </spacer>
+                </item>
+
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+
+          </layout>
+         </widget>
+
+         <!-- ══════════════════════════════════
+              PAGE 1 — CARTERA (posiciones)
+              ══════════════════════════════════ -->
+         <widget class="QWidget" name="page_cartera">
+          <layout class="QHBoxLayout" name="hl_cartera_page">
+           <property name="spacing"><number>16</number></property>
+           <property name="leftMargin"><number>24</number></property>
+           <property name="topMargin"><number>24</number></property>
+           <property name="rightMargin"><number>24</number></property>
+           <property name="bottomMargin"><number>16</number></property>
+
+           <!-- CARD POSICIONES -->
+           <item>
+            <widget class="QFrame" name="card_posiciones">
+             <layout class="QVBoxLayout" name="vl_card_pos">
+              <property name="spacing"><number>0</number></property>
+              <property name="leftMargin"><number>0</number></property>
+              <property name="topMargin"><number>0</number></property>
+              <property name="rightMargin"><number>0</number></property>
+              <property name="bottomMargin"><number>0</number></property>
+
+              <item>
+               <widget class="QFrame" name="card_accent_pos">
+                <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+               </widget>
+              </item>
+
+              <item>
+               <layout class="QVBoxLayout" name="vl_pos_inner">
+                <property name="spacing"><number>0</number></property>
+                <property name="leftMargin"><number>26</number></property>
+                <property name="topMargin"><number>26</number></property>
+                <property name="rightMargin"><number>26</number></property>
+                <property name="bottomMargin"><number>26</number></property>
+
+                <item>
+                 <layout class="QHBoxLayout" name="hl_pos_header">
+                  <property name="spacing"><number>10</number></property>
+                  <item>
+                   <layout class="QVBoxLayout" name="vl_pos_titles">
+                    <property name="spacing"><number>0</number></property>
+                    <item>
+                     <widget class="QLabel" name="lbl_ey_pos">
+                      <property name="text"><string>PORTFOLIO</string></property>
+                     </widget>
+                    </item>
+                    <item><spacer name="sp_ey_p1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>5</height></size></property></spacer></item>
+                    <item>
+                     <widget class="QLabel" name="lbl_tit_pos">
+                      <property name="text"><string>Mi Cartera</string></property>
+                     </widget>
+                    </item>
+                    <item><spacer name="sp_ey_p2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>3</height></size></property></spacer></item>
+                    <item>
+                     <widget class="QLabel" name="lbl_desc_pos">
+                      <property name="text"><string>Activos en tu poder y valor estimado actual</string></property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <spacer name="hs_pos"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property></spacer>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="lbl_badge_aviso">
+                    <property name="text"><string>💼 EN VIVO</string></property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+
+                <item><spacer name="sp_p1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
+                <item>
+                 <widget class="QFrame" name="sep_card_pos">
+                  <property name="objectName"><string>sep_card</string></property>
+                  <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                  <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                  <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_p2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>14</height></size></property></spacer></item>
+
+                <item>
+                 <widget class="QTableWidget" name="tabla_posiciones">
+                  <property name="frameShape"><enum>QFrame::NoFrame</enum></property>
+                  <property name="showGrid"><bool>false</bool></property>
+                  <property name="selectionBehavior"><enum>QAbstractItemView::SelectRows</enum></property>
+                  <property name="selectionMode"><enum>QAbstractItemView::SingleSelection</enum></property>
+                  <property name="editTriggers"><set>QAbstractItemView::NoEditTriggers</set></property>
+                  <property name="alternatingRowColors"><bool>false</bool></property>
+                  <property name="verticalScrollBarPolicy"><enum>Qt::ScrollBarAsNeeded</enum></property>
+                  <property name="horizontalScrollBarPolicy"><enum>Qt::ScrollBarAlwaysOff</enum></property>
+                  <column><property name="text"><string>ACTIVO</string></property></column>
+                  <column><property name="text"><string>SÍMBOLO</string></property></column>
+                  <column><property name="text"><string>CANTIDAD</string></property></column>
+                  <column><property name="text"><string>PRECIO MEDIO</string></property></column>
+                  <column><property name="text"><string>VALOR ACTUAL</string></property></column>
+                  <column><property name="text"><string>P&amp;L</string></property></column>
+                 </widget>
+                </item>
+
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+
+          </layout>
+         </widget>
+
+         <!-- ══════════════════════════════════
+              PAGE 2 — NOTICIAS
+              ══════════════════════════════════ -->
+         <widget class="QWidget" name="page_noticias">
+          <layout class="QHBoxLayout" name="hl_noticias_page">
+           <property name="spacing"><number>16</number></property>
+           <property name="leftMargin"><number>24</number></property>
+           <property name="topMargin"><number>24</number></property>
+           <property name="rightMargin"><number>24</number></property>
+           <property name="bottomMargin"><number>16</number></property>
+
+           <item>
+            <widget class="QFrame" name="card_noticias">
+             <layout class="QVBoxLayout" name="vl_card_not">
+              <property name="spacing"><number>0</number></property>
+              <property name="leftMargin"><number>0</number></property>
+              <property name="topMargin"><number>0</number></property>
+              <property name="rightMargin"><number>0</number></property>
+              <property name="bottomMargin"><number>0</number></property>
+
+              <item>
+               <widget class="QFrame" name="card_accent_not">
+                <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+               </widget>
+              </item>
+
+              <item>
+               <layout class="QVBoxLayout" name="vl_not_inner">
+                <property name="spacing"><number>0</number></property>
+                <property name="leftMargin"><number>26</number></property>
+                <property name="topMargin"><number>26</number></property>
+                <property name="rightMargin"><number>26</number></property>
+                <property name="bottomMargin"><number>26</number></property>
+
+                <item>
+                 <layout class="QHBoxLayout" name="hl_not_header">
+                  <property name="spacing"><number>10</number></property>
+                  <item>
+                   <layout class="QVBoxLayout" name="vl_not_titles">
+                    <property name="spacing"><number>0</number></property>
+                    <item>
+                     <widget class="QLabel" name="lbl_ey_not">
+                      <property name="text"><string>ANÁLISIS DE MERCADO</string></property>
+                     </widget>
+                    </item>
+                    <item><spacer name="sp_ey_n1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>5</height></size></property></spacer></item>
+                    <item>
+                     <widget class="QLabel" name="lbl_tit_not">
+                      <property name="text"><string>Noticias</string></property>
+                     </widget>
+                    </item>
+                    <item><spacer name="sp_ey_n2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>3</height></size></property></spacer></item>
+                    <item>
+                     <widget class="QLabel" name="lbl_desc_not">
+                      <property name="text"><string>Publicaciones de los analistas de CryptoLearning</string></property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <spacer name="hs_not"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property></spacer>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="lbl_badge_aviso_not">
+                    <property name="objectName"><string>lbl_badge_aviso</string></property>
+                    <property name="text"><string>⚡ EN VIVO</string></property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+
+                <item><spacer name="sp_n1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
+                <item>
+                 <widget class="QFrame" name="sep_card_not">
+                  <property name="objectName"><string>sep_card</string></property>
+                  <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                  <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                  <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_n2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>14</height></size></property></spacer></item>
+
+                <item>
+                 <widget class="QTableWidget" name="tabla_noticias">
+                  <property name="frameShape"><enum>QFrame::NoFrame</enum></property>
+                  <property name="showGrid"><bool>false</bool></property>
+                  <property name="selectionBehavior"><enum>QAbstractItemView::SelectRows</enum></property>
+                  <property name="selectionMode"><enum>QAbstractItemView::SingleSelection</enum></property>
+                  <property name="editTriggers"><set>QAbstractItemView::NoEditTriggers</set></property>
+                  <property name="alternatingRowColors"><bool>false</bool></property>
+                  <property name="verticalScrollBarPolicy"><enum>Qt::ScrollBarAsNeeded</enum></property>
+                  <property name="horizontalScrollBarPolicy"><enum>Qt::ScrollBarAlwaysOff</enum></property>
+                  <column><property name="text"><string>FECHA</string></property></column>
+                  <column><property name="text"><string>TÍTULO</string></property></column>
+                  <column><property name="text"><string>TIPO</string></property></column>
+                  <column><property name="text"><string>ANALISTA</string></property></column>
+                 </widget>
+                </item>
+
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+
+          </layout>
+         </widget>
+
+         <!-- ══════════════════════════════════
+              PAGE 3 — HISTORIAL OPERACIONES
+              ══════════════════════════════════ -->
+         <widget class="QWidget" name="page_historial">
+          <layout class="QHBoxLayout" name="hl_historial_page">
+           <property name="spacing"><number>16</number></property>
+           <property name="leftMargin"><number>24</number></property>
+           <property name="topMargin"><number>24</number></property>
+           <property name="rightMargin"><number>24</number></property>
+           <property name="bottomMargin"><number>16</number></property>
+
+           <item>
+            <widget class="QFrame" name="card_historial_ops">
+             <layout class="QVBoxLayout" name="vl_card_hist">
+              <property name="spacing"><number>0</number></property>
+              <property name="leftMargin"><number>0</number></property>
+              <property name="topMargin"><number>0</number></property>
+              <property name="rightMargin"><number>0</number></property>
+              <property name="bottomMargin"><number>0</number></property>
+
+              <item>
+               <widget class="QFrame" name="card_accent_hist">
+                <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+               </widget>
+              </item>
+
+              <item>
+               <layout class="QVBoxLayout" name="vl_hist_inner">
+                <property name="spacing"><number>0</number></property>
+                <property name="leftMargin"><number>26</number></property>
+                <property name="topMargin"><number>26</number></property>
+                <property name="rightMargin"><number>26</number></property>
+                <property name="bottomMargin"><number>26</number></property>
+
+                <item>
+                 <widget class="QLabel" name="lbl_ey_hist">
+                  <property name="text"><string>REGISTRO DE ACTIVIDAD</string></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_ey_h1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>5</height></size></property></spacer></item>
+                <item>
+                 <widget class="QLabel" name="lbl_tit_hist">
+                  <property name="text"><string>Historial de Operaciones</string></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_ey_h2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>3</height></size></property></spacer></item>
+                <item>
+                 <widget class="QLabel" name="lbl_desc_hist">
+                  <property name="text"><string>Todas tus compras y ventas ejecutadas</string></property>
+                 </widget>
+                </item>
+
+                <item><spacer name="sp_h1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
+                <item>
+                 <widget class="QFrame" name="sep_card_hist">
+                  <property name="objectName"><string>sep_card</string></property>
+                  <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                  <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                  <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_h2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>14</height></size></property></spacer></item>
+
+                <item>
+                 <widget class="QTableWidget" name="tabla_historial">
+                  <property name="frameShape"><enum>QFrame::NoFrame</enum></property>
+                  <property name="showGrid"><bool>false</bool></property>
+                  <property name="selectionBehavior"><enum>QAbstractItemView::SelectRows</enum></property>
+                  <property name="selectionMode"><enum>QAbstractItemView::SingleSelection</enum></property>
+                  <property name="editTriggers"><set>QAbstractItemView::NoEditTriggers</set></property>
+                  <property name="alternatingRowColors"><bool>false</bool></property>
+                  <property name="verticalScrollBarPolicy"><enum>Qt::ScrollBarAsNeeded</enum></property>
+                  <property name="horizontalScrollBarPolicy"><enum>Qt::ScrollBarAlwaysOff</enum></property>
+                  <column><property name="text"><string>FECHA</string></property></column>
+                  <column><property name="text"><string>ACTIVO</string></property></column>
+                  <column><property name="text"><string>TIPO</string></property></column>
+                  <column><property name="text"><string>CANTIDAD</string></property></column>
+                  <column><property name="text"><string>PRECIO UNIT.</string></property></column>
+                  <column><property name="text"><string>TOTAL</string></property></column>
+                 </widget>
+                </item>
+
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+
+          </layout>
+         </widget>
+
+        </widget>
+       </item>
+
+       <!-- PIE -->
+       <item>
+        <widget class="QLabel" name="lbl_version">
+         <property name="text"><string>CryptoLearning  ·  v1.0  ·  2025</string></property>
+         <property name="minimumSize"><size><width>0</width><height>28</height></size></property>
+         <property name="maximumSize"><size><width>16777215</width><height>28</height></size></property>
+        </widget>
+       </item>
+
+      </layout>
+     </widget>
+    </item>
+
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

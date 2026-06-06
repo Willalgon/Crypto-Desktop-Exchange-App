@@ -16,14 +16,18 @@ class RegistroDaoJDBC(Conexion):
                 registroVO.dni,
                 registroVO.nombre,
                 apellidos,
-                registroVO.mail,        # ← comprueba que RegistroVO tiene .mail
-                registroVO.contrasena   # ← ya llega encriptada en SHA-256
+                registroVO.mail,
+                registroVO.contrasena
             ))
             self.conexion.commit()
             return True
         except Exception as e:
             print("Error en insertarUsuario:", e)
-            self.conexion.rollback()
+            try:
+                self.conexion.rollback()
+            except Exception:
+                pass    # ← fix jaydebeapi: rollback falla con autocommit=true
             return False
         finally:
             cursor.close()
+            self.closeConnection()
