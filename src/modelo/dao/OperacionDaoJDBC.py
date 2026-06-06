@@ -15,7 +15,6 @@ class OperacionDaoJDBC(Conexion):
                     operacionVO.cantidad,
                 )
             )
-            self.conexion.commit()
             return {
                 "exito":   True,
                 "mensaje": f"{operacionVO.tipo.capitalize()} ejecutada correctamente."

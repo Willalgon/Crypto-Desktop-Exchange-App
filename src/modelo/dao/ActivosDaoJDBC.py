@@ -62,7 +62,6 @@ class ActivosDaoJDBC(Conexion):
             if cursor.fetchone()[0] > 0:
                 return "operaciones_pendientes"
             cursor.execute("DELETE FROM ACTIVOS WHERE id_activo = ?", (id_activo,))
-            self.conexion.commit()
             return True
         except Exception as e:
             print("Error en retirar_activo:", e)
