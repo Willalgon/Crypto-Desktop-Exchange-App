@@ -1,13 +1,23 @@
-from src.modelo.dao.RegistroDaoJDBC import RegistroDaoJDBC
-from src.modelo.dao.LoginDaoJDBC import LoginDaoJDBC
-from src.modelo.dao.NoticiaDaoJDBC import NoticiaDaoJDBC
+from src.modelo.dao.RegistroDaoJDBC      import RegistroDaoJDBC
+from src.modelo.dao.LoginDaoJDBC         import LoginDaoJDBC
+from src.modelo.dao.NoticiaDaoJDBC       import NoticiaDaoJDBC
+from src.modelo.dao.AdminUsuariosDaoJDBC import AdminUsuariosDaoJDBC
+from src.modelo.dao.ActivosDaoJDBC       import ActivosDaoJDBC
+from src.modelo.dao.EventosDaoJDBC       import EventosDaoJDBC
+from src.modelo.vo.EventoMercadoVO       import EventoMercadoVO
+from src.modelo.dao.OperacionDaoJDBC import OperacionDaoJDBC
 
 class Logica:
     def __init__(self):
-        self.__registro_dao = RegistroDaoJDBC()
-        self.__login_dao = LoginDaoJDBC()
-        self.__noticia_dao = NoticiaDaoJDBC()
+        self.__registro_dao       = RegistroDaoJDBC()
+        self.__login_dao          = LoginDaoJDBC()
+        self.__noticia_dao        = NoticiaDaoJDBC()
+        self.__admin_usuarios_dao = AdminUsuariosDaoJDBC()
+        self.__activos_dao        = ActivosDaoJDBC()
+        self.__eventos_dao        = EventosDaoJDBC()
+        self.__operacion_dao = OperacionDaoJDBC()
 
+    # ── Login / Registro ──────────────────────────────────────────────────────
 
     def hacerLogin(self, loginVO):
         return self.__login_dao.checkLogin(loginVO)
@@ -15,12 +25,68 @@ class Logica:
     def hacerRegistro(self, registroVO):
         return self.__registro_dao.insertarUsuario(registroVO)
 
-    def obtenerActivos(self):
-        from src.modelo.dao.ActivosDaoJDBC import ActivosDaoJDBC
-        return ActivosDaoJDBC().obtener_todos()
+    # ── Noticias ──────────────────────────────────────────────────────────────
 
     def publicarNoticia(self, noticiaVO, id_analista):
         return self.__noticia_dao.insertarNoticia(noticiaVO, id_analista)
 
     def obtenerNoticias(self):
         return self.__noticia_dao.obtenerNoticias()
+
+    # ── Admin: Usuarios ───────────────────────────────────────────────────────
+
+    def obtener_usuarios_para_admin(self):
+        return self.__admin_usuarios_dao.obtener_usuarios_admin()
+
+    def desactivar_usuario(self, email):
+        return self.__admin_usuarios_dao.desactivar_usuario(email)
+
+    def actualizar_usuario(self, usuario_vo):
+        return self.__admin_usuarios_dao.actualizar_usuario(usuario_vo)
+
+    # ── Admin: Activos ────────────────────────────────────────────────────────
+
+    def obtener_activos_admin(self):
+        return self.__activos_dao.obtener_activos_admin()
+
+    def admin_retirar_activo(self, id_activo):
+        return self.__activos_dao.retirar_activo(id_activo)
+
+    # ── Mercado (Trader) ──────────────────────────────────────────────────────
+
+    def obtener_activos_mercado(self):
+        return self.__activos_dao.obtener_activos_mercado()
+
+    def obtener_historial_precios(self, id_activo):
+        return self.__activos_dao.obtener_historial_precios(id_activo)
+
+    # ── Admin: Eventos de mercado ─────────────────────────────────────────────
+
+    def lanzar_evento_mercado(self, id_admin, nombre_evento, descripcion):
+        evento_vo = EventoMercadoVO(
+            nombre_evento=nombre_evento,
+            descripcion=descripcion,
+            id_admin=id_admin,
+        )
+        return self.__eventos_dao.lanzar_evento(evento_vo)
+
+    def realizar_operacion(self, operacionVO) -> dict:
+        return self.__operacion_dao.realizar_operacion(operacionVO)
+
+    def obtener_activos_para_trader(self) -> list:
+        return self.__operacion_dao.obtener_activos()
+
+    def obtener_historial_operaciones(self, id_usuario: int) -> list:
+        return self.__operacion_dao.obtener_historial(id_usuario)
+
+    def obtener_cartera(self, id_usuario: int):
+        return self.__operacion_dao.obtener_cartera(id_usuario)
+
+    def obtenerPosiciones(self, id_usuario: int) -> list:
+        return self.__operacion_dao.obtener_posiciones(id_usuario)
+
+    def obtenerTodasLasNoticias(self):
+        return self.__noticia_dao.obtenerNoticias()
+
+    def obtenerAvisoUrgente(self):
+        return self.__operacion_dao.obtener_ultimo_aviso()

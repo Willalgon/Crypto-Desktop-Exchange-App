@@ -1,5 +1,5 @@
 from src.modelo.conexion.Conexion import Conexion
-from src.modelo.vo.RegistroVO import RegistroVO
+from src.modelo.vo.UsuarioVO import UsuarioVO          # ← cambia el import
 
 class LoginDaoJDBC(Conexion):
 
@@ -9,22 +9,25 @@ class LoginDaoJDBC(Conexion):
         WHERE email = ? AND password = ? AND activo = TRUE
     """
 
-    def __fila_a_vo(self, fila):
-        id_usuario, dni, nombre, apellidos, email, rol = fila
-        partes = apellidos.split(" ", 1) if apellidos else ["", ""]
-        primer_ape  = partes[0]
-        segundo_ape = partes[1] if len(partes) > 1 else ""
-        return RegistroVO(dni, nombre, primer_ape, segundo_ape, email, "", rol, id_usuario)
-        #                                                             ↑ contrasena vacía — no la necesitamos en sesión
-
     def checkLogin(self, loginVO):
         cursor = self.getCursor()
         try:
             cursor.execute(self.SQL_CHECK_LOGIN, (loginVO.email, loginVO.contrasena))
             fila = cursor.fetchone()
-            return self.__fila_a_vo(fila) if fila else None
+            if not fila:
+                return None
+            id_usuario, dni, nombre, apellidos, email, rol = fila
+            return UsuarioVO(
+                id_usuario = id_usuario,
+                dni        = dni,
+                nombre     = nombre,
+                apellidos  = apellidos,
+                email      = email,
+                rol        = rol,
+            )
         except Exception as e:
             print("Error en checkLogin:", e)
             return None
         finally:
             cursor.close()
+            self.closeConnection()

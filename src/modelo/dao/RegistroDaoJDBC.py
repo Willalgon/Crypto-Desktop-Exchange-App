@@ -11,19 +11,22 @@ class RegistroDaoJDBC(Conexion):
     def insertarUsuario(self, registroVO):
         cursor = self.getCursor()
         try:
-            apellidos = f"{registroVO.primerapellido} {registroVO.segundoapellido}".strip()
+            apellidos = f"{registroVO.primer_apellido} {registroVO.segundo_apellido}".strip()
             cursor.execute(self.SQL_INSERT, (
                 registroVO.dni,
                 registroVO.nombre,
                 apellidos,
-                registroVO.mail,        # ← comprueba que RegistroVO tiene .mail
-                registroVO.contrasena   # ← ya llega encriptada en SHA-256
+                registroVO.email,       # ← era .mail, correcto es .email
+                registroVO.contrasena
             ))
-            self.conexion.commit()
             return True
         except Exception as e:
             print("Error en insertarUsuario:", e)
-            self.conexion.rollback()
+            try:
+                self.conexion.rollback()
+            except Exception:
+                pass
             return False
         finally:
             cursor.close()
+            self.closeConnection()
