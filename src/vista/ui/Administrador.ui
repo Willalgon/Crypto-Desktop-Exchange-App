@@ -1,0 +1,1037 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AdminWindow</class>
+ <widget class="QMainWindow" name="AdminWindow">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>1440</width><height>900</height></rect>
+  </property>
+  <property name="windowTitle">
+   <string>CryptoLearning — Panel Administrador</string>
+  </property>
+
+  <property name="styleSheet">
+   <string notr="true">
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CRYPTOLEARNING  ·  PANEL ADMINISTRADOR
+   Apple Spatial Design  ·  Dark Matter Edition
+   ═══════════════════════════════════════════════════════════════════════
+   Palette:
+     Surface-0  #0A0A0B   — void black
+     Surface-1  #111113   — deep base
+     Surface-2  #18181B   — card ground
+     Surface-3  #222226   — raised card
+     Surface-4  #2C2C31   — input field
+     Divider    rgba(255,255,255,0.06)
+     Border     rgba(255,255,255,0.10)
+     Border-hi  rgba(255,255,255,0.16)
+     Accent     #FF6B00   — CryptoOrange
+     Accent-hi  #FF8C2A   — warm highlight
+     Red        #FF3B30   — danger
+     Text-pri   rgba(255,255,255,0.92)
+     Text-sec   rgba(255,255,255,0.50)
+     Text-ter   rgba(255,255,255,0.25)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── BASE ───────────────────────────────────────────────────────────── */
+QMainWindow, QWidget#centralwidget {
+    background-color: #0A0A0B;
+    font-family: "SF Pro Display", "Helvetica Neue", "Segoe UI Variable", Arial, sans-serif;
+}
+QFrame { background: transparent; border: none; }
+
+/* ── SIDEBAR ────────────────────────────────────────────────────────── */
+QFrame#sidebar {
+    background-color: #111113;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ── LOGO ───────────────────────────────────────────────────────────── */
+QLabel#lbl_sidebar_logo {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    qproperty-alignment: AlignLeft;
+}
+QLabel#lbl_sidebar_sub {
+    color: #FF6B00;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    qproperty-alignment: AlignLeft;
+}
+
+/* ── SEPARADOR ──────────────────────────────────────────────────────── */
+QFrame#sep_sidebar {
+    background-color: rgba(255, 255, 255, 0.06);
+    min-height: 1px;
+    max-height: 1px;
+    border: none;
+}
+
+/* ── SECCIÓN NAV LABEL ──────────────────────────────────────────────── */
+QLabel#lbl_nav_section {
+    color: rgba(255, 255, 255, 0.22);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding-left: 16px;
+}
+
+/* ── BOTONES NAV ────────────────────────────────────────────────────── */
+QPushButton#btn_nav_eventos,
+QPushButton#btn_nav_usuarios,
+QPushButton#btn_nav_activos {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px 10px 14px;
+    text-align: left;
+}
+QPushButton#btn_nav_eventos:hover,
+QPushButton#btn_nav_usuarios:hover,
+QPushButton#btn_nav_activos:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.80);
+}
+QPushButton#btn_nav_eventos:pressed,
+QPushButton#btn_nav_usuarios:pressed,
+QPushButton#btn_nav_activos:pressed {
+    background: rgba(255, 107, 0, 0.10);
+    color: #FF8C2A;
+}
+QPushButton#btn_nav_salir {
+    background: transparent;
+    color: rgba(255, 80, 80, 0.45);
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px 10px 14px;
+    text-align: left;
+}
+QPushButton#btn_nav_salir:hover {
+    background: rgba(255, 60, 60, 0.07);
+    color: rgba(255, 100, 100, 0.80);
+}
+
+/* ── AVATAR USUARIO ─────────────────────────────────────────────────── */
+QFrame#user_pill {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
+QLabel#lbl_user_name {
+    color: rgba(255, 255, 255, 0.70);
+    font-size: 11px;
+    font-weight: 500;
+}
+QLabel#lbl_user_role {
+    color: rgba(255, 107, 0, 0.70);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+QLabel#lbl_user_avatar {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
+        stop:0 #FF6B00, stop:1 #FF3D00);
+    color: #000000;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 10px;
+    qproperty-alignment: AlignCenter;
+}
+
+/* ── ÁREA PRINCIPAL ─────────────────────────────────────────────────── */
+QFrame#main_area {
+    background-color: #0A0A0B;
+}
+
+/* ── TOPBAR ─────────────────────────────────────────────────────────── */
+QFrame#topbar {
+    background-color: rgba(10, 10, 11, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+QLabel#lbl_topbar_breadcrumb {
+    color: rgba(255, 255, 255, 0.28);
+    font-size: 11px;
+    font-weight: 400;
+}
+QLabel#lbl_topbar_breadcrumb_sep {
+    color: rgba(255, 255, 255, 0.15);
+    font-size: 11px;
+}
+QLabel#lbl_topbar_breadcrumb_active {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* ── BADGE LIVE ─────────────────────────────────────────────────────── */
+QLabel#lbl_live_dot {
+    background: #34C759;
+    border-radius: 4px;
+    min-width: 8px;
+    max-width: 8px;
+    min-height: 8px;
+    max-height: 8px;
+}
+QLabel#lbl_live_text {
+    color: rgba(52, 199, 89, 0.80);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* ── CARDS ──────────────────────────────────────────────────────────── */
+QFrame#card_eventos,
+QFrame#card_usuarios,
+QFrame#card_activos {
+    background-color: #18181B;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+}
+
+/* ── ACCENT LINE TOP ────────────────────────────────────────────────── */
+QFrame#card_accent_ev,
+QFrame#card_accent_usr,
+QFrame#card_accent_act {
+    background: qlineargradient(
+        x1:0, y1:0, x2:1, y2:0,
+        stop:0.00 rgba(255, 107, 0,   0),
+        stop:0.30 rgba(255, 107, 0, 160),
+        stop:0.50 rgba(255, 160, 0, 255),
+        stop:0.70 rgba(255, 107, 0, 160),
+        stop:1.00 rgba(255, 107, 0,   0)
+    );
+    min-height: 1px;
+    max-height: 1px;
+    border: none;
+    border-radius: 0px;
+}
+
+/* ── EYEBROW / TÍTULOS CARD ─────────────────────────────────────────── */
+QLabel#lbl_ey_ev, QLabel#lbl_ey_usr, QLabel#lbl_ey_act {
+    color: #FF6B00;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2.2px;
+}
+QLabel#lbl_tit_ev, QLabel#lbl_tit_usr, QLabel#lbl_tit_act {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+QLabel#lbl_desc_ev, QLabel#lbl_desc_usr, QLabel#lbl_desc_act {
+    color: rgba(255, 255, 255, 0.32);
+    font-size: 11px;
+}
+
+/* ── SEPARADOR INTERNO ──────────────────────────────────────────────── */
+QFrame#sep_card {
+    background-color: rgba(255, 255, 255, 0.05);
+    min-height: 1px;
+    max-height: 1px;
+    border: none;
+}
+
+/* ── ETIQUETAS CAMPO ────────────────────────────────────────────────── */
+QLabel#lbl_f_evento, QLabel#lbl_f_desc {
+    color: rgba(255, 255, 255, 0.40);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+}
+
+/* ── COMBO BOX EVENTO ───────────────────────────────────────────────── */
+QComboBox#combo_evento {
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+        stop:0 rgba(255,255,255,8), stop:1 rgba(255,255,255,4));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.88);
+    padding: 10px 14px;
+    font-size: 13px;
+    min-height: 20px;
+    selection-background-color: rgba(255, 107, 0, 0.18);
+    selection-color: #FF8C2A;
+}
+QComboBox#combo_evento:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    color: #FFFFFF;
+}
+QComboBox#combo_evento:focus {
+    border: 1px solid rgba(255, 130, 0, 0.65);
+    color: #FFFFFF;
+}
+QComboBox#combo_evento::drop-down {
+    border: none;
+    padding-right: 12px;
+}
+QComboBox QAbstractItemView {
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.80);
+    selection-background-color: rgba(255, 107, 0, 0.18);
+    selection-color: #FF8C2A;
+    padding: 4px;
+}
+
+/* ── TEXTAREA DESCRIPCIÓN ───────────────────────────────────────────── */
+QTextEdit#input_desc_evento {
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+        stop:0 rgba(255,255,255,7), stop:1 rgba(255,255,255,3));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.82);
+    padding: 12px 14px;
+    font-size: 13px;
+}
+QTextEdit#input_desc_evento:focus {
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+        stop:0 rgba(255,106,0,18), stop:1 rgba(255,80,0,8));
+    border: 1px solid rgba(255, 130, 0, 0.65);
+    color: #FFFFFF;
+}
+
+/* ── INPUTS BÚSQUEDA ────────────────────────────────────────────────── */
+QLineEdit#input_buscar_usuario, QLineEdit#input_buscar_activo {
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+        stop:0 rgba(255,255,255,7), stop:1 rgba(255,255,255,3));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.88);
+    padding: 10px 14px;
+    font-size: 13px;
+    min-height: 20px;
+    selection-background-color: rgba(255, 106, 0, 100);
+    selection-color: #FFFFFF;
+}
+QLineEdit#input_buscar_usuario:hover, QLineEdit#input_buscar_activo:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    color: #FFFFFF;
+}
+QLineEdit#input_buscar_usuario:focus, QLineEdit#input_buscar_activo:focus {
+    background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+        stop:0 rgba(255,106,0,18), stop:1 rgba(255,80,0,8));
+    border: 1px solid rgba(255, 130, 0, 0.65);
+    color: #FFFFFF;
+}
+
+/* ── TABLAS ─────────────────────────────────────────────────────────── */
+QTableWidget#tabla_usuarios,
+QTableWidget#tabla_activos {
+    background: transparent;
+    border: none;
+    gridline-color: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.80);
+    font-size: 12px;
+    selection-background-color: rgba(255, 107, 0, 0.10);
+    selection-color: rgba(255, 255, 255, 0.92);
+    outline: none;
+}
+QTableWidget#tabla_usuarios::item,
+QTableWidget#tabla_activos::item {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+QTableWidget#tabla_usuarios::item:selected,
+QTableWidget#tabla_activos::item:selected {
+    background: rgba(255, 107, 0, 0.08);
+    color: rgba(255, 255, 255, 0.92);
+}
+QTableWidget#tabla_usuarios::item:hover,
+QTableWidget#tabla_activos::item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+QHeaderView::section {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.28);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    padding: 10px 14px;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ── SCROLLBAR ──────────────────────────────────────────────────────── */
+QScrollBar:vertical {
+    background: transparent;
+    width: 5px;
+    border-radius: 3px;
+    margin: 4px 0;
+}
+QScrollBar::handle:vertical {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 3px;
+    min-height: 24px;
+}
+QScrollBar::handle:vertical:hover {
+    background: rgba(255, 107, 0, 0.45);
+}
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical { height: 0; }
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical { background: transparent; }
+
+/* ── BOTÓN PRIMARIO NARANJA ─────────────────────────────────────────── */
+QPushButton#btn_lanzar_evento,
+QPushButton#btn_editar_usuario {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
+        stop:0 #FF5E00, stop:0.5 #FF8000, stop:1 #FF5200);
+    color: #000000;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    border-radius: 11px;
+    border-top: 1px solid rgba(255,200,100,160);
+    border-left: 1px solid rgba(255,200,100, 80);
+    border-right: 1px solid rgba(180, 80, 0, 80);
+    border-bottom: 1px solid rgba(160, 60, 0,120);
+    min-height: 44px;
+    padding: 0 20px;
+}
+QPushButton#btn_lanzar_evento:hover,
+QPushButton#btn_editar_usuario:hover {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
+        stop:0 #FF7520, stop:0.5 #FFA040, stop:1 #FF6A18);
+}
+QPushButton#btn_lanzar_evento:pressed,
+QPushButton#btn_editar_usuario:pressed {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
+        stop:0 #D94E00, stop:0.5 #E06A00, stop:1 #D04400);
+    padding-top: 1px;
+}
+
+/* ── BOTÓN PELIGRO ROJO ─────────────────────────────────────────────── */
+QPushButton#btn_eliminar_usuario,
+QPushButton#btn_retirar_activo {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
+        stop:0 #8B0000, stop:0.5 #B22222, stop:1 #8B0000);
+    color: rgba(255, 255, 255, 0.90);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    border-radius: 11px;
+    border-top: 1px solid rgba(255,100,100,100);
+    border-left: 1px solid rgba(255,100,100, 60);
+    border-right: 1px solid rgba(100, 0, 0, 80);
+    border-bottom: 1px solid rgba(100, 0, 0,120);
+    min-height: 44px;
+    padding: 0 20px;
+}
+QPushButton#btn_eliminar_usuario:hover,
+QPushButton#btn_retirar_activo:hover {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
+        stop:0 #A00000, stop:0.5 #CC3333, stop:1 #A00000);
+}
+QPushButton#btn_eliminar_usuario:pressed,
+QPushButton#btn_retirar_activo:pressed {
+    background: #6B0000;
+    padding-top: 1px;
+}
+
+/* ── PIE ────────────────────────────────────────────────────────────── */
+QLabel#lbl_version {
+    color: rgba(255, 255, 255, 0.10);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    qproperty-alignment: AlignCenter;
+}
+
+   </string>
+  </property>
+
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="root_layout">
+    <property name="spacing"><number>0</number></property>
+    <property name="leftMargin"><number>0</number></property>
+    <property name="topMargin"><number>0</number></property>
+    <property name="rightMargin"><number>0</number></property>
+    <property name="bottomMargin"><number>0</number></property>
+
+    <!-- ══════════════════════════════════
+         SIDEBAR — 220px fixed
+         ══════════════════════════════════ -->
+    <item>
+     <widget class="QFrame" name="sidebar">
+      <property name="minimumSize"><size><width>220</width><height>0</height></size></property>
+      <property name="maximumSize"><size><width>220</width><height>16777215</height></size></property>
+      <layout class="QVBoxLayout" name="vl_sidebar">
+       <property name="spacing"><number>0</number></property>
+       <property name="leftMargin"><number>0</number></property>
+       <property name="topMargin"><number>0</number></property>
+       <property name="rightMargin"><number>0</number></property>
+       <property name="bottomMargin"><number>0</number></property>
+
+       <!-- LOGO BLOQUE -->
+       <item>
+        <layout class="QVBoxLayout" name="vl_logo">
+         <property name="leftMargin"><number>20</number></property>
+         <property name="topMargin"><number>28</number></property>
+         <property name="rightMargin"><number>20</number></property>
+         <property name="bottomMargin"><number>24</number></property>
+         <property name="spacing"><number>3</number></property>
+         <item>
+          <widget class="QLabel" name="lbl_sidebar_logo">
+           <property name="text"><string>CRYPTOLEARNING</string></property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lbl_sidebar_sub">
+           <property name="text"><string>Panel Administrador</string></property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+
+       <!-- DIVISOR TOP -->
+       <item>
+        <widget class="QFrame" name="sep_sidebar">
+         <property name="frameShape"><enum>QFrame::HLine</enum></property>
+         <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+         <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+        </widget>
+       </item>
+
+       <!-- NAVEGACIÓN -->
+       <item>
+        <layout class="QVBoxLayout" name="vl_nav">
+         <property name="spacing"><number>2</number></property>
+         <property name="leftMargin"><number>12</number></property>
+         <property name="topMargin"><number>20</number></property>
+         <property name="rightMargin"><number>12</number></property>
+         <property name="bottomMargin"><number>0</number></property>
+         <item>
+          <widget class="QLabel" name="lbl_nav_section">
+           <property name="text"><string>ADMINISTRACIÓN</string></property>
+           <property name="minimumSize"><size><width>0</width><height>24</height></size></property>
+          </widget>
+         </item>
+         <item><spacer name="sp_nav_lbl"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>4</height></size></property></spacer></item>
+         <item>
+          <widget class="QPushButton" name="btn_nav_eventos">
+           <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+           <property name="text"><string>⚡  Publicar Evento</string></property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_nav_usuarios">
+           <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+           <property name="text"><string>👥  Gestionar Usuarios</string></property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_nav_activos">
+           <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+           <property name="text"><string>📈  Gestionar Activos</string></property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+
+       <!-- SPACER CRECER -->
+       <item>
+        <spacer name="sp_nav_grow">
+         <property name="orientation"><enum>Qt::Vertical</enum></property>
+         <property name="sizeType"><enum>QSizePolicy::Expanding</enum></property>
+         <property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property>
+        </spacer>
+       </item>
+
+       <!-- DIVISOR INFERIOR -->
+       <item>
+        <widget class="QFrame" name="sep_sidebar_bot">
+         <property name="objectName"><string>sep_sidebar</string></property>
+         <property name="frameShape"><enum>QFrame::HLine</enum></property>
+         <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+         <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+        </widget>
+       </item>
+
+       <!-- USER PILL -->
+       <item>
+        <layout class="QVBoxLayout" name="vl_user">
+         <property name="leftMargin"><number>12</number></property>
+         <property name="topMargin"><number>14</number></property>
+         <property name="rightMargin"><number>12</number></property>
+         <property name="bottomMargin"><number>14</number></property>
+         <item>
+          <widget class="QFrame" name="user_pill">
+           <layout class="QHBoxLayout" name="hl_user_pill">
+            <property name="leftMargin"><number>10</number></property>
+            <property name="topMargin"><number>8</number></property>
+            <property name="rightMargin"><number>10</number></property>
+            <property name="bottomMargin"><number>8</number></property>
+            <property name="spacing"><number>10</number></property>
+            <item>
+             <widget class="QLabel" name="lbl_user_avatar">
+              <property name="text"><string>A</string></property>
+              <property name="minimumSize"><size><width>30</width><height>30</height></size></property>
+              <property name="maximumSize"><size><width>30</width><height>30</height></size></property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="vl_user_info">
+              <property name="spacing"><number>1</number></property>
+              <item>
+               <widget class="QLabel" name="lbl_user_name">
+                <property name="text"><string>admin@unileon.es</string></property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="lbl_user_role">
+                <property name="text"><string>ADMINISTRADOR</string></property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+
+       <!-- CERRAR SESIÓN -->
+       <item>
+        <layout class="QVBoxLayout" name="vl_salir">
+         <property name="leftMargin"><number>12</number></property>
+         <property name="topMargin"><number>0</number></property>
+         <property name="rightMargin"><number>12</number></property>
+         <property name="bottomMargin"><number>16</number></property>
+         <item>
+          <widget class="QPushButton" name="btn_nav_salir">
+           <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+           <property name="text"><string>Cerrar Sesión</string></property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+
+      </layout>
+     </widget>
+    </item>
+
+    <!-- ══════════════════════════════════
+         ÁREA PRINCIPAL
+         ══════════════════════════════════ -->
+    <item>
+     <widget class="QFrame" name="main_area">
+      <layout class="QVBoxLayout" name="vl_main">
+       <property name="spacing"><number>0</number></property>
+       <property name="leftMargin"><number>0</number></property>
+       <property name="topMargin"><number>0</number></property>
+       <property name="rightMargin"><number>0</number></property>
+       <property name="bottomMargin"><number>0</number></property>
+
+       <!-- TOPBAR -->
+       <item>
+        <widget class="QFrame" name="topbar">
+         <property name="minimumSize"><size><width>0</width><height>52</height></size></property>
+         <property name="maximumSize"><size><width>16777215</width><height>52</height></size></property>
+         <layout class="QHBoxLayout" name="hl_topbar">
+          <property name="leftMargin"><number>28</number></property>
+          <property name="rightMargin"><number>28</number></property>
+          <property name="topMargin"><number>0</number></property>
+          <property name="bottomMargin"><number>0</number></property>
+          <property name="spacing"><number>5</number></property>
+          <item>
+           <layout class="QHBoxLayout" name="hl_breadcrumb">
+            <property name="spacing"><number>5</number></property>
+            <item>
+             <widget class="QLabel" name="lbl_topbar_breadcrumb">
+              <property name="text"><string>CryptoLearning</string></property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbl_topbar_breadcrumb_sep">
+              <property name="text"><string>/</string></property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbl_topbar_breadcrumb_active">
+              <property name="text"><string>Publicar Evento</string></property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="hs_topbar">
+            <property name="orientation"><enum>Qt::Horizontal</enum></property>
+            <property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hl_live">
+            <property name="spacing"><number>5</number></property>
+            <item>
+             <widget class="QLabel" name="lbl_live_dot">
+              <property name="text"><string></string></property>
+              <property name="minimumSize"><size><width>8</width><height>8</height></size></property>
+              <property name="maximumSize"><size><width>8</width><height>8</height></size></property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lbl_live_text">
+              <property name="text"><string>EN VIVO</string></property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- STACKED WIDGET -->
+       <item>
+        <widget class="QStackedWidget" name="stackedWidget">
+         <property name="currentIndex"><number>0</number></property>
+
+         <!-- ══════════════════════
+              PAGE 0 — EVENTOS
+              ══════════════════════ -->
+         <widget class="QWidget" name="page_eventos">
+          <layout class="QVBoxLayout" name="vl_page_eventos">
+           <property name="spacing"><number>0</number></property>
+           <property name="leftMargin"><number>28</number></property>
+           <property name="topMargin"><number>24</number></property>
+           <property name="rightMargin"><number>28</number></property>
+           <property name="bottomMargin"><number>24</number></property>
+
+           <item>
+            <widget class="QFrame" name="card_eventos">
+             <property name="maximumSize"><size><width>560</width><height>16777215</height></size></property>
+             <layout class="QVBoxLayout" name="vl_ev">
+              <property name="spacing"><number>0</number></property>
+              <property name="leftMargin"><number>0</number></property>
+              <property name="topMargin"><number>0</number></property>
+              <property name="rightMargin"><number>0</number></property>
+              <property name="bottomMargin"><number>0</number></property>
+
+              <!-- Accent line -->
+              <item>
+               <widget class="QFrame" name="card_accent_ev">
+                <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+               </widget>
+              </item>
+
+              <item>
+               <layout class="QVBoxLayout" name="vl_ev_inner">
+                <property name="spacing"><number>0</number></property>
+                <property name="leftMargin"><number>30</number></property>
+                <property name="topMargin"><number>28</number></property>
+                <property name="rightMargin"><number>30</number></property>
+                <property name="bottomMargin"><number>30</number></property>
+
+                <item><widget class="QLabel" name="lbl_ey_ev"><property name="text"><string>GESTIÓN DE MERCADO</string></property></widget></item>
+                <item><spacer name="sp_ev1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>5</height></size></property></spacer></item>
+                <item><widget class="QLabel" name="lbl_tit_ev"><property name="text"><string>Publicar Evento</string></property></widget></item>
+                <item><spacer name="sp_ev2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>3</height></size></property></spacer></item>
+                <item><widget class="QLabel" name="lbl_desc_ev"><property name="text"><string>Lanza un evento global que altera los precios del mercado</string></property></widget></item>
+                <item><spacer name="sp_ev3"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
+
+                <item>
+                 <widget class="QFrame" name="sep_card">
+                  <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                  <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                  <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_ev4"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>20</height></size></property></spacer></item>
+
+                <!-- Campo Tipo de Evento -->
+                <item><widget class="QLabel" name="lbl_f_evento"><property name="text"><string>TIPO DE EVENTO</string></property></widget></item>
+                <item><spacer name="sp_ev5"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
+                <item>
+                 <widget class="QComboBox" name="combo_evento">
+                  <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+                  <item><property name="text"><string>Bull Market</string></property></item>
+                  <item><property name="text"><string>Bear Market</string></property></item>
+                  <item><property name="text"><string>Crisis Fiat</string></property></item>
+                  <item><property name="text"><string>Guerra Mundial</string></property></item>
+                  <item><property name="text"><string>Halving Bitcoin</string></property></item>
+                  <item><property name="text"><string>Hack Exchange</string></property></item>
+                 </widget>
+                </item>
+                <item><spacer name="sp_ev6"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>16</height></size></property></spacer></item>
+
+                <!-- Campo Descripción -->
+                <item><widget class="QLabel" name="lbl_f_desc"><property name="text"><string>DESCRIPCIÓN / AVISO</string></property></widget></item>
+                <item><spacer name="sp_ev7"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
+                <item>
+                 <widget class="QTextEdit" name="input_desc_evento">
+                  <property name="minimumSize"><size><width>0</width><height>100</height></size></property>
+                  <property name="placeholderText"><string>Describe el evento para mostrar como aviso a los traders...</string></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_ev8"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>24</height></size></property></spacer></item>
+
+                <!-- Botón lanzar -->
+                <item>
+                 <widget class="QPushButton" name="btn_lanzar_evento">
+                  <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+                  <property name="text"><string>⚡  LANZAR EVENTO</string></property>
+                 </widget>
+                </item>
+
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+
+           <item>
+            <spacer name="sp_ev_bot">
+             <property name="orientation"><enum>Qt::Vertical</enum></property>
+             <property name="sizeType"><enum>QSizePolicy::Expanding</enum></property>
+             <property name="sizeHint" stdset="0"><size><width>0</width><height>0</height></size></property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+
+         <!-- ══════════════════════
+              PAGE 1 — USUARIOS
+              ══════════════════════ -->
+         <widget class="QWidget" name="page_usuarios">
+          <layout class="QVBoxLayout" name="vl_page_usuarios">
+           <property name="spacing"><number>0</number></property>
+           <property name="leftMargin"><number>28</number></property>
+           <property name="topMargin"><number>24</number></property>
+           <property name="rightMargin"><number>28</number></property>
+           <property name="bottomMargin"><number>24</number></property>
+
+           <item>
+            <widget class="QFrame" name="card_usuarios">
+             <layout class="QVBoxLayout" name="vl_usr">
+              <property name="spacing"><number>0</number></property>
+              <property name="leftMargin"><number>0</number></property>
+              <property name="topMargin"><number>0</number></property>
+              <property name="rightMargin"><number>0</number></property>
+              <property name="bottomMargin"><number>0</number></property>
+
+              <!-- Accent line -->
+              <item>
+               <widget class="QFrame" name="card_accent_usr">
+                <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+               </widget>
+              </item>
+
+              <item>
+               <layout class="QVBoxLayout" name="vl_usr_inner">
+                <property name="spacing"><number>0</number></property>
+                <property name="leftMargin"><number>26</number></property>
+                <property name="topMargin"><number>26</number></property>
+                <property name="rightMargin"><number>26</number></property>
+                <property name="bottomMargin"><number>20</number></property>
+
+                <item><widget class="QLabel" name="lbl_ey_usr"><property name="text"><string>CONTROL DE ACCESO</string></property></widget></item>
+                <item><spacer name="sp_usr1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>4</height></size></property></spacer></item>
+                <item><widget class="QLabel" name="lbl_tit_usr"><property name="text"><string>Gestionar Usuarios</string></property></widget></item>
+                <item><spacer name="sp_usr2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>3</height></size></property></spacer></item>
+                <item><widget class="QLabel" name="lbl_desc_usr"><property name="text"><string>Revisa, edita o elimina los usuarios registrados en el sistema</string></property></widget></item>
+                <item><spacer name="sp_usr3"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
+
+                <item>
+                 <widget class="QFrame" name="sep_card_usr">
+                  <property name="objectName"><string>sep_card</string></property>
+                  <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                  <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                  <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_usr4"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>16</height></size></property></spacer></item>
+
+                <!-- Toolbar -->
+                <item>
+                 <layout class="QHBoxLayout" name="hl_usr_toolbar">
+                  <property name="spacing"><number>10</number></property>
+                  <item>
+                   <widget class="QLineEdit" name="input_buscar_usuario">
+                    <property name="placeholderText"><string>🔍  Buscar por nombre, email o rol...</string></property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btn_editar_usuario">
+                    <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+                    <property name="text"><string>Editar</string></property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btn_eliminar_usuario">
+                    <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+                    <property name="text"><string>Eliminar</string></property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item><spacer name="sp_usr5"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>12</height></size></property></spacer></item>
+
+                <!-- Tabla usuarios: col 0 = id oculta -->
+                <item>
+                 <widget class="QTableWidget" name="tabla_usuarios">
+                  <property name="frameShape"><enum>QFrame::NoFrame</enum></property>
+                  <property name="showGrid"><bool>false</bool></property>
+                  <property name="selectionBehavior"><enum>QAbstractItemView::SelectRows</enum></property>
+                  <property name="selectionMode"><enum>QAbstractItemView::SingleSelection</enum></property>
+                  <property name="editTriggers"><set>QAbstractItemView::NoEditTriggers</set></property>
+                  <property name="alternatingRowColors"><bool>false</bool></property>
+                  <property name="verticalScrollBarPolicy"><enum>Qt::ScrollBarAsNeeded</enum></property>
+                  <property name="horizontalScrollBarPolicy"><enum>Qt::ScrollBarAlwaysOff</enum></property>
+                  <column><property name="text"><string>ID</string></property></column>
+                  <column><property name="text"><string>DNI</string></property></column>
+                  <column><property name="text"><string>NOMBRE</string></property></column>
+                  <column><property name="text"><string>APELLIDOS</string></property></column>
+                  <column><property name="text"><string>EMAIL</string></property></column>
+                  <column><property name="text"><string>ROL</string></property></column>
+                 </widget>
+                </item>
+
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+
+         <!-- ══════════════════════
+              PAGE 2 — ACTIVOS
+              ══════════════════════ -->
+         <widget class="QWidget" name="page_activos">
+          <layout class="QVBoxLayout" name="vl_page_activos">
+           <property name="spacing"><number>0</number></property>
+           <property name="leftMargin"><number>28</number></property>
+           <property name="topMargin"><number>24</number></property>
+           <property name="rightMargin"><number>28</number></property>
+           <property name="bottomMargin"><number>24</number></property>
+
+           <item>
+            <widget class="QFrame" name="card_activos">
+             <layout class="QVBoxLayout" name="vl_act">
+              <property name="spacing"><number>0</number></property>
+              <property name="leftMargin"><number>0</number></property>
+              <property name="topMargin"><number>0</number></property>
+              <property name="rightMargin"><number>0</number></property>
+              <property name="bottomMargin"><number>0</number></property>
+
+              <!-- Accent line -->
+              <item>
+               <widget class="QFrame" name="card_accent_act">
+                <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+               </widget>
+              </item>
+
+              <item>
+               <layout class="QVBoxLayout" name="vl_act_inner">
+                <property name="spacing"><number>0</number></property>
+                <property name="leftMargin"><number>26</number></property>
+                <property name="topMargin"><number>26</number></property>
+                <property name="rightMargin"><number>26</number></property>
+                <property name="bottomMargin"><number>20</number></property>
+
+                <item><widget class="QLabel" name="lbl_ey_act"><property name="text"><string>CONTROL DE ACTIVOS</string></property></widget></item>
+                <item><spacer name="sp_act1"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>4</height></size></property></spacer></item>
+                <item><widget class="QLabel" name="lbl_tit_act"><property name="text"><string>Gestionar Activos</string></property></widget></item>
+                <item><spacer name="sp_act2"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>3</height></size></property></spacer></item>
+                <item><widget class="QLabel" name="lbl_desc_act"><property name="text"><string>Retira o elimina criptomonedas del mercado simulado</string></property></widget></item>
+                <item><spacer name="sp_act3"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>6</height></size></property></spacer></item>
+
+                <item>
+                 <widget class="QFrame" name="sep_card_act">
+                  <property name="objectName"><string>sep_card</string></property>
+                  <property name="frameShape"><enum>QFrame::HLine</enum></property>
+                  <property name="minimumSize"><size><width>0</width><height>1</height></size></property>
+                  <property name="maximumSize"><size><width>16777215</width><height>1</height></size></property>
+                 </widget>
+                </item>
+                <item><spacer name="sp_act4"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>16</height></size></property></spacer></item>
+
+                <!-- Toolbar -->
+                <item>
+                 <layout class="QHBoxLayout" name="hl_act_toolbar">
+                  <property name="spacing"><number>10</number></property>
+                  <item>
+                   <widget class="QLineEdit" name="input_buscar_activo">
+                    <property name="placeholderText"><string>🔍  Buscar activo por nombre o símbolo...</string></property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btn_retirar_activo">
+                    <property name="cursor"><cursorShape>PointingHandCursor</cursorShape></property>
+                    <property name="text"><string>Retirar</string></property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item><spacer name="sp_act5"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>12</height></size></property></spacer></item>
+
+                <!-- Tabla activos: col 0 = id oculta -->
+                <item>
+                 <widget class="QTableWidget" name="tabla_activos">
+                  <property name="frameShape"><enum>QFrame::NoFrame</enum></property>
+                  <property name="showGrid"><bool>false</bool></property>
+                  <property name="selectionBehavior"><enum>QAbstractItemView::SelectRows</enum></property>
+                  <property name="selectionMode"><enum>QAbstractItemView::SingleSelection</enum></property>
+                  <property name="editTriggers"><set>QAbstractItemView::NoEditTriggers</set></property>
+                  <property name="alternatingRowColors"><bool>false</bool></property>
+                  <property name="verticalScrollBarPolicy"><enum>Qt::ScrollBarAsNeeded</enum></property>
+                  <property name="horizontalScrollBarPolicy"><enum>Qt::ScrollBarAlwaysOff</enum></property>
+                  <column><property name="text"><string>ID</string></property></column>
+                  <column><property name="text"><string>NOMBRE</string></property></column>
+                  <column><property name="text"><string>SÍMBOLO</string></property></column>
+                  <column><property name="text"><string>PRECIO ACTUAL</string></property></column>
+                 </widget>
+                </item>
+
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+
+        </widget>
+       </item>
+
+       <!-- PIE -->
+       <item>
+        <widget class="QLabel" name="lbl_version">
+         <property name="text"><string>CryptoLearning v1.0 · 2025</string></property>
+         <property name="minimumSize"><size><width>0</width><height>28</height></size></property>
+         <property name="maximumSize"><size><width>16777215</width><height>28</height></size></property>
+        </widget>
+       </item>
+
+      </layout>
+     </widget>
+    </item>
+
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
