@@ -244,3 +244,8 @@ class ControladorPrincipal:
     def solicitarAvisoUrgente(self):
         return self.__modelo.obtenerAvisoUrgente()
 
+    def cargar_historial_trader(self):
+        operaciones = self.__modelo.obtener_historial_operaciones(
+            self.__usuario_actual.id_usuario
+        )
+        self.__vista_principal.cargar_historial(operaciones)
