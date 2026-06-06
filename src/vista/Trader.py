@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import (QMainWindow, QMessageBox, QHeaderView,
-                             QTableWidgetItem)
+                             QTableWidgetItem, QPushButton)
 from PyQt5 import uic
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QColor
@@ -21,6 +21,7 @@ class Trader(QMainWindow, Form):
         self._ultimo_aviso_mostrado = None
 
         self._configurar_tablas()
+        self._inyectar_boton_ayuda() 
         self._conectar_senales()
 
         # Timer avisos urgentes cada 10 s
@@ -28,6 +29,9 @@ class Trader(QMainWindow, Form):
         self._timer_avisos.timeout.connect(self._check_avisos_urgentes)
         self._timer_avisos.start(10000)
 
+        
+
+  
     # ── Configuración inicial de tablas ──────────────────────────────────────
 
     def _configurar_tablas(self):
@@ -73,6 +77,7 @@ class Trader(QMainWindow, Form):
         self.btn_nav_noticias.clicked.connect(self._mostrar_noticias)
         self.btn_nav_historial.clicked.connect(self._mostrar_historial)
         self.btn_nav_salir.clicked.connect(self._on_logout)
+        self.btn_ayuda.clicked.connect(self._abrir_ayuda)
 
         # Acciones en page_mercado
         self.btn_ver_detalles.clicked.connect(self._ver_detalles_activo)
@@ -86,6 +91,29 @@ class Trader(QMainWindow, Form):
         self.tabla_noticias.doubleClicked.connect(self._leer_noticia)
 
     # ── Navegación (stacked) ─────────────────────────────────────────────────
+
+    def _inyectar_boton_ayuda(self):
+        self.btn_ayuda = QPushButton("❓ Ayuda", self)
+        self.btn_ayuda.setCursor(Qt.PointingHandCursor)
+        self.btn_ayuda.setStyleSheet("""
+            QPushButton {
+                background: rgba(255, 255, 255, 0.05);
+                color: rgba(255, 255, 255, 0.6);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                padding: 8px 12px;
+                font-size: 11px;
+            }
+            QPushButton:hover { background: rgba(255, 107, 0, 0.2); color: #FF8C2A; }
+        """)
+    
+        self.topbar.layout().insertWidget(2, self.btn_ayuda)
+
+
+    def _abrir_ayuda(self):
+        from src.vista.Ayuda import Ayuda
+        ventana_ayuda = Ayuda(self)
+        ventana_ayuda.exec_()
 
     def _mostrar_mercado(self):
         self.stacked_trader.setCurrentIndex(0)
@@ -214,6 +242,50 @@ class Trader(QMainWindow, Form):
                     item.setForeground(color)
                 self.tabla_posiciones.setItem(i, col, item)
 
+        self._dibujar_grafico_cartera(lista_posiciones)
+
+
+
+    def _dibujar_grafico_cartera(self, lista_posiciones):
+        # 1. Preparar datos
+        posiciones_validas = [p for p in lista_posiciones if float(p.cantidad) > 0]
+        nombres = [p.simbolo for p in posiciones_validas]
+        valores = [float(p.cantidad) * float(p.precio_actual) for p in posiciones_validas]
+        
+        if not valores: return
+
+        # 2. Configurar estética oscura (Dark Matter)
+        plt.style.use('dark_background')
+        fig, ax = plt.subplots(figsize=(4, 4), dpi=100)
+        fig.patch.set_facecolor('#18181B')  # Color Surface-2 de tu app
+        ax.set_facecolor('#18181B')
+
+        # 3. Colores personalizados (CryptoOrange y derivados)
+        colores = ['#FF6B00', '#FF8C2A', '#FFB347', '#E0A890']
+        
+        # 4. Crear el anillo (Donut Chart)
+        # 'wedgeprops' con 'width' crea el efecto de anillo
+        wedges, texts, autotexts = ax.pie(
+            valores, labels=nombres, autopct='%1.1f%%', 
+            startangle=90, colors=colores,
+            wedgeprops={'width': 0.4, 'edgecolor': '#18181B', 'linewidth': 3}
+        )
+
+        # 5. Estilo de texto
+        plt.setp(texts, size=10, color=(1, 1, 1, 0.7))
+        plt.setp(autotexts, size=10, weight="bold", color="white")
+
+        # 6. Integración en Qt
+        canvas = FigureCanvas(fig)
+        canvas.setStyleSheet("background-color:transparent;") # Asegura transparencia
+        
+        if self._canvas_cartera:
+            self.page_cartera.layout().removeWidget(self._canvas_cartera)
+            self._canvas_cartera.deleteLater()
+            
+        self.page_cartera.layout().addWidget(canvas)
+        self._canvas_cartera = canvas
+
     # ── Noticias ─────────────────────────────────────────────────────────────
 
     def refrescar_noticias(self, lista_noticias: list):
@@ -312,3 +384,5 @@ class Trader(QMainWindow, Form):
     @controlador.setter
     def controlador(self, ref):
         self._controlador = ref
+
+

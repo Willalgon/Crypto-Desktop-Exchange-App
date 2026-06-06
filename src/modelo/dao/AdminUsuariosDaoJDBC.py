@@ -1,6 +1,5 @@
 from src.modelo.conexion.Conexion import Conexion
-from src.modelo.vo.UsuarioVO import UsuarioVO
-
+from src.modelo.factory.VOFactory import VOFactory
 
 class AdminUsuariosDaoJDBC(Conexion):
 
@@ -13,7 +12,7 @@ class AdminUsuariosDaoJDBC(Conexion):
                 "FROM USUARIOS"
             )
             for row in cursor.fetchall():
-                vo = UsuarioVO(
+                vo = VOFactory.crear_vo("usuario",
                     id_usuario=row[0],
                     dni=row[1],
                     nombre=row[2],
