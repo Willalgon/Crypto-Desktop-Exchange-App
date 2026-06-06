@@ -7,6 +7,7 @@ from src.modelo.dao.EventosDaoJDBC       import EventosDaoJDBC
 from src.modelo.vo.EventoMercadoVO       import EventoMercadoVO
 from src.modelo.dao.OperacionDaoJDBC import OperacionDaoJDBC
 
+
 class Logica:
     def __init__(self):
         self.__registro_dao       = RegistroDaoJDBC()
@@ -64,11 +65,11 @@ class Logica:
 
     def lanzar_evento_mercado(self, id_admin, nombre_evento, descripcion):
         evento_vo = EventoMercadoVO(
+            id_admin=id_admin,
             nombre_evento=nombre_evento,
             descripcion=descripcion,
-            id_admin=id_admin,
         )
-        return self.__eventos_dao.lanzar_evento(evento_vo)
+        return EventosDaoJDBC().lanzar_evento(evento_vo)
 
     def realizar_operacion(self, operacionVO) -> dict:
         return self.__operacion_dao.realizar_operacion(operacionVO)
@@ -90,3 +91,7 @@ class Logica:
 
     def obtenerAvisoUrgente(self):
         return self.__operacion_dao.obtener_ultimo_aviso()
+
+    def obtenerUltimoEvento(self):
+        from src.modelo.dao.EventosDaoJDBC import EventosDaoJDBC
+        return EventosDaoJDBC().obtener_ultimo_evento()
