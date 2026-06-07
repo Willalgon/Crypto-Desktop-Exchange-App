@@ -95,3 +95,7 @@ class Logica:
     def obtenerUltimoEvento(self):
         from src.modelo.dao.EventosDaoJDBC import EventosDaoJDBC
         return EventosDaoJDBC().obtener_ultimo_evento()
+
+    def hacer_backup(self):
+        from src.modelo.dao.BackupDaoJDBC import BackupDaoJDBC
+        return BackupDaoJDBC().hacer_backup()

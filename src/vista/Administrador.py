@@ -1,9 +1,10 @@
 from PyQt5.QtWidgets import (
     QMainWindow, QMessageBox, QHeaderView,
     QTableWidgetItem, QDialog, QFormLayout,
-    QLineEdit, QComboBox, QDialogButtonBox,
+    QLineEdit, QComboBox, QDialogButtonBox, QPushButton
 )
 from PyQt5 import uic
+from PyQt5.QtCore import Qt
 Form, Window = uic.loadUiType("src/vista/ui/Administrador.ui")
 
 
@@ -12,8 +13,38 @@ class Administrador(QMainWindow, Form):
         super().__init__()
         self.setupUi(self)
         self._controlador = None
+        self._inyectar_boton_backup()
         self._conectar_senales()
         self._construir_tabla()
+
+    def _inyectar_boton_backup(self):
+        self.btn_backup = QPushButton("💾  Copia de seguridad")
+        self.btn_backup.setCursor(Qt.PointingHandCursor)
+        self.btn_backup.setStyleSheet("""
+            QPushButton#btn_backup {
+                background: transparent;
+                color: rgba(255, 255, 255, 0.45);
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: 0.2px;
+                border: none;
+                border-radius: 10px;
+                padding: 10px 14px 10px 14px;
+                text-align: left;
+            }
+            QPushButton#btn_backup:hover {
+                background: rgba(255, 255, 255, 0.05);
+                color: rgba(255, 255, 255, 0.80);
+            }
+            QPushButton#btn_backup:pressed {
+                background: rgba(255, 107, 0, 0.10);
+                color: #FF8C2A;
+            }
+        """)
+        self.btn_backup.setObjectName("btn_backup")
+        sidebar_layout = self.sidebar.layout()
+        count = sidebar_layout.count()
+        sidebar_layout.insertWidget(count - 3, self.btn_backup)
 
     def _conectar_senales(self):
         self.btn_nav_usuarios.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(1))
@@ -26,6 +57,9 @@ class Administrador(QMainWindow, Form):
         self.btn_lanzar_evento.clicked.connect(self._on_lanzar_evento)
         self.input_buscar_usuario.hide()
         self.input_buscar_activo.hide()
+
+        self.btn_backup.clicked.connect(self._hacer_backup)
+
 
     def _construir_tabla(self):
         self.tabla_usuarios.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
@@ -126,6 +160,17 @@ class Administrador(QMainWindow, Form):
         if resp == QMessageBox.Yes:
             self._controlador.admin_lanzar_evento(nombre_evento, descripcion)
             self.input_desc_evento.clear()
+
+    def _hacer_backup(self):
+        if self._controlador:
+            self._controlador.hacer_backup()
+
+    def mostrar_backup_ok(self, ruta: str):
+        QMessageBox.information(
+            self,
+            "Copia de seguridad",
+            f"Backup generado correctamente:\n{ruta}"
+        )
 
     def _on_cerrar_sesion(self):
         if self._controlador:

@@ -252,3 +252,23 @@ class ControladorPrincipal:
             self.__usuario_actual.id_usuario
         )
         self.__vista_principal.cargar_historial(operaciones)
+
+    # Copia de seguridad para Admin:
+    def hacer_backup(self):
+        from datetime import datetime
+        import os
+
+        contenido = self.__modelo.hacer_backup()
+        if contenido is None:
+            self.__vista_principal.mostrar_error("Error al generar la copia de seguridad.")
+            return
+
+        carpeta = "backups"
+        os.makedirs(carpeta, exist_ok=True)
+        nombre = f"backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.sql"
+        ruta = os.path.join(carpeta, nombre)
+
+        with open(ruta, 'w', encoding='utf-8') as f:
+            f.write(contenido)
+
+        self.__vista_principal.mostrar_backup_ok(ruta)
