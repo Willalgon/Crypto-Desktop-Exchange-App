@@ -6,7 +6,7 @@ class RegistroDaoJDBC(Conexion):
         INSERT INTO USUARIOS (dni, nombre, apellidos, email, password, rol)
         VALUES (?, ?, ?, ?, ?, 'TRADER')
     """
-    # El trigger crea la cartera con 10.000€ automáticamente
+    # El trigger crea la cartera con 10000 euros automáticamente
 
     def insertarUsuario(self, registroVO):
         cursor = self.getCursor()

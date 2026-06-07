@@ -39,7 +39,7 @@ class AdminUsuariosDaoJDBC(Conexion):
             if fila is None:
                 return False
 
-            # Si es ADMIN, comprobamos que no sea el último
+            # Si es admin
             if fila[0] == "ADMIN":
                 cursor.execute(
                     "SELECT COUNT(*) FROM USUARIOS WHERE rol = 'ADMIN' AND activo = 1"

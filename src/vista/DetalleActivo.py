@@ -150,8 +150,6 @@ class DetalleActivo(QDialog):
             }}
         """)
 
-    # ── UI ────────────────────────────────────────────────────────────────────
-
     def _construir_ui(self):
         root = QVBoxLayout(self)
         root.setContentsMargins(24, 24, 24, 24)
@@ -163,17 +161,14 @@ class DetalleActivo(QDialog):
         card_layout.setContentsMargins(0, 0, 0, 0)
         card_layout.setSpacing(0)
 
-        # Accent line top
         accent = QFrame()
         accent.setObjectName("accentLine")
         card_layout.addWidget(accent)
 
-        # Inner content
         inner = QVBoxLayout()
         inner.setContentsMargins(28, 24, 28, 28)
         inner.setSpacing(0)
 
-        # ── Header ────────────────────────────────────────────────────────────
         header_row = QHBoxLayout()
         header_row.setSpacing(10)
 
@@ -231,14 +226,12 @@ class DetalleActivo(QDialog):
         inner.addLayout(header_row)
         inner.addSpacing(20)
 
-        # ── Separador ─────────────────────────────────────────────────────────
         sep = QFrame()
         sep.setFrameShape(QFrame.HLine)
         sep.setStyleSheet("background-color: rgba(255,255,255,0.05); max-height: 1px; border: none;")
         inner.addWidget(sep)
         inner.addSpacing(20)
 
-        # ── Gráfico ───────────────────────────────────────────────────────────
         lbl_chart_label = QLabel("HISTORIAL DE PRECIOS")
         lbl_chart_label.setObjectName("precioLabel")
         inner.addWidget(lbl_chart_label)
@@ -255,7 +248,6 @@ class DetalleActivo(QDialog):
 
         inner.addSpacing(20)
 
-        # ── Botón cerrar ──────────────────────────────────────────────────────
         btn_row = QHBoxLayout()
         btn_row.addStretch()
         btn_cerrar = QPushButton("CERRAR")
@@ -268,7 +260,7 @@ class DetalleActivo(QDialog):
         card_layout.addLayout(inner)
         root.addWidget(card)
 
-    # ── Gráfico matplotlib ────────────────────────────────────────────────────
+    # Gráfico matplotlib
 
     def _crear_grafico(self):
         precios = [p for p, _ in self.__historial]

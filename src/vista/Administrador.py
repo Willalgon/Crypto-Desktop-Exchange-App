@@ -201,9 +201,6 @@ class Administrador(QMainWindow, Form):
     def controlador(self, ref):
         self._controlador = ref
 
-
-# ── Diálogo auxiliar de edición ───────────────────────────────────────────────
-
 class _DialogoEditarUsuario(QDialog):
     ROLES = ["TRADER", "ANALISTA", "ADMIN"]
 

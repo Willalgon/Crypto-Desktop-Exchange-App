@@ -11,7 +11,6 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 Form, Window = uic.loadUiType("./src/vista/ui/Trader.ui")
 
-
 class Trader(QMainWindow, Form):
     def __init__(self):
         super().__init__()
@@ -30,10 +29,6 @@ class Trader(QMainWindow, Form):
         self._timer_avisos.timeout.connect(self._check_avisos_urgentes)
         self._timer_avisos.start(10000)
 
-        
-
-  
-    # ── Configuración inicial de tablas ──────────────────────────────────────
 
     def _configurar_tablas(self):
         self.tabla_mercado.setColumnCount(6)
@@ -61,7 +56,6 @@ class Trader(QMainWindow, Form):
         self.tabla_noticias.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tabla_noticias.verticalHeader().setVisible(False)
 
-        # Tabla historial operaciones
         self.tabla_historial.setColumnCount(6)
         self.tabla_historial.setHorizontalHeaderLabels(
             ["FECHA", "ACTIVO", "TIPO", "CANTIDAD", "PRECIO UNIT.", "TOTAL"]
@@ -69,10 +63,8 @@ class Trader(QMainWindow, Form):
         self.tabla_historial.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tabla_historial.verticalHeader().setVisible(False)
 
-    # ── Conexión de señales ──────────────────────────────────────────────────
 
     def _conectar_senales(self):
-        # Nav sidebar → cambiar página del stacked
         self.btn_nav_mercado.clicked.connect(self._mostrar_mercado)
         self.btn_nav_cartera.clicked.connect(self._mostrar_cartera)
         self.btn_nav_noticias.clicked.connect(self._mostrar_noticias)
@@ -85,13 +77,10 @@ class Trader(QMainWindow, Form):
         self.btn_comprar.clicked.connect(lambda: self._ejecutar_operacion("COMPRA"))
         self.btn_vender.clicked.connect(lambda: self._ejecutar_operacion("VENTA"))
 
-        # Doble clic en tabla mercado → rellena el combo de operación
         self.tabla_mercado.doubleClicked.connect(self._seleccionar_activo_desde_tabla)
 
-        # Doble clic en noticias → leer noticia completa
         self.tabla_noticias.doubleClicked.connect(self._leer_noticia)
 
-    # ── Navegación (stacked) ─────────────────────────────────────────────────
 
     def _inyectar_boton_ayuda(self):
         self.btn_ayuda = QPushButton("❓ Ayuda", self)
@@ -144,8 +133,6 @@ class Trader(QMainWindow, Form):
         if self._controlador:
             self._controlador.cerrarSesion()
 
-    # ── Mercado ──────────────────────────────────────────────────────────────
-
     def cargar_mercado(self, activos: list):
         self.tabla_mercado.setRowCount(len(activos))
         for i, a in enumerate(activos):
@@ -159,7 +146,6 @@ class Trader(QMainWindow, Form):
         # Sincronizar combo de operación con los activos cargados
         self._sync_combo_activo(activos)
 
-    # igual que cargar_mercado — alias usado por solicitarMercado
     def refrescar_mercado(self, activos: list):
         self.cargar_mercado(activos)
 
@@ -191,8 +177,6 @@ class Trader(QMainWindow, Form):
         if self._controlador:
             self._controlador.ver_detalles_activo(id_activo, nombre, simbolo, descripcion)
 
-    # ── Operación (compra / venta) ───────────────────────────────────────────
-
     def _ejecutar_operacion(self, tipo: str):
         if not self._controlador:
             return
@@ -203,7 +187,6 @@ class Trader(QMainWindow, Form):
         cantidad = self.input_cantidad.value()
         self._controlador.trader_realizar_operacion(id_activo, tipo, cantidad)
 
-    # ── Saldo / KPIs ─────────────────────────────────────────────────────────
 
     def actualizar_nombre(self, nombre_completo: str):
         self.lbl_user_name.setText(nombre_completo)
@@ -215,7 +198,6 @@ class Trader(QMainWindow, Form):
     def mostrar_exito_operacion(self, mensaje: str):
         QMessageBox.information(self, "Operación ejecutada", mensaje)
 
-    # ── Cartera / Posiciones ─────────────────────────────────────────────────
 
     def refrescar_cartera(self, carteraVO, lista_posiciones: list):
         if carteraVO is None:
@@ -256,28 +238,22 @@ class Trader(QMainWindow, Form):
         
         if not valores: return
 
-        # 2. Configurar estética oscura (Dark Matter)
         plt.style.use('dark_background')
         fig, ax = plt.subplots(figsize=(4, 4), dpi=100)
         fig.patch.set_facecolor('#18181B')  # Color Surface-2 de tu app
         ax.set_facecolor('#18181B')
 
-        # 3. Colores personalizados (CryptoOrange y derivados)
         colores = ['#FF6B00', '#FF8C2A', '#FFB347', '#E0A890']
-        
-        # 4. Crear el anillo (Donut Chart)
-        # 'wedgeprops' con 'width' crea el efecto de anillo
+
         wedges, texts, autotexts = ax.pie(
             valores, labels=nombres, autopct='%1.1f%%', 
             startangle=90, colors=colores,
             wedgeprops={'width': 0.4, 'edgecolor': '#18181B', 'linewidth': 3}
         )
 
-        # 5. Estilo de texto
         plt.setp(texts, size=10, color=(1, 1, 1, 0.7))
         plt.setp(autotexts, size=10, weight="bold", color="white")
 
-        # 6. Integración en Qt
         canvas = FigureCanvas(fig)
         canvas.setStyleSheet("background-color:transparent;") # Asegura transparencia
         
@@ -288,8 +264,6 @@ class Trader(QMainWindow, Form):
         self.page_cartera.layout().addWidget(canvas)
         self._canvas_cartera = canvas
 
-    # ── Noticias ─────────────────────────────────────────────────────────────
-
     def refrescar_noticias(self, lista_noticias: list):
         self.tabla_noticias.setRowCount(len(lista_noticias))
         for i, n in enumerate(lista_noticias):
@@ -298,13 +272,13 @@ class Trader(QMainWindow, Form):
                 fecha, titulo, cuerpo, es_aviso = n[0], n[1], n[2], n[3]
                 analista = n[4] if len(n) > 4 else ""
             else:
-                fecha    = str(n.fecha_publicacion)
-                titulo   = n.titulo
-                cuerpo   = n.cuerpo
+                fecha = str(n.fecha_publicacion)
+                titulo = n.titulo
+                cuerpo = n.cuerpo
                 es_aviso = n.es_aviso
                 analista = ""
 
-            tipo_item  = QTableWidgetItem("⚡ AVISO" if es_aviso else "Noticia")
+            tipo_item = QTableWidgetItem("⚡ AVISO" if es_aviso else "Noticia")
             titulo_item = QTableWidgetItem(titulo)
             titulo_item.setData(Qt.UserRole, cuerpo)   # cuerpo en UserRole
 
@@ -327,26 +301,24 @@ class Trader(QMainWindow, Form):
         cuerpo = titulo_item.data(Qt.UserRole) or ""
         QMessageBox.information(self, titulo, cuerpo)
 
-    # ── Historial operaciones ─────────────────────────────────────────────────
-
     def cargar_historial(self, operaciones: list):
         self.tabla_historial.setRowCount(len(operaciones))
         for i, op in enumerate(operaciones):
             # op puede ser dict o VO
             if isinstance(op, dict):
-                fecha    = str(op.get("fecha_hora", ""))
-                activo   = op.get("simbolo", "")
-                tipo     = op.get("operacion", op.get("tipo", ""))
+                fecha = str(op.get("fecha_hora", ""))
+                activo = op.get("simbolo", "")
+                tipo = op.get("operacion", op.get("tipo", ""))
                 cantidad = float(op.get("cantidad", 0))
-                precio   = float(op.get("precio_ejecucion", 0))
-                total    = float(op.get("total_fiat", 0))
+                precio = float(op.get("precio_ejecucion", 0))
+                total = float(op.get("total_fiat", 0))
             else:
-                fecha    = str(op.fecha_hora)
-                activo   = op.simbolo
-                tipo     = op.tipo
+                fecha = str(op.fecha_hora)
+                activo = op.simbolo
+                tipo = op.tipo
                 cantidad = float(op.cantidad)
-                precio   = float(op.precio_ejecucion)
-                total    = float(op.total_fiat)
+                precio = float(op.precio_ejecucion)
+                total = float(op.total_fiat)
 
             color = QColor("#34C759") if tipo == "COMPRA" else QColor("#FF3B30")
             tipo_item = QTableWidgetItem(tipo)
@@ -358,8 +330,6 @@ class Trader(QMainWindow, Form):
             self.tabla_historial.setItem(i, 3, QTableWidgetItem(f"{cantidad:,.8f}"))
             self.tabla_historial.setItem(i, 4, QTableWidgetItem(f"${precio:,.2f}"))
             self.tabla_historial.setItem(i, 5, QTableWidgetItem(f"${total:,.2f}"))
-
-    # ── Avisos urgentes (CU12) ────────────────────────────────────────────────
 
     def _check_avisos_urgentes(self):
         if not self._controlador:
@@ -413,7 +383,6 @@ class Trader(QMainWindow, Form):
             wedgeprops={"width": 0.35, "edgecolor": "#0D0D0F", "linewidth": 2},
         )
 
-        # Leyenda con símbolo + valor + porcentaje
         ax.legend(
             wedges,
             [f"{n}  ${v:,.0f}  ({v / total * 100:.1f}%)" for n, v in zip(nombres, valores)],
@@ -471,17 +440,12 @@ class Trader(QMainWindow, Form):
                 self.tabla_posiciones.setItem(i, col, item)
         self._dibujar_grafico_cartera(lista_posiciones)
 
-
-
-    # ── Utilidades ────────────────────────────────────────────────────────────
-
     def mostrar_error(self, mensaje: str):
         QMessageBox.warning(self, "Error", mensaje)
 
     def mostrar_mensaje(self, titulo: str, mensaje: str):
         QMessageBox.information(self, titulo, mensaje)
 
-    # ── Propiedad controlador ─────────────────────────────────────────────────
 
     @property
     def controlador(self):
@@ -490,5 +454,3 @@ class Trader(QMainWindow, Form):
     @controlador.setter
     def controlador(self, ref):
         self._controlador = ref
-
-

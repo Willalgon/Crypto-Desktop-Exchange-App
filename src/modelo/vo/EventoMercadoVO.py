@@ -23,15 +23,20 @@ class EventoMercadoVO:
 
     def __init__(self, nombre_evento=None, descripcion=None, id_admin=None):
         self.__nombre_evento = nombre_evento
-        self.__descripcion   = descripcion
-        self.__id_admin      = id_admin
+        self.__descripcion = descripcion
+        self.__id_admin = id_admin
 
     @property
-    def nombre_evento(self): return self.__nombre_evento
+    def nombre_evento(self):
+        return self.__nombre_evento
+
     @property
-    def descripcion(self):   return self.__descripcion
+    def descripcion(self):
+        return self.__descripcion
+
     @property
-    def id_admin(self):      return self.__id_admin
+    def id_admin(self):
+        return self.__id_admin
 
     def es_valido(self):
         return (

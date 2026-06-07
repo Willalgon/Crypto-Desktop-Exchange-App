@@ -34,7 +34,6 @@ class Logica:
     def obtenerNoticias(self):
         return self.__noticia_dao.obtenerNoticias()
 
-    # ── Admin: Usuarios ───────────────────────────────────────────────────────
 
     def obtener_usuarios_para_admin(self):
         return self.__admin_usuarios_dao.obtener_usuarios_admin()
@@ -45,23 +44,17 @@ class Logica:
     def actualizar_usuario(self, usuario_vo):
         return self.__admin_usuarios_dao.actualizar_usuario(usuario_vo)
 
-    # ── Admin: Activos ────────────────────────────────────────────────────────
-
     def obtener_activos_admin(self):
         return self.__activos_dao.obtener_activos_admin()
 
     def admin_retirar_activo(self, id_activo):
         return self.__activos_dao.retirar_activo(id_activo)
 
-    # ── Mercado (Trader) ──────────────────────────────────────────────────────
-
     def obtener_activos_mercado(self):
         return self.__activos_dao.obtener_activos_mercado()
 
     def obtener_historial_precios(self, id_activo):
         return self.__activos_dao.obtener_historial_precios(id_activo)
-
-    # ── Admin: Eventos de mercado ─────────────────────────────────────────────
 
     def lanzar_evento_mercado(self, id_admin, nombre_evento, descripcion):
         evento_vo = EventoMercadoVO(

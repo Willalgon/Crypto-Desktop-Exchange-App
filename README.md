@@ -1,5 +1,3 @@
 # CryptoLearning app
-## Login.py
-1. Mostrar el login.ui
-2. Llamar al controlador para autenticar
-3. Redirigir a la ventana correcta según el rol.
+Compra y vende las criptomonedas disponibles!
+El administrador de la app publicará eventos cuando menos te lo esperes y tu patrimonio variará! Suerte!
