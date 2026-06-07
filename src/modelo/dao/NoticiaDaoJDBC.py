@@ -9,12 +9,12 @@ class NoticiaDaoJDBC(Conexion):
               """
         try:
             cursor = self.getCursor()
-            cursor.execute(SQL, [
+            cursor.execute(SQL, (
                 id_analista,
                 noticiaVO.titulo,
                 noticiaVO.cuerpo,
                 1 if noticiaVO.es_aviso else 0
-            ])
+            ))
             return True
         except Exception as e:
             print(f"[NoticiaDaoJDBC] Error al insertar noticia: {type(e).__name__}: {e}")

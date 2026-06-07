@@ -18,19 +18,19 @@ class Logica:
         self.__eventos_dao        = EventosDaoJDBC()
         self.__operacion_dao = OperacionDaoJDBC()
 
-    # ── Login / Registro ──────────────────────────────────────────────────────
-
+    # Login/Registro
     def hacerLogin(self, loginVO):
         return self.__login_dao.checkLogin(loginVO)
 
+    # Login/Registro
     def hacerRegistro(self, registroVO):
         return self.__registro_dao.insertarUsuario(registroVO)
 
-    # ── Noticias ──────────────────────────────────────────────────────────────
-
+    # Analista
     def publicarNoticia(self, noticiaVO, id_analista):
         return self.__noticia_dao.insertarNoticia(noticiaVO, id_analista)
 
+    # Analista
     def obtenerNoticias(self):
         return self.__noticia_dao.obtenerNoticias()
 

@@ -44,10 +44,10 @@ class Analista(QMainWindow, Form):
         self.input_titulo.clear()
         self.input_cuerpo.clear()
         self.chk_aviso.setChecked(False)
-        self.input_titulo.setFocus() # Para ubicarnos en el titulo de nuevo (comodidad)
+        self.input_titulo.setFocus() # Para ubicarnos en el titulo de nuevo
 
     def _on_cerrar_sesion(self):
-        if self.controlador:
+        if self._controlador:
             self._controlador.cerrarSesion()
 
     def _scroll_to_form(self):
@@ -55,13 +55,13 @@ class Analista(QMainWindow, Form):
 
     def _scroll_to_hist(self):
         if self._controlador:
-            self._controlador.cargarHistorial()  # ← pide los datos al controlador
+            self._controlador.cargarHistorial()
         self.tabla_noticias.setFocus()
 
-    def mostrarExitoPublicacion(self, titulo, cuerpo, es_aviso):  # ← añadir cuerpo
+    def mostrarExitoPublicacion(self, titulo, cuerpo, es_aviso):
         tipo = "AVISO" if es_aviso else "NO_AVISO"
         fecha = QDateTime.currentDateTime().toString("dd/MM/yyyy  hh:mm")
-        self._anadir_fila_tabla(fecha, titulo, tipo, cuerpo)  # ← pasar cuerpo
+        self._anadir_fila_tabla(fecha, titulo, tipo, cuerpo)
         self._limpiar_formulario()
         self._mostrar_info(f"Noticia publicada correctamente.\n\nTítulo: {titulo}")
 
