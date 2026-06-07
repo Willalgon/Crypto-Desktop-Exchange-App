@@ -13,12 +13,12 @@ class Registro(QMainWindow, Form):
         self.btn_volver.clicked.connect(self.on_volver_click)
 
     def on_registrar_click(self):
-        dni = self.lineEdit_dni.text()
-        nombre = self.lineEdit_nombre.text()
-        ape1 = self.lineEdit_apellido1.text()
-        ape2 = self.lineEdit_apellido2.text()
-        email = self.lineEdit_email.text()
-        password = self.lineEdit_pass.text()
+        dni = self.lineEdit_dni.text().strip()
+        nombre = self.lineEdit_nombre.text().strip()
+        ape1 = self.lineEdit_apellido1.text().strip()
+        ape2 = self.lineEdit_apellido2.text().strip()
+        email = self.lineEdit_email.text().strip()
+        password = self.lineEdit_pass.text().strip()
 
         if self._controlador:
             self._controlador.procesarRegistro(dni, nombre, ape1, ape2, email, password)

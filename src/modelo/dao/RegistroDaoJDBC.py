@@ -6,7 +6,7 @@ class RegistroDaoJDBC(Conexion):
         INSERT INTO USUARIOS (dni, nombre, apellidos, email, password, rol)
         VALUES (?, ?, ?, ?, ?, 'TRADER')
     """
-    # El TRIGGER trg_crear_cartera_trader crea la cartera con 10.000€ automáticamente
+    # El trigger crea la cartera con 10.000€ automáticamente
 
     def insertarUsuario(self, registroVO):
         cursor = self.getCursor()
@@ -16,7 +16,7 @@ class RegistroDaoJDBC(Conexion):
                 registroVO.dni,
                 registroVO.nombre,
                 apellidos,
-                registroVO.email,       # ← era .mail, correcto es .email
+                registroVO.email,
                 registroVO.contrasena
             ))
             return True

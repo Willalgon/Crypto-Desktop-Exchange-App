@@ -22,18 +22,21 @@ class ControladorPrincipal:
 
     def comprobarLogin(self, email, passw):
         if not email or not passw:
-            # BUG FIX: método unificado a lanzar_aviso (guion bajo, acento)
             self.__vista_login.lanzar_aviso("Por favor, rellena todos los campos.")
             return
         pass_encriptada = self.__encriptar_contrasena(passw)
         loginVO  = LoginVO(email, pass_encriptada)
         resultado = self.__modelo.hacerLogin(loginVO)
-
         if resultado:
             self.__vista_login.hide()
             self.__redirigir_segun_rol(resultado)
         else:
             self.__vista_login.lanzar_aviso("Login incorrecto. Verifica tus credenciales.")
+
+    def __encriptar_contrasena(self, contrasena):
+        sha256 = hashlib.sha256()
+        sha256.update(contrasena.encode('utf-8'))
+        return sha256.hexdigest()
 
     def __redirigir_segun_rol(self, usuario_vo):
         self.__usuario_actual = usuario_vo
@@ -82,6 +85,17 @@ class ControladorPrincipal:
             self.volverAlLogin()
         else:
             self.__vista_registro.mostrarError("Error: No se pudo conectar con el servidor.")
+
+    def __validar_datos_registro(self, dni, nombre, ape1, ape2, email, contra):
+        if not all([dni, nombre, ape1, ape2, email, contra]):
+            return "Todos los campos son obligatorios."
+        if len(dni) != 9:
+            return "El DNI/NIE debe tener 9 caracteres."
+        if not re.search(r'^[\w\.-]+@[\w\.-]+\.\w{2,4}$', email):
+            return "El formato del email no es válido."
+        if len(contra) < 4:
+            return "La contraseña debe tener al menos 4 caracteres."
+        return None
 
     def cerrarSesion(self):
         if self.__vista_principal:
@@ -149,24 +163,6 @@ class ControladorPrincipal:
     def cargarHistorial(self):
         noticias = self.__modelo.obtenerNoticias()
         self.__vista_principal.cargarHistorial(noticias)
-
-    # ── Privados ──────────────────────────────────────────────────────────────
-
-    def __validar_datos_registro(self, dni, nombre, ape1, ape2, email, contra):
-        if not all([dni, nombre, ape1, ape2, email, contra]):
-            return "Todos los campos son obligatorios."
-        if len(dni) != 9:
-            return "El DNI/NIE debe tener 9 caracteres."
-        if not re.search(r'^[\w\.-]+@[\w\.-]+\.\w{2,4}$', email):
-            return "El formato del email no es válido."
-        if len(contra) < 4:
-            return "La contraseña debe tener al menos 4 caracteres."
-        return None
-
-    def __encriptar_contrasena(self, contrasena):
-        sha256 = hashlib.sha256()
-        sha256.update(contrasena.encode('utf-8'))
-        return sha256.hexdigest()
 
     def consultar_criptomonedas(self):
         try:

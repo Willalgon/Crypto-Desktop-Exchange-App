@@ -8,27 +8,27 @@ USE CryptoLearning;
 
 -- 1. USUARIOS
 CREATE TABLE IF NOT EXISTS USUARIOS (
-    id_usuario   INT AUTO_INCREMENT PRIMARY KEY,
-    dni          VARCHAR(15)  NOT NULL UNIQUE,
-    nombre       VARCHAR(100) NOT NULL,
-    apellidos    VARCHAR(150) NOT NULL,
-    email        VARCHAR(120) NOT NULL UNIQUE,
-    password     VARCHAR(255) NOT NULL,
-    rol          ENUM('ADMIN','ANALISTA','TRADER') NOT NULL,
-    avatar_url   VARCHAR(255),
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    dni VARCHAR(15) NOT NULL UNIQUE,
+    nombre VARCHAR(100) NOT NULL,
+    apellidos VARCHAR(150) NOT NULL,
+    email VARCHAR(120) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    rol ENUM('ADMIN','ANALISTA','TRADER') NOT NULL,
+    avatar_url VARCHAR(255),
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
-    activo       BOOLEAN DEFAULT TRUE
+    activo BOOLEAN DEFAULT TRUE
 );
 
 -- 2. ACTIVOS
 CREATE TABLE IF NOT EXISTS ACTIVOS (
-    id_activo           INT AUTO_INCREMENT PRIMARY KEY,
-    nombre              VARCHAR(50)    NOT NULL,
-    simbolo             VARCHAR(10)    NOT NULL UNIQUE,
-    slug                VARCHAR(50)    UNIQUE,
-    precio_actual       DECIMAL(18,8)  NOT NULL,
+    id_activo INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    simbolo VARCHAR(10) NOT NULL UNIQUE,
+    slug VARCHAR(50) UNIQUE,
+    precio_actual DECIMAL(18,8) NOT NULL,
     descripcion_especial TEXT,
-    es_cripto           BOOLEAN DEFAULT TRUE
+    es_cripto BOOLEAN DEFAULT TRUE
 );
 
 -- 3. CARTERAS

@@ -1,8 +1,8 @@
 from src.modelo.conexion.Conexion import Conexion
-from src.modelo.vo.UsuarioVO import UsuarioVO          # ← cambia el import
+from src.modelo.vo.UsuarioVO import UsuarioVO
 
 class LoginDaoJDBC(Conexion):
-
+    # variable de clase entonces hay que llamarlo con self.
     SQL_CHECK_LOGIN = """
         SELECT id_usuario, dni, nombre, apellidos, email, rol
         FROM USUARIOS
@@ -19,11 +19,11 @@ class LoginDaoJDBC(Conexion):
             id_usuario, dni, nombre, apellidos, email, rol = fila
             return UsuarioVO(
                 id_usuario = id_usuario,
-                dni        = dni,
-                nombre     = nombre,
-                apellidos  = apellidos,
-                email      = email,
-                rol        = rol,
+                dni = dni,
+                nombre = nombre,
+                apellidos = apellidos,
+                email = email,
+                rol = rol,
             )
         except Exception as e:
             print("Error en checkLogin:", e)
