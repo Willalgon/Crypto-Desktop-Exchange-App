@@ -13,34 +13,27 @@ class Administrador(QMainWindow, Form):
         super().__init__()
         self.setupUi(self)
         self._controlador = None
+        self._conectar_senales()
+        self._construir_tabla()
 
-        # ── Navegación lateral ────────────────────────────────────────────────
+    def _conectar_senales(self):
         self.btn_nav_usuarios.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(1))
         self.btn_nav_activos.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
         self.btn_nav_eventos.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
         self.btn_nav_salir.clicked.connect(self._on_cerrar_sesion)
-
-        # ── Tabla usuarios ────────────────────────────────────────────────────
-        self.tabla_usuarios.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        self.tabla_usuarios.setColumnHidden(0, True)   # oculta id_usuario
         self.btn_eliminar_usuario.clicked.connect(self._on_eliminar_usuario)
         self.btn_editar_usuario.clicked.connect(self._on_editar_usuario)
-
-        # ── Tabla activos ─────────────────────────────────────────────────────
-        self.tabla_activos.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        self.tabla_activos.setColumnHidden(0, True)    # oculta id_activo
         self.btn_retirar_activo.clicked.connect(self._on_retirar_activo)
-
-        # ── Eventos de mercado ────────────────────────────────────────────────
         self.btn_lanzar_evento.clicked.connect(self._on_lanzar_evento)
-
-        # Quitamos las barras de búsqueda, no las queremos
         self.input_buscar_usuario.hide()
         self.input_buscar_activo.hide()
 
+    def _construir_tabla(self):
+        self.tabla_usuarios.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.tabla_usuarios.setColumnHidden(0, True)  # oculta id_usuario
+        self.tabla_activos.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.tabla_activos.setColumnHidden(0, True)  # oculta id_activo
 
-
-    # ── Cargar datos ──────────────────────────────────────────────────────────
 
     def cargar_usuarios(self, usuarios):
         self.tabla_usuarios.setRowCount(0)
@@ -67,7 +60,6 @@ class Administrador(QMainWindow, Form):
             self.tabla_activos.setItem(fila, 2, QTableWidgetItem(vo.simbolo or ""))
             self.tabla_activos.setItem(fila, 3, QTableWidgetItem(str(vo.precio_actual)))
 
-    # ── Slots: Usuarios ───────────────────────────────────────────────────────
 
     def _on_eliminar_usuario(self):
         fila = self.tabla_usuarios.currentRow()
@@ -102,7 +94,6 @@ class Administrador(QMainWindow, Form):
         if dialogo.exec_() == QDialog.Accepted:
             self._controlador.admin_editar_usuario(dialogo.get_vo())
 
-    # ── Slots: Activos ────────────────────────────────────────────────────────
 
     def _on_retirar_activo(self):
         fila = self.tabla_activos.currentRow()
@@ -120,7 +111,6 @@ class Administrador(QMainWindow, Form):
         if resp == QMessageBox.Yes:
             self._controlador.admin_retirar_activo(id_activo)
 
-    # ── Slots: Eventos ────────────────────────────────────────────────────────
 
     def _on_lanzar_evento(self):
         nombre_evento = self.combo_evento.currentText()
@@ -138,13 +128,9 @@ class Administrador(QMainWindow, Form):
             self._controlador.admin_lanzar_evento(nombre_evento, descripcion)
             self.input_desc_evento.clear()
 
-    # ── Cerrar sesión ─────────────────────────────────────────────────────────
-
     def _on_cerrar_sesion(self):
         if self._controlador:
             self._controlador.cerrarSesion()
-
-    # ── Feedback ──────────────────────────────────────────────────────────────
 
     def mostrar_error(self, mensaje):
         QMessageBox.critical(self, "Error", mensaje)
@@ -175,8 +161,6 @@ class Administrador(QMainWindow, Form):
 # ── Diálogo auxiliar de edición ───────────────────────────────────────────────
 
 class _DialogoEditarUsuario(QDialog):
-    """Diálogo modal para editar nombre, apellidos y rol de un usuario."""
-
     ROLES = ["TRADER", "ANALISTA", "ADMIN"]
 
     def __init__(self, usuario_vo, parent=None):
