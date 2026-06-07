@@ -379,7 +379,9 @@ class Trader(QMainWindow, Form):
                 evento.descripcion or "Se ha producido un evento de mercado."
             )
             self._avisos_mostrados.add(evento.nombre_evento)
-            self._controlador.solicitarMercado()
+            # Solo refrescar mercado si seguimos en la vista Trader
+            if hasattr(self._controlador, 'solicitarMercado'):
+                self._controlador.solicitarMercado()
 
     def _dibujar_grafico_cartera(self, lista_posiciones: list):
         posiciones_validas = [p for p in lista_posiciones if float(p.cantidad) > 0]

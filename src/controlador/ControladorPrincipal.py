@@ -238,7 +238,8 @@ class ControladorPrincipal:
 
     def solicitarMercado(self):
         activos = self.__modelo.obtener_activos_mercado()
-        self.__vista_principal.refrescar_mercado(activos)  # ← typo corregido (__vista__principal)
+        if hasattr(self.__vista_principal, 'refrescar_mercado'):
+            self.__vista_principal.refrescar_mercado(activos)
 
     def solicitarAvisoUrgente(self):
         return self.__modelo.obtenerAvisoUrgente()

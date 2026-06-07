@@ -212,108 +212,252 @@ BEGIN
     VALUES (p_id_admin, p_nombre_evento, p_descripcion, 1.0);
 
     OPEN cur_activos;
-    read_loop: LOOP
-        FETCH cur_activos INTO v_id_activo, v_simbolo, v_precio_actual;
-        IF done THEN LEAVE read_loop; END IF;
+read_loop: LOOP
+    FETCH cur_activos INTO v_id_activo, v_simbolo, v_precio_actual;
+    IF done THEN LEAVE read_loop; END IF;
 
-        -- Rangos por evento y símbolo
-        IF p_nombre_evento = 'Bull Market' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=0.95; SET v_max_mult=1.40;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=0.98; SET v_max_mult=1.10;
-            ELSE SET v_min_mult=0.90; SET v_max_mult=1.45; END IF;
+    IF p_nombre_evento = 'Bull Market' THEN
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=1.10; SET v_max_mult=1.40;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=1.15; SET v_max_mult=1.55;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=1.20; SET v_max_mult=1.80;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=1.10; SET v_max_mult=1.45;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=1.05; SET v_max_mult=1.50;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=1.15; SET v_max_mult=1.70;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=1.20; SET v_max_mult=2.20;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=1.10; SET v_max_mult=1.60;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=0.98; SET v_max_mult=1.08;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.999; SET v_max_mult=1.001;
+        ELSE SET v_min_mult=1.05; SET v_max_mult=1.40; END IF;
 
-        ELSEIF p_nombre_evento = 'Bear Market' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=0.60; SET v_max_mult=1.05;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=0.98; SET v_max_mult=1.08;
-            ELSE SET v_min_mult=0.55; SET v_max_mult=1.10; END IF;
+    ELSEIF p_nombre_evento = 'Bear Market' THEN
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=0.60; SET v_max_mult=0.88;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=0.55; SET v_max_mult=0.85;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=0.40; SET v_max_mult=0.78;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=0.55; SET v_max_mult=0.85;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=0.50; SET v_max_mult=0.82;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=0.40; SET v_max_mult=0.75;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=0.30; SET v_max_mult=0.70;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=0.45; SET v_max_mult=0.80;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=0.95; SET v_max_mult=1.05;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.999; SET v_max_mult=1.001;
+        ELSE SET v_min_mult=0.45; SET v_max_mult=0.80; END IF;
 
-        ELSEIF p_nombre_evento = 'Crisis Fiat' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=0.90; SET v_max_mult=1.40;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=0.98; SET v_max_mult=1.50;
-            ELSE SET v_min_mult=0.45; SET v_max_mult=0.85; END IF;
+    ELSEIF p_nombre_evento = 'Crisis Fiat' THEN
+        -- BTC y GOLD son refugio, altcoins caen por pánico
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=1.10; SET v_max_mult=1.50;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=0.85; SET v_max_mult=1.20;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=0.60; SET v_max_mult=0.90;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=0.70; SET v_max_mult=1.00;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=0.55; SET v_max_mult=0.85;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=0.50; SET v_max_mult=0.80;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=0.40; SET v_max_mult=0.75;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=0.55; SET v_max_mult=0.85;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=1.15; SET v_max_mult=1.55;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.998; SET v_max_mult=1.002;
+        ELSE SET v_min_mult=0.55; SET v_max_mult=0.88; END IF;
 
-        ELSEIF p_nombre_evento = 'Guerra Mundial' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=0.70; SET v_max_mult=1.50;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=1.05; SET v_max_mult=1.30;
-            ELSE SET v_min_mult=0.65; SET v_max_mult=1.40; END IF;
+    ELSEIF p_nombre_evento = 'Guerra Mundial' THEN
+        -- Volatilidad extrema: GOLD sube, cripto cae por riesgo
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=0.55; SET v_max_mult=1.20;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=0.45; SET v_max_mult=1.00;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=0.35; SET v_max_mult=0.80;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=0.40; SET v_max_mult=0.85;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=0.35; SET v_max_mult=0.80;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=0.30; SET v_max_mult=0.75;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=0.25; SET v_max_mult=0.70;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=0.35; SET v_max_mult=0.80;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=1.20; SET v_max_mult=1.60;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.997; SET v_max_mult=1.003;
+        ELSE SET v_min_mult=0.35; SET v_max_mult=0.85; END IF;
 
-        ELSEIF p_nombre_evento = 'Analista Aleatorio' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=0.80; SET v_max_mult=1.05;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=0.95; SET v_max_mult=1.02;
-            ELSE SET v_min_mult=0.75; SET v_max_mult=1.08; END IF;
+    ELSEIF p_nombre_evento = 'Analista Aleatorio' THEN
+        -- Movimientos pequeños y aleatorios, DOGE más volátil
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=0.88; SET v_max_mult=1.12;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=0.85; SET v_max_mult=1.15;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=0.80; SET v_max_mult=1.20;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=0.85; SET v_max_mult=1.12;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=0.82; SET v_max_mult=1.18;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=0.78; SET v_max_mult=1.22;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=0.65; SET v_max_mult=1.40;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=0.80; SET v_max_mult=1.20;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=0.97; SET v_max_mult=1.03;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.999; SET v_max_mult=1.001;
+        ELSE SET v_min_mult=0.80; SET v_max_mult=1.20; END IF;
 
-        ELSEIF p_nombre_evento = 'Inyección Liquidez' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=1.10; SET v_max_mult=1.50;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=1.00; SET v_max_mult=1.05;
-            ELSE SET v_min_mult=1.05; SET v_max_mult=1.60; END IF;
+    ELSEIF p_nombre_evento = 'Inyección Liquidez' THEN
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=1.08; SET v_max_mult=1.35;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=1.10; SET v_max_mult=1.40;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=1.15; SET v_max_mult=1.55;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=1.08; SET v_max_mult=1.35;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=1.05; SET v_max_mult=1.30;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=1.12; SET v_max_mult=1.50;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=1.10; SET v_max_mult=1.60;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=1.08; SET v_max_mult=1.40;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=1.02; SET v_max_mult=1.08;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.999; SET v_max_mult=1.001;
+        ELSE SET v_min_mult=1.05; SET v_max_mult=1.40; END IF;
 
-        ELSEIF p_nombre_evento = 'Retirada Liquidez' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=0.50; SET v_max_mult=0.85;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=0.98; SET v_max_mult=1.08;
-            ELSE SET v_min_mult=0.45; SET v_max_mult=0.90; END IF;
+    ELSEIF p_nombre_evento = 'Retirada Liquidez' THEN
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=0.60; SET v_max_mult=0.88;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=0.55; SET v_max_mult=0.85;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=0.45; SET v_max_mult=0.78;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=0.55; SET v_max_mult=0.82;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=0.50; SET v_max_mult=0.80;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=0.42; SET v_max_mult=0.75;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=0.35; SET v_max_mult=0.70;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=0.45; SET v_max_mult=0.78;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=0.96; SET v_max_mult=1.04;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.999; SET v_max_mult=1.001;
+        ELSE SET v_min_mult=0.45; SET v_max_mult=0.80; END IF;
 
-        ELSEIF p_nombre_evento = 'Halving Bitcoin' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=1.20; SET v_max_mult=1.80;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=0.98; SET v_max_mult=1.05;
-            ELSE SET v_min_mult=1.00; SET v_max_mult=1.30; END IF;
+    ELSEIF p_nombre_evento = 'Halving Bitcoin' THEN
+        -- BTC explota, ETH y altcoins suben por efecto contagio, DOGE disparo especulativo
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=1.30; SET v_max_mult=1.90;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=1.15; SET v_max_mult=1.50;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=1.10; SET v_max_mult=1.45;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=1.08; SET v_max_mult=1.35;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=1.05; SET v_max_mult=1.30;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=1.08; SET v_max_mult=1.40;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=1.20; SET v_max_mult=1.80;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=1.05; SET v_max_mult=1.35;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=0.99; SET v_max_mult=1.05;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.999; SET v_max_mult=1.001;
+        ELSE SET v_min_mult=1.05; SET v_max_mult=1.35; END IF;
 
-        ELSEIF p_nombre_evento = 'Adopción Corporativa' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=1.10; SET v_max_mult=1.50;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=0.98; SET v_max_mult=1.03;
-            ELSE SET v_min_mult=1.05; SET v_max_mult=1.45; END IF;
+    ELSEIF p_nombre_evento = 'Adopción Corporativa' THEN
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=1.15; SET v_max_mult=1.55;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=1.10; SET v_max_mult=1.45;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=1.05; SET v_max_mult=1.35;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=1.08; SET v_max_mult=1.40;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=1.10; SET v_max_mult=1.50;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=1.03; SET v_max_mult=1.25;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=1.15; SET v_max_mult=1.70;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=1.08; SET v_max_mult=1.40;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=0.97; SET v_max_mult=1.03;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.999; SET v_max_mult=1.001;
+        ELSE SET v_min_mult=1.05; SET v_max_mult=1.35; END IF;
 
-        ELSEIF p_nombre_evento = 'Adopción Países' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=1.15; SET v_max_mult=1.70;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=0.98; SET v_max_mult=1.04;
-            ELSE SET v_min_mult=1.10; SET v_max_mult=1.60; END IF;
+    ELSEIF p_nombre_evento = 'Adopción Países' THEN
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=1.20; SET v_max_mult=1.75;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=1.10; SET v_max_mult=1.50;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=1.08; SET v_max_mult=1.40;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=1.05; SET v_max_mult=1.30;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=1.15; SET v_max_mult=1.60;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=1.05; SET v_max_mult=1.35;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=1.10; SET v_max_mult=1.55;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=1.05; SET v_max_mult=1.30;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=0.96; SET v_max_mult=1.02;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.999; SET v_max_mult=1.001;
+        ELSE SET v_min_mult=1.05; SET v_max_mult=1.40; END IF;
 
-        ELSEIF p_nombre_evento = 'Crisis Bancaria' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=0.50; SET v_max_mult=0.85;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=1.05; SET v_max_mult=1.20;
-            ELSE SET v_min_mult=0.45; SET v_max_mult=0.80; END IF;
+    ELSEIF p_nombre_evento = 'Crisis Bancaria' THEN
+        -- BTC como refugio digital, GOLD como refugio clásico, altcoins pánico
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=1.05; SET v_max_mult=1.40;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=0.60; SET v_max_mult=0.90;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=0.40; SET v_max_mult=0.72;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=0.50; SET v_max_mult=0.78;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=0.45; SET v_max_mult=0.75;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=0.38; SET v_max_mult=0.68;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=0.30; SET v_max_mult=0.65;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=0.42; SET v_max_mult=0.72;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=1.10; SET v_max_mult=1.35;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.999; SET v_max_mult=1.001;
+        ELSE SET v_min_mult=0.42; SET v_max_mult=0.75; END IF;
 
-        ELSEIF p_nombre_evento = 'Regulación China' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=0.55; SET v_max_mult=0.90;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=1.02; SET v_max_mult=1.10;
-            ELSE SET v_min_mult=0.50; SET v_max_mult=0.85; END IF;
+    ELSEIF p_nombre_evento = 'Regulación China' THEN
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=0.50; SET v_max_mult=0.78;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=0.48; SET v_max_mult=0.75;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=0.42; SET v_max_mult=0.70;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=0.40; SET v_max_mult=0.68;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=0.45; SET v_max_mult=0.72;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=0.42; SET v_max_mult=0.70;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=0.38; SET v_max_mult=0.65;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=0.44; SET v_max_mult=0.72;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=1.02; SET v_max_mult=1.10;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.998; SET v_max_mult=1.002;
+        ELSE SET v_min_mult=0.42; SET v_max_mult=0.72; END IF;
 
-        ELSEIF p_nombre_evento = 'Hack Exchange' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=0.45; SET v_max_mult=0.80;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=1.00; SET v_max_mult=1.12;
-            ELSE SET v_min_mult=0.40; SET v_max_mult=0.75; END IF;
+    ELSEIF p_nombre_evento = 'Hack Exchange' THEN
+        -- Todo cae, BTC menos por liquidez, DOGE y altcoins pequeñas se hunden
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=0.55; SET v_max_mult=0.82;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=0.48; SET v_max_mult=0.78;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=0.38; SET v_max_mult=0.65;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=0.35; SET v_max_mult=0.62;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=0.40; SET v_max_mult=0.68;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=0.35; SET v_max_mult=0.62;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=0.28; SET v_max_mult=0.55;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=0.38; SET v_max_mult=0.65;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=1.02; SET v_max_mult=1.12;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.997; SET v_max_mult=1.003;
+        ELSE SET v_min_mult=0.35; SET v_max_mult=0.65; END IF;
 
-        ELSEIF p_nombre_evento = 'Upgrade Ethereum' THEN
-            IF v_simbolo = 'ETH'  THEN SET v_min_mult=1.20; SET v_max_mult=1.80;
-            ELSEIF v_simbolo = 'BTC' THEN SET v_min_mult=1.10; SET v_max_mult=1.60;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=0.98; SET v_max_mult=1.02;
-            ELSE SET v_min_mult=1.00; SET v_max_mult=1.20; END IF;
+    ELSEIF p_nombre_evento = 'Upgrade Ethereum' THEN
+        -- ETH lidera, BTC contagio positivo, altcoins del ecosistema ETH suben
+        IF v_simbolo = 'ETH'   THEN SET v_min_mult=1.25; SET v_max_mult=1.90;
+        ELSEIF v_simbolo = 'BTC'   THEN SET v_min_mult=1.05; SET v_max_mult=1.30;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=1.20; SET v_max_mult=1.70;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=0.90; SET v_max_mult=1.10;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=0.92; SET v_max_mult=1.08;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=0.95; SET v_max_mult=1.05;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=0.90; SET v_max_mult=1.08;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=0.95; SET v_max_mult=1.15;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=0.98; SET v_max_mult=1.02;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.999; SET v_max_mult=1.001;
+        ELSE SET v_min_mult=0.95; SET v_max_mult=1.15; END IF;
 
-        ELSEIF p_nombre_evento = 'Whale Dump' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=0.70; SET v_max_mult=0.95;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=1.00; SET v_max_mult=1.03;
-            ELSE SET v_min_mult=0.65; SET v_max_mult=0.90; END IF;
+    ELSEIF p_nombre_evento = 'Whale Dump' THEN
+        -- BTC y ETH caen fuerte, DOGE catastrófico, GOLD refugio
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=0.62; SET v_max_mult=0.85;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=0.58; SET v_max_mult=0.82;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=0.50; SET v_max_mult=0.75;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=0.55; SET v_max_mult=0.80;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=0.52; SET v_max_mult=0.78;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=0.45; SET v_max_mult=0.72;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=0.30; SET v_max_mult=0.60;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=0.48; SET v_max_mult=0.75;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=1.01; SET v_max_mult=1.06;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.999; SET v_max_mult=1.001;
+        ELSE SET v_min_mult=0.45; SET v_max_mult=0.75; END IF;
 
-        ELSEIF p_nombre_evento = 'Inflación Alta' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=1.05; SET v_max_mult=1.25;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=1.08; SET v_max_mult=1.20;
-            ELSE SET v_min_mult=1.00; SET v_max_mult=1.20; END IF;
+    ELSEIF p_nombre_evento = 'Inflación Alta' THEN
+        -- BTC y GOLD como refugio inflacionario, altcoins neutras
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=1.08; SET v_max_mult=1.35;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=1.02; SET v_max_mult=1.20;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=0.98; SET v_max_mult=1.15;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=1.00; SET v_max_mult=1.12;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=0.95; SET v_max_mult=1.10;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=0.92; SET v_max_mult=1.08;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=0.90; SET v_max_mult=1.20;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=0.95; SET v_max_mult=1.12;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=1.10; SET v_max_mult=1.30;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.999; SET v_max_mult=1.001;
+        ELSE SET v_min_mult=0.95; SET v_max_mult=1.15; END IF;
 
-        ELSEIF p_nombre_evento = 'Fed Sube Tipos' THEN
-            IF v_simbolo = 'BTC'  THEN SET v_min_mult=0.80; SET v_max_mult=1.10;
-            ELSEIF v_simbolo = 'GOLD' THEN SET v_min_mult=1.00; SET v_max_mult=1.08;
-            ELSE SET v_min_mult=0.75; SET v_max_mult=1.05; END IF;
+    ELSEIF p_nombre_evento = 'Fed Sube Tipos' THEN
+        -- Todo cae: menos liquidez, GOLD resistente, USDT safe haven
+        IF v_simbolo = 'BTC'   THEN SET v_min_mult=0.70; SET v_max_mult=0.92;
+        ELSEIF v_simbolo = 'ETH'   THEN SET v_min_mult=0.65; SET v_max_mult=0.88;
+        ELSEIF v_simbolo = 'SOL'   THEN SET v_min_mult=0.55; SET v_max_mult=0.82;
+        ELSEIF v_simbolo = 'BNB'   THEN SET v_min_mult=0.62; SET v_max_mult=0.85;
+        ELSEIF v_simbolo = 'XRP'   THEN SET v_min_mult=0.60; SET v_max_mult=0.83;
+        ELSEIF v_simbolo = 'ADA'   THEN SET v_min_mult=0.52; SET v_max_mult=0.78;
+        ELSEIF v_simbolo = 'DOGE'  THEN SET v_min_mult=0.45; SET v_max_mult=0.72;
+        ELSEIF v_simbolo = 'LINK'  THEN SET v_min_mult=0.55; SET v_max_mult=0.80;
+        ELSEIF v_simbolo = 'GOLD'  THEN SET v_min_mult=1.00; SET v_max_mult=1.10;
+        ELSEIF v_simbolo = 'USDT'  THEN SET v_min_mult=0.999; SET v_max_mult=1.001;
+        ELSE SET v_min_mult=0.55; SET v_max_mult=0.82; END IF;
 
-        ELSE
-            SET v_min_mult=0.99; SET v_max_mult=1.01;
-        END IF;
+    ELSE
+        SET v_min_mult=0.99; SET v_max_mult=1.01;
+    END IF;
 
-        SET v_mult_aplicado = v_min_mult + (RAND() * (v_max_mult - v_min_mult));
-        SET v_nuevo_precio  = v_precio_actual * v_mult_aplicado;
+    SET v_mult_aplicado = v_min_mult + (RAND() * (v_max_mult - v_min_mult));
+    SET v_nuevo_precio  = v_precio_actual * v_mult_aplicado;
 
-        UPDATE ACTIVOS SET precio_actual = v_nuevo_precio WHERE id_activo = v_id_activo;
-        INSERT INTO HISTORIAL_PRECIOS (id_activo, precio) VALUES (v_id_activo, v_nuevo_precio);
-    END LOOP;
-    CLOSE cur_activos;
+    UPDATE ACTIVOS SET precio_actual = v_nuevo_precio WHERE id_activo = v_id_activo;
+    INSERT INTO HISTORIAL_PRECIOS (id_activo, precio) VALUES (v_id_activo, v_nuevo_precio);
+END LOOP;
+CLOSE cur_activos;
     COMMIT;
 END; //
 DELIMITER ;

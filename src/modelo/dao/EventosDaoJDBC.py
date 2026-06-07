@@ -2,27 +2,6 @@ from src.modelo.conexion.Conexion import Conexion
 from src.modelo.vo.EventoMercadoVO import EventoMercadoVO
 
 
-_MULTIPLICADORES = {
-    "Bull Market":          1.15,
-    "Bear Market":          0.80,
-    "Crisis Fiat":          1.20,
-    "Guerra Mundial":       0.70,
-    "Analista Aleatorio":   0.92,
-    "Inyección Liquidez":   1.20,
-    "Retirada Liquidez":    0.65,
-    "Halving Bitcoin":      1.25,
-    "Adopción Corporativa": 1.20,
-    "Adopción Países":      1.30,
-    "Crisis Bancaria":      0.65,
-    "Regulación China":     0.65,
-    "Hack Exchange":        0.60,
-    "Upgrade Ethereum":     1.35,
-    "Whale Dump":           0.80,
-    "Inflación Alta":       1.10,
-    "Fed Sube Tipos":       0.85,
-}
-
-
 class EventosDaoJDBC(Conexion):
 
     def lanzar_evento(self, evento_vo: EventoMercadoVO):
@@ -30,28 +9,16 @@ class EventosDaoJDBC(Conexion):
             print("EventoMercadoVO inválido:", evento_vo)
             return False
 
-        factor = _MULTIPLICADORES.get(evento_vo.nombre_evento, 1.0)
         cursor = self.getCursor()
         try:
             cursor.execute(
-                "INSERT INTO EVENTOS_MERCADO (id_admin, nombre_evento, descripcion) VALUES (?, ?, ?)",
-                (evento_vo.id_admin, evento_vo.nombre_evento, evento_vo.descripcion),
-            )
-            cursor.execute(
-                "UPDATE ACTIVOS SET precio_actual = ROUND(precio_actual * ?, 8)",
-                (factor,),
-            )
-            cursor.execute(
-                "INSERT INTO HISTORIAL_PRECIOS (id_activo, precio) SELECT id_activo, precio_actual FROM ACTIVOS"
+                "CALL sp_ejecutar_evento_mercado(?, ?, ?)",
+                (evento_vo.id_admin, evento_vo.nombre_evento, evento_vo.descripcion)
             )
             return True
 
         except Exception as e:
             print("Error en lanzar_evento:", e)
-            try:
-                self.conexion.rollback()
-            except Exception:
-                pass
             return False
 
         finally:
@@ -61,18 +28,20 @@ class EventosDaoJDBC(Conexion):
         cursor = self.getCursor()
         try:
             cursor.execute("""
-                SELECT id_admin, nombre_evento, descripcion
+                SELECT id_admin, nombre_evento, descripcion, fecha_ejecucion
                 FROM EVENTOS_MERCADO
                 ORDER BY fecha_ejecucion DESC
                 LIMIT 1
             """)
             row = cursor.fetchone()
             if row:
-                return EventoMercadoVO(
+                vo = EventoMercadoVO(
                     id_admin=row[0],
                     nombre_evento=row[1],
                     descripcion=row[2] or "",
                 )
+                vo.fecha_ejecucion = row[3]
+                return vo
             return None
         except Exception as e:
             print("Error en obtener_ultimo_evento:", e)
