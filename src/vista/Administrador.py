@@ -4,7 +4,6 @@ from PyQt5.QtWidgets import (
     QLineEdit, QComboBox, QDialogButtonBox,
 )
 from PyQt5 import uic
-from src.modelo.backup.BackupManager import BackupManager
 Form, Window = uic.loadUiType("src/vista/ui/Administrador.ui")
 
 

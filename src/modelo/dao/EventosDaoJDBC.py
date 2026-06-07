@@ -3,12 +3,23 @@ from src.modelo.vo.EventoMercadoVO import EventoMercadoVO
 
 
 _MULTIPLICADORES = {
-    "Bull Market":     1.15,
-    "Bear Market":     0.80,
-    "Crisis Fiat":     1.20,
-    "Guerra Mundial":  0.70,
-    "Halving Bitcoin": 1.25,
-    "Hack Exchange":   0.60,
+    "Bull Market":          1.15,
+    "Bear Market":          0.80,
+    "Crisis Fiat":          1.20,
+    "Guerra Mundial":       0.70,
+    "Analista Aleatorio":   0.92,
+    "Inyección Liquidez":   1.20,
+    "Retirada Liquidez":    0.65,
+    "Halving Bitcoin":      1.25,
+    "Adopción Corporativa": 1.20,
+    "Adopción Países":      1.30,
+    "Crisis Bancaria":      0.65,
+    "Regulación China":     0.65,
+    "Hack Exchange":        0.60,
+    "Upgrade Ethereum":     1.35,
+    "Whale Dump":           0.80,
+    "Inflación Alta":       1.10,
+    "Fed Sube Tipos":       0.85,
 }
 
 

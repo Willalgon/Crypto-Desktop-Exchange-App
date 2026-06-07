@@ -36,12 +36,12 @@ class Trader(QMainWindow, Form):
     # ── Configuración inicial de tablas ──────────────────────────────────────
 
     def _configurar_tablas(self):
-        # Tabla mercado: col 0 = id_activo (oculta)
-        self.tabla_mercado.setColumnCount(5)
+        self.tabla_mercado.setColumnCount(6)
         self.tabla_mercado.setHorizontalHeaderLabels(
-            ["ID", "ACTIVO", "SÍMBOLO", "PRECIO ACTUAL", "TIPO"]
+            ["ID", "ACTIVO", "SÍMBOLO", "PRECIO ACTUAL", "TIPO", "DESC"]
         )
         self.tabla_mercado.setColumnHidden(0, True)
+        self.tabla_mercado.setColumnHidden(5, True)
         self.tabla_mercado.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tabla_mercado.verticalHeader().setVisible(False)
 
@@ -155,6 +155,7 @@ class Trader(QMainWindow, Form):
             self.tabla_mercado.setItem(i, 2, QTableWidgetItem(a.simbolo))
             self.tabla_mercado.setItem(i, 3, QTableWidgetItem(f"${a.precio_actual:,.2f}"))
             self.tabla_mercado.setItem(i, 4, QTableWidgetItem(tipo))
+            self.tabla_mercado.setItem(i, 5, QTableWidgetItem(a.descripcion_especial or ""))
         # Sincronizar combo de operación con los activos cargados
         self._sync_combo_activo(activos)
 
@@ -186,7 +187,7 @@ class Trader(QMainWindow, Form):
         id_activo   = int(self.tabla_mercado.item(fila, 0).text())
         nombre      = self.tabla_mercado.item(fila, 1).text()
         simbolo     = self.tabla_mercado.item(fila, 2).text()
-        descripcion = ""  # col 4 oculta no disponible directamente
+        descripcion = self.tabla_mercado.item(fila, 5).text()
         if self._controlador:
             self._controlador.ver_detalles_activo(id_activo, nombre, simbolo, descripcion)
 

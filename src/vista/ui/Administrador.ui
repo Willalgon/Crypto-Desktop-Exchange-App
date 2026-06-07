@@ -766,8 +766,19 @@ QLabel#lbl_version {
                   <item><property name="text"><string>Bear Market</string></property></item>
                   <item><property name="text"><string>Crisis Fiat</string></property></item>
                   <item><property name="text"><string>Guerra Mundial</string></property></item>
+                  <item><property name="text"><string>Analista Aleatorio</string></property></item>
+                  <item><property name="text"><string>Inyección Liquidez</string></property></item>
+                  <item><property name="text"><string>Retirada Liquidez</string></property></item>
                   <item><property name="text"><string>Halving Bitcoin</string></property></item>
+                  <item><property name="text"><string>Adopción Corporativa</string></property></item>
+                  <item><property name="text"><string>Adopción Países</string></property></item>
+                  <item><property name="text"><string>Crisis Bancaria</string></property></item>
+                  <item><property name="text"><string>Regulación China</string></property></item>
                   <item><property name="text"><string>Hack Exchange</string></property></item>
+                  <item><property name="text"><string>Upgrade Ethereum</string></property></item>
+                  <item><property name="text"><string>Whale Dump</string></property></item>
+                  <item><property name="text"><string>Inflación Alta</string></property></item>
+                  <item><property name="text"><string>Fed Sube Tipos</string></property></item>
                  </widget>
                 </item>
                 <item><spacer name="sp_ev6"><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeType"><enum>QSizePolicy::Fixed</enum></property><property name="sizeHint" stdset="0"><size><width>0</width><height>16</height></size></property></spacer></item>
