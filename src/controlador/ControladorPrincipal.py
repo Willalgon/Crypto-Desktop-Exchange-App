@@ -220,6 +220,9 @@ class ControladorPrincipal:
         operaciones = self.__modelo.obtener_historial_operaciones(self.__usuario_actual.id_usuario)
         self.__vista_principal.cargar_historial(operaciones)
 
+        posiciones = self.__modelo.obtenerPosiciones(self.__usuario_actual.id_usuario)
+        self.__vista_principal.refrescar_cartera(cartera, posiciones)
+
     def solicitarEstadoCarteraTrader(self):
         id_u = self.__usuario_actual.id_usuario
         cartera = self.__modelo.obtener_cartera(id_u)

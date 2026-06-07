@@ -468,19 +468,7 @@ class Trader(QMainWindow, Form):
                 self.tabla_posiciones.setItem(i, col, item)
         self._dibujar_grafico_cartera(lista_posiciones)
 
-    def _refrescar_datos_trader(self):
-        cartera = self.__modelo.obtener_cartera(self.__usuario_actual.id_usuario)
-        if cartera:
-            self.__vista_principal.actualizar_saldo(
-                saldo_fiat=cartera.saldo_fiat,
-                patrimonio_total=cartera.patrimonio_total,
-            )
-        operaciones = self.__modelo.obtener_historial_operaciones(self.__usuario_actual.id_usuario)
-        self.__vista_principal.cargar_historial(operaciones)
 
-        # ← AÑADIR ESTO para que el gráfico se redibuje tras compra/venta
-        posiciones = self.__modelo.obtenerPosiciones(self.__usuario_actual.id_usuario)
-        self.__vista_principal.refrescar_cartera(cartera, posiciones)
 
     # ── Utilidades ────────────────────────────────────────────────────────────
 
