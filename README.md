@@ -1,7 +1,7 @@
 # CryptoLearning app
 Compra y vende las criptomonedas disponibles!
 El administrador de la app publicará eventos cuando menos te lo esperes y tu patrimonio variará! Suerte!
-(Para generar los gráficos de los activos, deben publicarse eventos)
+(Para generar los gráficos de los activos deben publicarse eventos)
 
 ---
 
