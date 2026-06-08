@@ -144,13 +144,9 @@ class Administrador(QMainWindow, Form):
         if resp == QMessageBox.Yes:
             self._controlador.admin_retirar_activo(id_activo)
 
-
     def _on_lanzar_evento(self):
         nombre_evento = self.combo_evento.currentText()
         descripcion = self.input_desc_evento.toPlainText().strip()
-        if not descripcion:
-            QMessageBox.warning(self, "Aviso", "Debes redactar una descripción para el evento.")
-            return
         resp = QMessageBox.warning(
             self, "¡Alerta de Volatilidad!",
             f"¿Estás seguro de lanzar '{nombre_evento}'?\n"

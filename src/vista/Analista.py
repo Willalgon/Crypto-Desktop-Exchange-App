@@ -31,12 +31,6 @@ class Analista(QMainWindow, Form):
         titulo = self.input_titulo.text().strip()
         cuerpo = self.input_cuerpo.toPlainText().strip()
         es_aviso = self.chk_aviso.isChecked()
-        if not titulo:
-            self._mostrar_error("Tiene que incluir un título")
-            return
-        if not cuerpo:
-            self._mostrar_error("El contenido no puede estar vacío")
-            return
         if self._controlador:
             self._controlador.publicarNoticia(titulo, cuerpo, es_aviso)
 
@@ -135,11 +129,7 @@ class Analista(QMainWindow, Form):
 
     def cargarHistorial(self, noticias):
         self.tabla_noticias.setRowCount(0)
-        for fecha, titulo, cuerpo, es_aviso in noticias:
-            if es_aviso:
-                tipo = "AVISO"
-            else:
-                tipo = "NO_AVISO"
+        for fecha, titulo, cuerpo, tipo in noticias:
             self._anadir_fila_tabla(fecha, titulo, tipo, cuerpo)
 
     def setNombreUsuario(self, email):

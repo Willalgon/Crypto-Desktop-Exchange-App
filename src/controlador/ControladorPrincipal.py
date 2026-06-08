@@ -142,17 +142,25 @@ class ControladorPrincipal:
         else:
             self.__vista_principal.mostrar_error("No se pudo retirar el activo.")
 
-
     def admin_lanzar_evento(self, nombre_evento, descripcion):
+        if not descripcion:
+            self.__vista_principal.mostrar_error("Debes redactar una descripción para el evento.")
+            return
         id_admin = self.__usuario_actual.id_usuario
         exito = self.__modelo.lanzar_evento_mercado(id_admin, nombre_evento, descripcion)
         if exito:
-            self.actualizar_vista_admin()  # recarga activos con precios actualizados
+            self.actualizar_vista_admin()
         else:
             self.__vista_principal.mostrar_error("No se pudo lanzar el evento de mercado.")
 
     # Analista
     def publicarNoticia(self, titulo, cuerpo, es_aviso):
+        if not titulo:
+            self.__vista_principal.mostrar_error("Tiene que incluir un título")
+            return
+        if not cuerpo:
+            self.__vista_principal.mostrar_error("El contenido no puede estar vacío")
+            return
         noticiaVO = NoticiaVO(titulo, cuerpo, es_aviso)
         resultado = self.__modelo.publicarNoticia(noticiaVO, self.__usuario_actual.id_usuario)
         if resultado:
@@ -163,7 +171,11 @@ class ControladorPrincipal:
     # Analista
     def cargarHistorial(self):
         noticias = self.__modelo.obtenerNoticias()
-        self.__vista_principal.cargarHistorial(noticias)
+        noticias_formateadas = [
+            (fecha, titulo, cuerpo, "AVISO" if es_aviso else "NO_AVISO")
+            for fecha, titulo, cuerpo, es_aviso in noticias
+        ]
+        self.__vista_principal.cargarHistorial(noticias_formateadas)
 
     def consultar_criptomonedas(self):
         try:
@@ -232,7 +244,17 @@ class ControladorPrincipal:
     def solicitarNoticias(self):
         noticias = self.__modelo.obtenerTodasLasNoticias()
         if noticias:
-            self.__vista_principal.refrescar_noticias(noticias)
+            noticias_formateadas = [
+                (
+                    str(n.fecha_publicacion),
+                    n.titulo,
+                    n.cuerpo,
+                    "AVISO" if n.es_aviso else "Noticia",
+                    ""
+                )
+                for n in noticias
+            ]
+            self.__vista_principal.refrescar_noticias(noticias_formateadas)
         else:
             self.__vista_principal.mostrar_mensaje("Noticias", "No hay noticias recientes.")
 

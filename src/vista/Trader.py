@@ -266,26 +266,15 @@ class Trader(QMainWindow, Form):
 
     def refrescar_noticias(self, lista_noticias: list):
         self.tabla_noticias.setRowCount(len(lista_noticias))
-        for i, n in enumerate(lista_noticias):
-            # n puede ser tupla (fecha, titulo, cuerpo, es_aviso) o NoticiaVO
-            if isinstance(n, (list, tuple)):
-                fecha, titulo, cuerpo, es_aviso = n[0], n[1], n[2], n[3]
-                analista = n[4] if len(n) > 4 else ""
-            else:
-                fecha = str(n.fecha_publicacion)
-                titulo = n.titulo
-                cuerpo = n.cuerpo
-                es_aviso = n.es_aviso
-                analista = ""
-
-            tipo_item = QTableWidgetItem("⚡ AVISO" if es_aviso else "Noticia")
+        for i, (fecha, titulo, cuerpo, tipo, analista) in enumerate(lista_noticias):
+            tipo_item = QTableWidgetItem(tipo)
             titulo_item = QTableWidgetItem(titulo)
-            titulo_item.setData(Qt.UserRole, cuerpo)   # cuerpo en UserRole
+            titulo_item.setData(Qt.UserRole, cuerpo)
 
-            if es_aviso:
+            if "AVISO" in tipo:
                 naranja = QColor("#FF6B00")
-                for item in (tipo_item, titulo_item):
-                    item.setForeground(naranja)
+                tipo_item.setForeground(naranja)
+                titulo_item.setForeground(naranja)
 
             self.tabla_noticias.setItem(i, 0, QTableWidgetItem(str(fecha)))
             self.tabla_noticias.setItem(i, 1, titulo_item)
