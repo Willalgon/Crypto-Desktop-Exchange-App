@@ -244,16 +244,15 @@ class ControladorPrincipal:
     def solicitarNoticias(self):
         noticias = self.__modelo.obtenerTodasLasNoticias()
         if noticias:
-            noticias_formateadas = [
-                (
-                    str(n.fecha_publicacion),
-                    n.titulo,
-                    n.cuerpo,
-                    "AVISO" if n.es_aviso else "Noticia",
-                    ""
-                )
-                for n in noticias
-            ]
+            noticias_formateadas = []
+            for n in noticias:
+                fecha = str(n[0])
+                titulo = n[1]
+                cuerpo = n[2]
+                es_aviso = n[3]
+                analista = n[4] if len(n) > 4 else ""
+                tipo = "AVISO" if es_aviso else "Noticia"
+                noticias_formateadas.append((fecha, titulo, cuerpo, tipo, analista))
             self.__vista_principal.refrescar_noticias(noticias_formateadas)
         else:
             self.__vista_principal.mostrar_mensaje("Noticias", "No hay noticias recientes.")
