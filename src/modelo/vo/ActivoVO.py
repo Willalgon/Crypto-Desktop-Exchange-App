@@ -13,33 +13,53 @@ class ActivoVO:
     def id_activo(self):
         return self.__id_activo
 
+    @id_activo.setter
+    def id_activo(self, s):
+        self.__id_activo = s
+
     @property
     def nombre(self):
         return self.__nombre
+
+    @nombre.setter
+    def nombre(self, v):
+        self.__nombre = v
 
     @property
     def simbolo(self):
         return self.__simbolo
 
+    @simbolo.setter
+    def simbolo(self, v):
+        self.__simbolo = v
+
     @property
     def precio_actual(self):
         return self.__precio_actual
+
+    @precio_actual.setter
+    def precio_actual(self, v):
+        self.__precio_actual = float(v)
 
     @property
     def descripcion_especial(self):
         return self.__descripcion_especial
 
+    @descripcion_especial.setter
+    def descripcion_especial(self, v):
+        self.__descripcion_especial = v
+
     @property
     def es_cripto(self):
         return self.__es_cripto
 
+    @es_cripto.setter
+    def es_cripto(self, v):
+        self.__es_cripto = bool(v) if v is not None else True
+
     @property
     def historial_precios(self):
-        return self.__historial_precios  # [(precio, fecha_hora), ...]
-
-    @precio_actual.setter
-    def precio_actual(self, v):
-        self.__precio_actual = float(v)
+        return self.__historial_precios
 
     @historial_precios.setter
     def historial_precios(self, lista):

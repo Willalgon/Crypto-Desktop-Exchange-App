@@ -1,5 +1,4 @@
 class EventoMercadoVO:
-    """Value Object para un evento de mercado lanzado por el admin."""
 
     EVENTOS_VALIDOS = [
         "Bull Market",
@@ -30,13 +29,25 @@ class EventoMercadoVO:
     def nombre_evento(self):
         return self.__nombre_evento
 
+    @nombre_evento.setter
+    def nombre_evento(self, v):
+        self.__nombre_evento = v
+
     @property
     def descripcion(self):
         return self.__descripcion
 
+    @descripcion.setter
+    def descripcion(self, v):
+        self.__descripcion = v
+
     @property
     def id_admin(self):
         return self.__id_admin
+
+    @id_admin.setter
+    def id_admin(self, v):
+        self.__id_admin = v
 
     def es_valido(self):
         return (
