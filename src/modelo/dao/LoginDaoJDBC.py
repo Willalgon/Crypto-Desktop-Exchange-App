@@ -1,5 +1,5 @@
+from modelo.factory.VOFactory import VOFactory
 from src.modelo.conexion.Conexion import Conexion
-from src.modelo.vo.UsuarioVO import UsuarioVO
 
 class LoginDaoJDBC(Conexion):
     # variable de clase entonces hay que llamarlo con self.
@@ -17,7 +17,7 @@ class LoginDaoJDBC(Conexion):
             if not fila:
                 return None
             id_usuario, dni, nombre, apellidos, email, rol = fila
-            return UsuarioVO(
+            return VOFactory.crear_vo("usuario",
                 id_usuario = id_usuario,
                 dni = dni,
                 nombre = nombre,
