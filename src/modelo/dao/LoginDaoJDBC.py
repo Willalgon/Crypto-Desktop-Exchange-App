@@ -1,4 +1,4 @@
-from modelo.factory.VOFactory import VOFactory
+from src.modelo.factory.VOFactory import VOFactory
 from src.modelo.conexion.Conexion import Conexion
 
 class LoginDaoJDBC(Conexion):
