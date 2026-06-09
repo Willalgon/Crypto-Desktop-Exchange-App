@@ -1,6 +1,5 @@
+from src.modelo.factory.VOFactory import VOFactory
 from src.modelo.conexion.Conexion import Conexion
-from src.modelo.vo.ActivoVO import ActivoVO
-
 
 class ActivosDaoJDBC(Conexion):
 
@@ -15,7 +14,7 @@ class ActivosDaoJDBC(Conexion):
                 "SELECT id_activo, nombre, simbolo, precio_actual FROM ACTIVOS"
             )
             for row in cursor.fetchall():
-                activos.append(ActivoVO(
+                activos.append(VOFactory.crear_vo("activo",
                     id_activo     = row[0],
                     nombre        = row[1],
                     simbolo       = row[2],
@@ -38,7 +37,7 @@ class ActivosDaoJDBC(Conexion):
                 ORDER BY nombre ASC
             """)
             for row in cursor.fetchall():
-                activos.append(ActivoVO(
+                activos.append(VOFactory.crear_vo("activo",
                     id_activo            = row[0],
                     nombre               = row[1],
                     simbolo              = row[2],
