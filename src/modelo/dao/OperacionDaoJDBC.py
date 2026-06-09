@@ -1,3 +1,4 @@
+from src.modelo.factory.VOFactory import VOFactory
 from src.modelo.conexion.Conexion import Conexion
 
 
@@ -25,7 +26,6 @@ class OperacionDaoJDBC(Conexion):
             self.closeConnection()
 
     def obtener_activos(self) -> list:
-        from src.modelo.vo.ActivoVO import ActivoVO
         cursor = self.getCursor()
         activos = []
         try:
@@ -36,7 +36,7 @@ class OperacionDaoJDBC(Conexion):
                 ORDER BY nombre
             """)
             for row in cursor.fetchall():
-                activos.append(ActivoVO(
+                activos.append(VOFactory.crear_vo("activo",
                     id_activo            = row[0],
                     nombre               = row[1],
                     simbolo              = row[2],
