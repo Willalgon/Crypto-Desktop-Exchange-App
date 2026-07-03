@@ -263,7 +263,6 @@ INSERT INTO EVENTOS_MERCADO (id_evento, id_admin, es_aviso, nombre_evento, multi
 INSERT INTO EVENTOS_MERCADO (id_evento, id_admin, es_aviso, nombre_evento, multiplicador_aplicado, descripcion, fecha_ejecucion) VALUES ('24', '1', 'True', 'Guerra Mundial', '1.0', 'Guerra', '2026-06-07 18:09:59');
 
 -- TABLA: NOTICIAS
-INSERT INTO NOTICIAS (id_noticia, id_analista, titulo, cuerpo, es_aviso, fecha_publicacion) VALUES ('31', '2', 'TRump', 'Bomb iran', 'False', '2026-05-18 13:04:28');
 INSERT INTO NOTICIAS (id_noticia, id_analista, titulo, cuerpo, es_aviso, fecha_publicacion) VALUES ('32', '2', 'u2iebfc', 'ouwebv0wuvondcw0ipn', 'False', '2026-05-18 13:04:41');
 INSERT INTO NOTICIAS (id_noticia, id_analista, titulo, cuerpo, es_aviso, fecha_publicacion) VALUES ('33', '2', 'ljebcfou3r', 'db 3irvb3privb', 'False', '2026-05-18 14:15:07');
 INSERT INTO NOTICIAS (id_noticia, id_analista, titulo, cuerpo, es_aviso, fecha_publicacion) VALUES ('34', '2', 'ourvbufvb', 'p9rhjvnp3irv', 'False', '2026-05-18 14:16:15');
